@@ -1,0 +1,375 @@
+@prefix kbont: <http://kb.local/ontology/> .
+@prefix kb:    <http://kb.local/instance/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+### ============================================================
+### KB-ONT 概念层 v1.12（结构源 v1.6，2026-11-04；2026-11-26 赛博朋克关联层校准）
+### 对标：三大洲社会研究所 GSI「红色马克思」系统（2026-08）
+###   - 分层概念知识图谱（本文件 44 义项级概念，RedMarx 原型 35 概念/32 关系）
+###   - 受控辩证谓词（11 个，见 kb-ontology.ttl；禁用 is-related-to 泛化边）
+###   - 历史歧义消解：kbont:periodTrace（如 1844→1857→1867）
+###   - 词义拆分：同 lemma 异语境 = 独立节点（本文件 3 组：占有关系/价格信号/异化）
+###   - 非黑箱：每概念 kbont:conceptAnchor 锚回正式层
+### 判读说明：periodTrace 与辩证边属**分析性判读**（标注出处于 L1/L1-E/L1-C），
+###           不改动正式层一字；若判读与正式层不合，改本文件即可。
+### v1.10 边界：仅校准新型生产资料、非排他性、排他性占有的定义与分期文本。
+### v1.11 新增：赛博朋克、赛博朋克式技术统治、技术垄断三概念（CP-41～43）；
+###           概念 40→43；新增 6 条受控关系并删除 2 条重复三元组，当批为 34 条。
+### v1.12 校准：新增正式机制概念“平台依附固化”（CP-44）；文化—分析总称
+###           不再作为技术垄断的下位概念；技术垄断与平台依附固化改为条件/再生产关系。
+###           当前 44 概念、36 条去重受控关系、9 条 skos:broader。
+###           rdflib 解析通过；未重抽 ABox，未运行完整 SHACL/graph。
+###           赛博朋克是文化表征，不是实证理论；技术封建主义仍拒绝为正式框架。
+### ============================================================
+
+### ---------- 一、经典范畴（L1-C §一 / L1-E） ----------
+
+kb:C-生产力 a kbont:MarxistConcept ; kbont:code "CP-01" ; kbont:lemma "生产力" ;
+    rdfs:label "生产力（productive forces）"@zh ;
+    skos:definition "人类改造自然、获取物质资料的实际能力，含劳动者、劳动资料、劳动对象（L1-C §一）"@zh ;
+    kbont:periodTrace "1845（德意志意识形态）→1859（政治经济学批判·序言）→1867（资本论）" ;
+    kbont:conceptAnchor kb:M1 , kb:T01A .
+
+kb:C-生产关系 a kbont:MarxistConcept ; kbont:code "CP-02" ; kbont:lemma "生产关系" ;
+    rdfs:label "生产关系（relations of production）"@zh ;
+    skos:definition "人们在生产中形成的、不以意志为转移的物质关系，核心是生产资料所有制（L1-C §一）"@zh ;
+    kbont:periodTrace "1845→1859→1867" ;
+    kbont:conceptAnchor kb:M1 , kb:T07B .
+
+kb:C-生产资料 a kbont:MarxistConcept ; kbont:code "CP-03" ; kbont:lemma "生产资料" ;
+    rdfs:label "生产资料（means of production）"@zh ;
+    skos:definition "劳动者进行生产所必需的物质条件（劳动资料＋劳动对象），与生活资料严格区分（L1-C §一）"@zh ;
+    kbont:periodTrace "1857→1867" ;
+    kbont:conceptAnchor kb:M4 , kb:T02A .
+
+### —— 词义拆分组 1：lemma「占有关系」（所有制/所有权/占有形式 三义项） ——
+kb:C-所有制 a kbont:MarxistConcept ; kbont:code "CP-04" ; kbont:lemma "占有关系" ;
+    kbont:senseContext "经济范畴：对生产资料的占有关系及由此形成的经济关系（区别于法学所有权）" ;
+    rdfs:label "所有制（ownership / property relations·经济范畴）"@zh ;
+    skos:definition "生产资料归属的经济学规定，是生产关系的核心（L1-C §一 易混提示）"@zh ;
+    kbont:periodTrace "1845→1867" ;
+    kbont:conceptAnchor kb:T02D , kb:T07B ;
+    skos:broader kb:C-生产关系 .
+
+kb:C-所有权 a kbont:MarxistConcept ; kbont:code "CP-05" ; kbont:lemma "占有关系" ;
+    kbont:senseContext "法权范畴：法学意义的所有权（ownership right），罗马法传统" ;
+    rdfs:label "所有权（ownership right·法权范畴）"@zh ;
+    skos:definition "对物的排他支配在法律上的表现，与经济意义的所有制可能错位（L1-C §一 易混提示）"@zh ;
+    kbont:periodTrace "1867→1875" ;
+    kbont:conceptAnchor kb:T07A ;
+    kbont:distinguishedFrom kb:C-所有制 .
+
+kb:C-占有形式 a kbont:MarxistConcept ; kbont:code "CP-06" ; kbont:lemma "占有关系" ;
+    kbont:senseContext "运营/控制层面：谁在事实上支配与运营（本库 T02-D「从所有制批判到占有形式分析」）" ;
+    rdfs:label "占有形式（本库 T02-D 展开）"@zh ;
+    skos:definition "不问归属、只问实际控制与运营的分析层面：占有可以脱离所有而分层（L2 T02-D）"@zh ;
+    kbont:periodTrace "2025（本库 T02-D 提出）" ; kbont:isOriginalInference true ;
+    kbont:conceptAnchor kb:T02D ;
+    kbont:distinguishedFrom kb:C-所有制 .
+
+kb:C-一般智力 a kbont:MarxistConcept ; kbont:code "CP-07" ; kbont:lemma "一般智力" ;
+    rdfs:label "一般智力（general intellect）"@zh ;
+    skos:definition "社会总体知识成为直接生产力（源自《大纲》机器论片断；勿与认知科学的集体智慧混同）（L1-C §一）"@zh ;
+    kbont:periodTrace "1857→1858（大纲·机器论片断）→2025（本库 M3 拓展：AI 为一般智力的物质化形态）" ;
+    kbont:conceptAnchor kb:M3 , kb:T02B .
+
+kb:C-异化 a kbont:MarxistConcept ; kbont:code "CP-08" ; kbont:lemma "异化" ;
+    kbont:senseContext "人类学语境：1844 巴黎手稿，四重规定（产品/过程/类本质/人与人）" ;
+    rdfs:label "异化（alienation·1844 语境）"@zh ;
+    skos:definition "人的活动及其产物反过来支配人自身（L1-C §一）"@zh ;
+    kbont:periodTrace "1844→1857→1867（转入拜物教的结构分析）" ;
+    kbont:conceptAnchor kb:M8 , kb:T04B .
+
+kb:C-拜物教 a kbont:MarxistConcept ; kbont:code "CP-09" ; kbont:lemma "异化" ;
+    kbont:senseContext "结构语境：1867 资本论，社会关系颠倒地表现为物—物关系" ;
+    rdfs:label "拜物教（fetishism·1867 结构语境）"@zh ;
+    skos:definition "把社会关系表现为主—客之间的物—物关系；商品/货币/资本拜物教（L1-C §一）"@zh ;
+    kbont:periodTrace "1867" ;
+    kbont:conceptAnchor kb:T06B , kb:T02B ;
+    kbont:distinguishedFrom kb:C-异化 .
+
+kb:C-商品形式 a kbont:MarxistConcept ; kbont:code "CP-10" ; kbont:lemma "商品形式" ;
+    rdfs:label "商品形式（commodity form）"@zh ;
+    skos:definition "使用价值与价值的对立统一体，等价形式是其谜一般的性质（资本论第一卷第一章第三节）"@zh ;
+    kbont:periodTrace "1857→1867" ;
+    kbont:conceptAnchor kb:T02B , kb:T02C .
+
+kb:C-货币贮藏 a kbont:MarxistConcept ; kbont:code "CP-11" ; kbont:lemma "货币" ;
+    kbont:senseContext "贮藏职能语境：货币作为价值贮藏手段（资本论第一卷第三章）" ;
+    rdfs:label "货币贮藏职能"@zh ;
+    skos:definition "货币退出流通被贮藏的职能；本库 T02-C 指出其与知识经济熵增的错位（L2 T02-C）"@zh ;
+    kbont:periodTrace "1867→2025（本库 T02-C 熵增错位判读）" ;
+    kbont:conceptAnchor kb:T02C .
+
+kb:C-分配形式 a kbont:MarxistConcept ; kbont:code "CP-12" ; kbont:lemma "分配形式" ;
+    rdfs:label "分配形式（form of distribution）"@zh ;
+    skos:definition "分配关系是生产关系的背面（1859 序言）；分配结构由生产结构决定"@zh ;
+    kbont:periodTrace "1859→1875" ;
+    kbont:conceptAnchor kb:M1 .
+
+kb:C-按劳分配 a kbont:MarxistConcept ; kbont:code "CP-13" ; kbont:lemma "分配形式" ;
+    kbont:senseContext "共产主义第一阶段（低级阶段）的分配原则" ;
+    rdfs:label "按劳分配（distribution according to work）"@zh ;
+    skos:definition "以劳动为同一尺度分配消费资料，形式平等、实质不平等（哥达纲领批判）"@zh ;
+    kbont:periodTrace "1875（哥达纲领批判）" ;
+    kbont:conceptAnchor kb:M1 , kb:T01B ;
+    skos:broader kb:C-分配形式 .
+
+kb:C-按需分配 a kbont:MarxistConcept ; kbont:code "CP-14" ; kbont:lemma "分配形式" ;
+    kbont:senseContext "共产主义高级阶段的分配原则" ;
+    rdfs:label "按需分配（distribution according to needs）"@zh ;
+    skos:definition "各尽所能、按需分配；以生产力高度发达与旧式分工消亡为前提（哥达纲领批判）"@zh ;
+    kbont:periodTrace "1875（哥达纲领批判）" ;
+    kbont:conceptAnchor kb:M1 , kb:T01A ;
+    skos:broader kb:C-分配形式 .
+
+kb:C-资产阶级法权 a kbont:MarxistConcept ; kbont:code "CP-15" ; kbont:lemma "资产阶级法权" ;
+    rdfs:label "资产阶级法权（bourgeois right）"@zh ;
+    skos:definition "按同一尺度衡量不同人而产生的形式平等、实质不平等（哥达纲领批判）"@zh ;
+    kbont:periodTrace "1875" ;
+    kbont:conceptAnchor kb:T01B .
+
+kb:C-自由人联合体 a kbont:MarxistConcept ; kbont:code "CP-16" ; kbont:lemma "自由人联合体" ;
+    rdfs:label "自由人联合体（association of free men）"@zh ;
+    skos:definition "《宣言》中人的解放的最终形态：联合起来的生产者对交换、生产、分配的共同控制"@zh ;
+    kbont:periodTrace "1848（宣言）→1867（资本论第一卷第一章第四节）" ;
+    kbont:conceptAnchor kb:M8 , kb:T05D , kb:T10A .
+
+kb:C-协作 a kbont:MarxistConcept ; kbont:code "CP-17" ; kbont:lemma "协作" ;
+    rdfs:label "协作（cooperation）"@zh ;
+    skos:definition "众多劳动者在同一过程中有计划地协同劳动，产生大于个体之和的社会生产力（资本论第一卷第十一章）"@zh ;
+    kbont:periodTrace "1867" ;
+    kbont:conceptAnchor kb:T03B .
+
+kb:C-劳动社会化 a kbont:MarxistConcept ; kbont:code "CP-18" ; kbont:lemma "劳动社会化" ;
+    rdfs:label "劳动社会化（socialisation of labour）"@zh ;
+    skos:definition "协作、分工与机器使劳动过程日益成为社会总过程——切实的社会事件，其价值形式表现为资本有机构成提高"@zh ;
+    kbont:periodTrace "1857→1867→1894（卷三）" ;
+    kbont:conceptAnchor kb:T03B , kb:T09B .
+
+kb:C-资本有机构成 a kbont:MarxistConcept ; kbont:code "CP-19" ; kbont:lemma "资本有机构成" ;
+    rdfs:label "资本有机构成（organic composition of capital）"@zh ;
+    skos:definition "由技术构成决定并反映技术构成变化的价值构成：c/v（资本论第一卷第二十三章、卷三）"@zh ;
+    kbont:periodTrace "1867→1894" ;
+    kbont:conceptAnchor kb:T03A .
+
+kb:C-利润率趋向下降 a kbont:MarxistConcept ; kbont:code "CP-20" ; kbont:lemma "利润率趋向下降" ;
+    rdfs:label "利润率趋向下降规律（tendency of the rate of profit to fall）"@zh ;
+    skos:definition "剩余价值率不变时，有机构成提高使利润率趋向下降，其反作用因素使之为趋势而非直线（卷三第三篇）"@zh ;
+    kbont:periodTrace "1857→1894（卷三第三篇）" ;
+    kbont:conceptAnchor kb:T09B .
+
+### ---------- 二、计算社会主义论争（L1-C §二） ----------
+
+kb:C-经济核算争论 a kbont:MarxistConcept ; kbont:code "CP-21" ; kbont:lemma "社会主义经济核算之争" ;
+    rdfs:label "社会主义经济核算争论（socialist calculation debate）"@zh ;
+    skos:definition "中央计划能否有效配置资源的 20 世纪大论战，焦点是信息而非效率（L1-C §二）"@zh ;
+    kbont:periodTrace "1920（米塞斯）→1936（兰格）→1945（哈耶克）" ;
+    kbont:conceptAnchor kb:T01A .
+
+kb:C-信息生成 a kbont:MarxistConcept ; kbont:code "CP-22" ; kbont:lemma "价格信号" ;
+    kbont:senseContext "米塞斯语境：价格是被市场生成的，非待收集的既有数据" ;
+    rdfs:label "信息生成 vs 信息收集（米塞斯 1920）"@zh ;
+    skos:definition "价格内生地生成于交换过程——收集范式无法替代生成机制（本库最关键辨析之一，L1-C §二）"@zh ;
+    kbont:periodTrace "1920（米塞斯《社会主义》）" ;
+    kbont:conceptAnchor kb:T01A ;
+    skos:broader kb:C-经济核算争论 .
+
+kb:C-参数价格 a kbont:MarxistConcept ; kbont:code "CP-23" ; kbont:lemma "价格信号" ;
+    kbont:senseContext "兰格语境：中央计划局设定、下达给企业的价格信号（试错法）" ;
+    rdfs:label "参数价格（parametric prices·兰格模式）"@zh ;
+    skos:definition "计划局模拟市场：以参数价格与试错法逼近均衡（区别于市场内生价格）（L1-C §二）"@zh ;
+    kbont:periodTrace "1936→1938（兰格两篇）" ;
+    kbont:conceptAnchor kb:T01A ;
+    skos:broader kb:C-经济核算争论 .
+
+kb:C-分散知识 a kbont:MarxistConcept ; kbont:code "CP-24" ; kbont:lemma "分散知识" ;
+    rdfs:label "分散知识（dispersed knowledge）"@zh ;
+    skos:definition "关键经济知识分散在无数个体手中（哈耶克 1945）；区别于更强调情境性的局部知识（L1-C §二）"@zh ;
+    kbont:periodTrace "1945（知识在社会中的用途）" ;
+    kbont:conceptAnchor kb:Ch-Hayek , kb:T01A ;
+    skos:broader kb:C-经济核算争论 .
+
+kb:C-默会知识 a kbont:MarxistConcept ; kbont:code "CP-25" ; kbont:lemma "默会知识" ;
+    rdfs:label "默会知识（tacit knowledge）"@zh ;
+    skos:definition "难以言传的、嵌入实践的知识（波兰尼），与显性知识相对（L1-C §二）"@zh ;
+    kbont:periodTrace "1958→1966（波兰尼《个体知识》《隐性维度》）" ;
+    kbont:conceptAnchor kb:T01A , kb:T04B .
+
+kb:C-可计算性 a kbont:MarxistConcept ; kbont:code "CP-26" ; kbont:lemma "可计算性" ;
+    rdfs:label "可计算性（computability）"@zh ;
+    skos:definition "配置问题在逻辑上能否求解（区别于工程上的可操作性）（L1-C §二）"@zh ;
+    kbont:periodTrace "1908（巴罗内）→1930s（兰格—勒纳）" ;
+    kbont:conceptAnchor kb:T01A ;
+    skos:broader kb:C-经济核算争论 .
+
+kb:C-古德哈特定律 a kbont:MarxistConcept ; kbont:code "CP-27" ; kbont:lemma "古德哈特定律" ;
+    rdfs:label "古德哈特定律（Goodhart's Law）"@zh ;
+    skos:definition "当指标成为目标，它就不再是好指标；本库「反古德哈特四防线」的基础（L1-C §二）"@zh ;
+    kbont:ahistorical true ;
+    kbont:conceptAnchor kb:T01B .
+
+kb:C-赛博共产主义 a kbont:MarxistConcept ; kbont:code "CP-28" ; kbont:lemma "赛博共产主义" ;
+    rdfs:label "赛博共产主义（cyber-communism）"@zh ;
+    skos:definition "用现代计算技术实现计划配置的构想（科克肖特 & 科特雷尔），也译电子社会主义（L1-C §二）"@zh ;
+    kbont:periodTrace "1993（Towards a New Socialism）" ;
+    kbont:conceptAnchor kb:T01A .
+
+### ---------- 三、数智时代新概念（L1-C §三 / 本库推演） ----------
+
+kb:C-新型生产资料 a kbont:MarxistConcept ; kbont:code "CP-29" ; kbont:lemma "新型生产资料" ;
+    rdfs:label "新型生产资料（new-type means of production）"@zh ;
+    skos:definition "数据、算法、模型、算力及运行所需能源、芯片与网络设施的分层对象；数字副本可复制、倾向非竞争，算力能源等仍有物理和制度稀缺（L1-C §三；M4 校准）"@zh ;
+    kbont:periodTrace "2025（本库提出）→2026（M4 分层校准）" ; kbont:isOriginalInference true ;
+    kbont:conceptAnchor kb:M4 , kb:T02A , kb:Case-1-1 ;
+    skos:broader kb:C-生产资料 .
+
+kb:C-非排他性 a kbont:MarxistConcept ; kbont:code "CP-30" ; kbont:lemma "非排他性" ;
+    rdfs:label "非排他性（non-excludability）"@zh ;
+    skos:definition "无法以合理成本排除他人使用的属性；数据/模型副本的低复制成本不等于无排他，许可、接口、隐私与算力配额仍可排除使用（L4-B §1 校准）"@zh ;
+    kbont:periodTrace "1990（奥斯特罗姆 CPR 分析）→2025（本库引用）→2026（M4 分层校准）" ;
+    kbont:conceptAnchor kb:M4 , kb:T02A .
+
+kb:C-排他性占有 a kbont:MarxistConcept ; kbont:code "CP-31" ; kbont:lemma "排他性占有" ;
+    rdfs:label "排他性占有（exclusive appropriation）"@zh ;
+    skos:definition "通过产权、接口、协议或实际控制排除他人使用并获取收益；M4 不把全部新型生产资料视为天然非排他，社会化按瓶颈层与治理成本推进（L4-B §1 校准）"@zh ;
+    kbont:periodTrace "1867→2025（本库 T02-D 占有形式分析）→2026（M4 分层校准）" ;
+    kbont:conceptAnchor kb:T02D , kb:M4 .
+
+kb:C-数据要素 a kbont:MarxistConcept ; kbont:code "CP-32" ; kbont:lemma "数据要素" ;
+    rdfs:label "数据要素（data as a factor of production）"@zh ;
+    skos:definition "数据成为独立的生产要素参与分配，中国政策语境特有表述（L1-C §三）"@zh ;
+    kbont:periodTrace "2020（要素市场化配置意见）→2022（数据二十条）" ;
+    kbont:conceptAnchor kb:T02A , kb:Case-1-1 .
+
+kb:C-平台依附 a kbont:MarxistConcept ; kbont:code "CP-33" ; kbont:lemma "平台依附" ;
+    rdfs:label "平台依附（platform dependency·本库正式命名）"@zh ;
+    skos:definition "生产者「形式独立、实质依附」于平台的关系；本库以此替代技术封建主义框架（L1-C §三）"@zh ;
+    kbont:periodTrace "2025（本库正式命名）" ; kbont:isOriginalInference true ;
+    kbont:conceptAnchor kb:T03A , kb:T09C .
+
+kb:C-云租金 a kbont:MarxistConcept ; kbont:code "CP-34" ; kbont:lemma "云租金" ;
+    rdfs:label "云租金（cloud rent）"@zh ;
+    skos:definition "平台对在其数字领地活动者收取的通行费（瓦鲁法基斯）；区别于垄断利润——前者是形式，后者是实质（L1-C §三）"@zh ;
+    kbont:periodTrace "2023（瓦鲁法基斯《技术封建主义》）" ;
+    kbont:conceptAnchor kb:T03A ;
+    skos:broader kb:C-技术封建主义 .
+
+kb:C-技术封建主义 a kbont:MarxistConcept ; kbont:code "CP-35" ; kbont:lemma "技术封建主义" ;
+    rdfs:label "技术封建主义（technofeudalism·本库拒绝其框架）"@zh ;
+    skos:definition "资本主义被「云租金＋依附」新形态取代的论断；本库拒绝此概念框架，仅引用其问题意识（L1-C §三）"@zh ;
+    kbont:periodTrace "2023（瓦鲁法基斯）" ;
+    kbont:conceptAnchor kb:T03A ;
+    kbont:distinguishedFrom kb:C-平台依附 .
+
+kb:C-算法治理 a kbont:MarxistConcept ; kbont:code "CP-36" ; kbont:lemma "算法治理" ;
+    rdfs:label "算法治理（algorithmic governance）"@zh ;
+    skos:definition "以算法进行分配、调度、规制；具双面性：既可能新增支配，也可能新增解放可能；赛博朋克常以算法监狱表征支配面，开放审计与参与指向解放面（L1-C §三）"@zh ;
+    kbont:periodTrace "2010s→2025（本库 T07-D 双面性判读）" ;
+    kbont:conceptAnchor kb:T07D , kb:T03D .
+
+kb:C-数字反馈基础设施 a kbont:MarxistConcept ; kbont:code "CP-37" ; kbont:lemma "数字反馈基础设施" ;
+    rdfs:label "数字反馈基础设施（digital feedback infrastructure）"@zh ;
+    skos:definition "用数字系统实现需求采集与反馈（莫罗佐夫）；本库「需求登记期」的上游概念（L1-C §三）"@zh ;
+    kbont:periodTrace "2019（莫罗佐夫《数字社会主义？》）" ;
+    kbont:conceptAnchor kb:T01A , kb:T01B .
+
+kb:C-公共池塘资源 a kbont:MarxistConcept ; kbont:code "CP-38" ; kbont:lemma "公共池塘资源" ;
+    rdfs:label "公共池塘资源（common-pool resource）"@zh ;
+    skos:definition "难以排除使用者但具有竞争性的资源（奥斯特罗姆）；不能与新型生产资料混同：数字副本倾向非竞争，算力、能源、芯片与优质数据仍可稀缺（L1-C §四；M4 分层校准）"@zh ;
+    kbont:periodTrace "1990（奥斯特罗姆《公地治理》）" ;
+    kbont:conceptAnchor kb:T02A ;
+    kbont:distinguishedFrom kb:C-新型生产资料 .
+
+kb:C-可行能力 a kbont:MarxistConcept ; kbont:code "CP-39" ; kbont:lemma "可行能力" ;
+    rdfs:label "可行能力（capability）"@zh ;
+    skos:definition "人实际能做什么、能成为什么（森）；本库用于「时间贫困」的刻画（L1-C §四）"@zh ;
+    kbont:periodTrace "1979→1993（森《以自由看待发展》）" ;
+    kbont:conceptAnchor kb:T03C .
+
+kb:C-CAP定理 a kbont:MarxistConcept ; kbont:code "CP-40" ; kbont:lemma "CAP 定理" ;
+    rdfs:label "CAP 定理（CAP theorem）"@zh ;
+    skos:definition "分布式系统无法同时满足一致性、可用性、分区容忍（L1-C §四）"@zh ;
+    kbont:ahistorical true ;
+    kbont:conceptAnchor kb:T01A .
+
+### ---------- 赛博朋克关联概念（L1-C §3.1 / L1-B 分叉 A） ----------
+
+kb:C-赛博朋克式技术统治 a kbont:MarxistConcept ; kbont:code "CP-41" ;
+    kbont:lemma "赛博朋克式技术统治" ;
+    rdfs:label "赛博朋克式技术统治（cyberpunk-style techno-domination·本库工作定义）"@zh ;
+    skos:definition "对私人技术权力通过接口、身份、算法、算力与安全体系支配生产生活的文化—分析总称；正式机制仍落到技术垄断、平台依附、云租金与占有关系，不是新的社会形态定性（L1-C §3.1）"@zh ;
+    kbont:periodTrace "2026（本库工作定义）" ;
+    kbont:conceptAnchor kb:T07B , kb:T09D .
+
+kb:C-技术垄断 a kbont:MarxistConcept ; kbont:code "CP-42" ; kbont:lemma "技术垄断" ;
+    rdfs:label "技术垄断（technological monopoly）"@zh ;
+    skos:definition "少数主体对数据、算力、模型、接口、规则与可见性的排他控制；可发生于资本主义内部，不自动意味着制度更替，须区分法律排他、网络效应、物理稀缺与实际控制（L1-C §三）"@zh ;
+    kbont:periodTrace "2026（本库术语校准）" ;
+    kbont:conceptAnchor kb:T02B , kb:T08D .
+
+kb:C-赛博朋克 a kbont:MarxistConcept ; kbont:code "CP-43" ; kbont:lemma "赛博朋克" ;
+    rdfs:label "赛博朋克（cyberpunk）"@zh ;
+    skos:definition "以高科技、企业权力、城市衰败、身体改造与地下抵抗为核心的科幻类型及文化批判视角；用于风险表征与传播，不是实证经济理论，也不等于赛博共产主义（L1-C §三）"@zh ;
+    kbont:periodTrace "2026（本库文化—机制接口）" ;
+    kbont:conceptAnchor kb:T08B , kb:T07D .
+
+kb:C-平台依附固化 a kbont:MarxistConcept ; kbont:code "CP-44" ;
+    kbont:lemma "平台依附固化" ;
+    rdfs:label "平台依附固化（platform dependency consolidation·本库正式机制）"@zh ;
+    skos:definition "生产者形式独立、实质依附于平台的关系在任务入口、可见性、结算与保障绑定中持续再生产；这是本库分叉 A 的正式机制，赛博朋克只提供文化表征，不能由意象推定其已经发生（L1-B 分叉 A）"@zh ;
+    kbont:periodTrace "2025（本库分叉 A 分析）→2026（赛博朋克关联校准）" ; kbont:isOriginalInference true ;
+    kbont:conceptAnchor kb:T03A , kb:T09D .
+
+### ---------- 四、受控辩证边（概念—概念；C7 白名单谓词） ----------
+
+# —— 经典唯物史观链（M1 的理论根据）——
+kb:C-生产力   kbont:determines   kb:C-生产关系 .
+kb:C-生产关系 kbont:determines   kb:C-分配形式 .
+kb:C-按劳分配 kbont:transformsInto kb:C-按需分配 .
+kb:C-资产阶级法权 kbont:mediates kb:C-按劳分配 .
+kb:C-自由人联合体 kbont:groundsOppositionTo kb:C-异化 .
+
+# —— 劳动社会化链（RedMarx 示例问题的本库版）——
+kb:C-协作       kbont:mediates    kb:C-劳动社会化 .
+kb:C-劳动社会化 kbont:determines  kb:C-资本有机构成 .
+kb:C-资本有机构成 kbont:determines kb:C-利润率趋向下降 .
+
+# —— 商品—货币—拜物教链（T02-B/T02-C）——
+kb:C-商品形式 kbont:reproduces kb:C-拜物教 .
+kb:C-商品形式 kbont:determines kb:C-货币贮藏 .
+
+# —— 一般智力—新型生产资料链（M3→M4，T02-B 核心矛盾）——
+kb:C-一般智力     kbont:conditions     kb:C-新型生产资料 .
+kb:C-新型生产资料 kbont:commodifies    kb:C-一般智力 .
+kb:C-非排他性     kbont:contradictsConcept kb:C-排他性占有 .
+
+# —— 经济核算争论链（T01-A 的对手骨架）——
+kb:C-信息生成 kbont:contradictsConcept kb:C-参数价格 .
+kb:C-分散知识 kbont:groundsOppositionTo kb:C-参数价格 .
+kb:C-默会知识 kbont:groundsOppositionTo kb:C-可计算性 .
+kb:C-可计算性 kbont:conditions kb:C-赛博共产主义 .
+kb:C-分散知识 kbont:conditions kb:C-赛博共产主义 .
+kb:C-CAP定理  kbont:conditions kb:C-赛博共产主义 .
+kb:C-古德哈特定律 kbont:conditions kb:C-按需分配 .
+kb:C-数字反馈基础设施 kbont:mediates kb:C-按需分配 .
+
+# —— 平台—依附链（T03-A/T07-D）——
+kb:C-云租金   kbont:exploits    kb:C-平台依附 .
+kb:C-算法治理 kbont:reproduces  kb:C-平台依附 .
+
+# —— 赛博朋克文化—机制链（L1-C §3.1 / L1-B 分叉 A）——
+# 文化—分析总称与技术垄断、正式机制分别建节点，不把文化标签设为机制下位概念。
+kb:C-技术垄断 kbont:conditions kb:C-平台依附固化 .
+kb:C-平台依附 kbont:reproduces kb:C-平台依附固化 .
+kb:C-赛博朋克式技术统治 kbont:distinguishedFrom kb:C-技术封建主义 .
+kb:C-赛博朋克式技术统治 kbont:distinguishedFrom kb:C-赛博共产主义 .
+kb:C-赛博朋克式技术统治 kbont:distinguishedFrom kb:C-平台依附固化 .
+kb:C-赛博朋克 kbont:distinguishedFrom kb:C-赛博朋克式技术统治 .
+kb:C-赛博朋克 kbont:distinguishedFrom kb:C-赛博共产主义 .
+
+# —— 解放条件链（T03-C/T05-D/T10）——
+kb:C-可行能力 kbont:conditions kb:C-自由人联合体 .

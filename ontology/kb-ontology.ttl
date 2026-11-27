@@ -1,0 +1,336 @@
+@prefix kbont: <http://kb.local/ontology/> .
+@prefix kb:    <http://kb.local/instance/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+### ============================================================
+### KB-ONT v1.12 · AI 时代共产主义知识库本体（TBox + SHACL + 抽样 ABox）
+### 2026-11-26 同步赛博朋克关联层版本；TBox/SHACL 结构未改，校验边界见 README。
+### 非正式层资产。配套说明见 ontology/README.md。
+### ============================================================
+
+<http://kb.local/ontology> a owl:Ontology ;
+    owl:versionInfo "KB-ONT v1.12 (2026-11-26, 赛博朋克关联层版本同步；TBox/SHACL 未改)" ;
+    rdfs:label "AI时代共产主义知识库本体"@zh .
+
+### ---------- 顶层类 ----------
+kbont:Entity a owl:Class ; rdfs:label "实体"@zh .
+kbont:ContentUnit a owl:Class ; rdfs:subClassOf kbont:Entity ; rdfs:label "信息实体"@zh .
+kbont:EpistemicUnit a owl:Class ; rdfs:subClassOf kbont:Entity ; rdfs:label "认识/证据实体"@zh .
+kbont:MetaUnit a owl:Class ; rdfs:subClassOf kbont:Entity ; rdfs:label "元实体"@zh .
+kbont:TensionChallenge a owl:Class ; rdfs:subClassOf kbont:MetaUnit ; rdfs:label "张力挑战（入口§2.1）"@zh ;
+    rdfs:comment "与核心命题构成张力的挑战项（自动化乐观论/哈耶克问题/算力稀缺/制度权力论），非命题间张力"@zh .
+
+### ---------- 信息实体 ----------
+kbont:TheoryWork a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "文献条目"@zh .
+kbont:TheoryClaim a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "理论观点/依据"@zh .
+kbont:Term a owl:Class ; rdfs:subClassOf skos:Concept , kbont:ContentUnit ; rdfs:label "术语"@zh .
+kbont:CoreProposition a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "核心命题"@zh .
+kbont:TopicAxis a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "主题轴"@zh .
+kbont:ThesisCluster a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "论题簇"@zh .
+kbont:Argument a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "论点"@zh .
+kbont:Objection a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "反对意见"@zh .
+kbont:Response a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "回应"@zh .
+kbont:AdversaryPosition a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "对手立场（外推版本）"@zh .
+kbont:Case a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "制度实践案例"@zh .
+kbont:Counterexample a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "反例"@zh .
+kbont:CaseIndicator a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "观察指标（表格行）"@zh .
+kbont:ProseDataPoint a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "带数字散文行（J 段管控）"@zh .
+kbont:Insight a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "理论增量"@zh .
+kbont:CorpusSlice a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "素材语料切片"@zh .
+kbont:OutputWork a owl:Class ; rdfs:subClassOf kbont:ContentUnit ; rdfs:label "成稿"@zh .
+
+### ---------- 认识/证据实体 ----------
+kbont:EvidenceSource a owl:Class ; rdfs:subClassOf kbont:EpistemicUnit ; rdfs:label "外部来源（台账条目）"@zh .
+kbont:Anchor a owl:Class ; rdfs:subClassOf kbont:EpistemicUnit ; rdfs:label "锚点"@zh .
+kbont:CrossCheck a owl:Class ; rdfs:subClassOf kbont:EpistemicUnit ; rdfs:label "交叉核验记录"@zh .
+
+### ---------- 元实体 ----------
+kbont:OpenQuestion a owl:Class ; rdfs:subClassOf kbont:MetaUnit ; rdfs:label "待验证问题"@zh .
+kbont:ForkPath a owl:Class ; rdfs:subClassOf kbont:MetaUnit ; rdfs:label "分叉路径"@zh .
+kbont:Switch a owl:Class ; rdfs:subClassOf kbont:MetaUnit ; rdfs:label "五开关"@zh .
+kbont:MonitoringTarget a owl:Class ; rdfs:subClassOf kbont:MetaUnit ; rdfs:label "监测对象"@zh .
+kbont:DisciplineRule a owl:Class ; rdfs:subClassOf kbont:MetaUnit ; rdfs:label "纪律规则"@zh .
+
+### ---------- 对象属性 ----------
+kbont:belongsToAxis    a owl:ObjectProperty ; rdfs:domain kbont:ThesisCluster ; rdfs:range kbont:TopicAxis ; rdfs:label "属于主题轴"@zh .
+kbont:unfoldsProposition a owl:ObjectProperty ; rdfs:domain kbont:TopicAxis ; rdfs:range kbont:CoreProposition ; rdfs:label "展开核心命题（主题轴级，据入口§二）"@zh .
+kbont:unfoldsDirect a owl:ObjectProperty ; rdfs:subPropertyOf kbont:unfoldsProposition ; rdfs:domain kbont:ThesisCluster ; rdfs:range kbont:CoreProposition ; rdfs:label "直接展开命题（簇级判读）"@zh .
+kbont:unfoldsAxisDerived a owl:ObjectProperty ; rdfs:subPropertyOf kbont:unfoldsProposition ; rdfs:domain kbont:ThesisCluster ; rdfs:range kbont:CoreProposition ; rdfs:label "经主题轴间接展开命题"@zh .
+kbont:challenges a owl:ObjectProperty ; rdfs:domain kbont:TensionChallenge ; rdfs:range kbont:CoreProposition ; rdfs:label "构成张力挑战"@zh .
+kbont:supportedBy      a owl:ObjectProperty ; rdfs:domain kbont:Argument ; rdfs:range kbont:TheoryClaim ; rdfs:label "由理论依据支撑"@zh .
+kbont:answeredBy       a owl:ObjectProperty ; rdfs:domain kbont:Objection ; rdfs:range kbont:Response ; rdfs:label "被回应"@zh .
+kbont:counters         a owl:ObjectProperty ; rdfs:domain kbont:AdversaryPosition ; rdfs:range kbont:Argument ; rdfs:label "对位反驳"@zh .
+kbont:extrapolatesFrom a owl:ObjectProperty ; rdfs:domain kbont:AdversaryPosition ; rdfs:range kbont:TheoryClaim ; rdfs:label "由对手原文外推"@zh .
+kbont:instantiatedBy   a owl:ObjectProperty ; rdfs:domain kbont:ThesisCluster ; rdfs:range kbont:Case ; rdfs:label "被案例例证"@zh .
+kbont:contradicts      a owl:ObjectProperty ; rdfs:domain kbont:Counterexample ; rdfs:range kbont:ThesisCluster ; rdfs:label "否证"@zh .
+kbont:evidencedBy      a owl:ObjectProperty ; rdfs:range kbont:EvidenceSource ; rdfs:label "由来源佐证"@zh .
+kbont:raises           a owl:ObjectProperty ; rdfs:domain kbont:Case ; rdfs:range kbont:OpenQuestion ; rdfs:label "引出待验证问题"@zh .
+kbont:suppliesConcept  a owl:ObjectProperty ; rdfs:domain kbont:TheoryClaim ; rdfs:range kbont:ThesisCluster ; rdfs:label "供给概念"@zh .
+kbont:hasAnchor        a owl:ObjectProperty ; rdfs:range kbont:Anchor ; rdfs:label "挂锚点"@zh .
+kbont:inTensionWith    a owl:ObjectProperty , owl:SymmetricProperty ; rdfs:domain kbont:CoreProposition ; rdfs:range kbont:CoreProposition ; rdfs:label "存在张力"@zh .
+kbont:produces         a owl:ObjectProperty ; rdfs:domain kbont:ThesisCluster ; rdfs:range kbont:OutputWork ; rdfs:label "产出成稿"@zh .
+kbont:drawnFrom        a owl:ObjectProperty ; rdfs:domain kbont:CorpusSlice ; rdfs:label "语料溯源"@zh .
+kbont:monitors         a owl:ObjectProperty ; rdfs:domain kbont:MonitoringTarget ; rdfs:range kbont:EvidenceSource ; rdfs:label "监测"@zh .
+kbont:flagsRisk        a owl:ObjectProperty ; rdfs:domain kbont:Switch ; rdfs:range kbont:ThesisCluster ; rdfs:label "预警风险"@zh .
+kbont:countersCluster  a owl:ObjectProperty ; rdfs:domain kbont:AdversaryPosition ; rdfs:range kbont:ThesisCluster ; rdfs:label "对位论题簇"@zh .
+kbont:reinforcesCluster a owl:ObjectProperty ; rdfs:domain kbont:AdversaryPosition ; rdfs:range kbont:ThesisCluster ; rdfs:label "援军同向（具名正方）"@zh .
+kbont:partOf           a owl:ObjectProperty ; rdfs:domain kbont:Case ; rdfs:range kbont:Case ; rdfs:label "机制行属于案例"@zh .
+kbont:relatedCluster   a owl:ObjectProperty ; rdfs:domain kbont:Case ; rdfs:range kbont:ThesisCluster ; rdfs:label "次要对应论题簇"@zh .
+kbont:concernsCluster  a owl:ObjectProperty ; rdfs:domain kbont:OpenQuestion ; rdfs:range kbont:ThesisCluster ; rdfs:label "关涉论题簇"@zh .
+kbont:illustratedBy    a owl:ObjectProperty ; rdfs:domain kbont:Insight ; rdfs:range kbont:Case ; rdfs:label "由案例例证"@zh .
+
+### ---------- 数据属性 ----------
+kbont:code a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "全库唯一编号"@zh .
+kbont:sourceGrade a owl:DatatypeProperty ; rdfs:label "来源等级"@zh ;
+    rdfs:comment "受控值：L-A 一手文献 | L-B 同行评议 | L-C 工作论文 | L-D 权威媒体 | L-E 一般网络（RULES §1）"@zh .
+kbont:verifyStatus a owl:DatatypeProperty ; rdfs:label "核验状态"@zh ;
+    rdfs:comment "受控值：未处理|检索中|待核验|已核验|已入库|退回待补|作废（LEDGER 状态机）"@zh .
+kbont:anchorNature a owl:DatatypeProperty ; rdfs:label "锚点性质"@zh ;
+    rdfs:comment "受控值：factual 数据锚点 | phenomenal 现象锚点 | inference 本文推论"@zh .
+kbont:metricKind a owl:DatatypeProperty ; rdfs:label "指标性质"@zh ;
+    rdfs:comment "受控值：attitude 态度类 | stock 存量类 | rate 比率类（RULES §2 口径纪律）"@zh .
+kbont:caliber a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "统计口径"@zh .
+kbont:firstHandVerified a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "已核到一手页"@zh .
+kbont:inLedger a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "已登记台账"@zh .
+kbont:isOriginalInference a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "是否本文推论"@zh .
+kbont:isP0 a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "是否 P0 优先簇"@zh ;
+    rdfs:comment "14 个 P0 簇见 L2 附录 D 覆盖总表；P0 是簇级属性，不构成独立主题轴"@zh .
+kbont:verdict a owl:DatatypeProperty ; rdfs:label "理论校验结论"@zh ;
+    rdfs:comment "受控值：验证|部分验证|强验证|创新|雏形|反向验证|边界验证|刻度化（L3-A §六总表）"@zh .
+kbont:questionStatus a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "问题状态"@zh ;
+    rdfs:comment "受控值：open | partially-answered | resolved（v1.0 新增建议）"@zh .
+
+### ============================================================
+### SHACL 约束：把 RULES / J 段硬纪律编码为可校验 shape
+### ============================================================
+
+# C1：L-E 一般网络未经一手回溯，不得作为任何内容的佐证来源
+kbont:C1_NoLEAsEvidence a sh:NodeShape ;
+    sh:targetObjectsOf kbont:evidencedBy ;
+    sh:not [ a sh:NodeShape ;
+        sh:property [ sh:path kbont:sourceGrade ; sh:hasValue "L-E" ] ;
+        sh:property [ sh:path kbont:firstHandVerified ; sh:hasValue false ] ] ;
+    sh:message "违反 C1：L-E 来源未经一手页回溯，不得入库佐证（RULES §1）"@zh .
+
+# C2：带数字散文行必须有来源（J 段）
+kbont:C2_ProseDataPointNeedsSource a sh:NodeShape ;
+    sh:targetClass kbont:ProseDataPoint ;
+    sh:property [ sh:path kbont:evidencedBy ; sh:minCount 1 ;
+        sh:message "违反 C2：带数字散文行须行内附〔来源：…〕（J 段规则）"@zh ] .
+
+# C3：来源标记“已核验”须四要素齐备（作者/篇名/年份/载体）
+kbont:C3_FourElements a sh:NodeShape ;
+    sh:targetClass kbont:EvidenceSource ;
+    sh:not [ a sh:NodeShape ;
+        sh:property [ sh:path kbont:verifyStatus ; sh:hasValue "已核验" ] ;
+        sh:property [ sh:path kbont:author ;    sh:minCount 1 ] ;
+        sh:property [ sh:path kbont:title ;     sh:minCount 1 ] ;
+        sh:property [ sh:path kbont:year ;      sh:minCount 1 ] ;
+        sh:property [ sh:path kbont:venue ;     sh:minCount 1 ] ] ;
+    sh:message "违反 C3：四要素缺一不可，不得标记为已核验（RULES §2）"@zh .
+kbont:author a owl:DatatypeProperty ; rdfs:label "作者"@zh .
+kbont:title  a owl:DatatypeProperty ; rdfs:label "篇名"@zh .
+kbont:year   a owl:DatatypeProperty ; rdfs:range xsd:gYear ; rdfs:label "年份"@zh .
+kbont:venue  a owl:DatatypeProperty ; rdfs:label "载体"@zh .
+
+# C4：跨口径比率不得直接相减——交叉核验若涉 rate 对比，两侧口径必须一致
+kbont:C4_CaliberMatch a sh:NodeShape ;
+    sh:targetClass kbont:CrossCheck ;
+    sh:property [ sh:path kbont:caliber ; sh:minCount 1 ;
+        sh:message "违反 C4：跨来源比较须先确认口径一致并记录口径（RULES §2 附则 1）"@zh ] .
+
+# C5：态度类与存量类不可混说
+kbont:C5_MetricKindMatch a sh:NodeShape ;
+    sh:targetClass kbont:CrossCheck ;
+    sh:property [ sh:path kbont:metricKind ; sh:minCount 1 ;
+        sh:message "违反 C5 前置：交叉核验须登记两侧 metricKind（态度/存量不可混说，RULES §2.2）"@zh ] .
+
+# C6：对位不简化对手——对手立场必须有本人原文锚点
+kbont:C6_AdversaryGrounded a sh:NodeShape ;
+    sh:targetClass kbont:AdversaryPosition ;
+    sh:property [ sh:path kbont:extrapolatesFrom ; sh:minCount 1 ;
+        sh:message "违反 C6：对手立场缺失原文锚点，构成稻草人（对位纪律第 12 条）"@zh ] .
+
+### ============================================================
+### 概念层（v1.6 · RedMarx 范式升级）：受控辩证谓词 + 概念图骨架
+### 对标 RedMarx（三大洲社会研究所 GSI, 2026-08）：
+###   ① 概念图谱先行——研究问题先在概念图上推出分析骨架，再回正式层检索
+###   ② 受控谓词词表——辩证关系用受限谓词表达，不用"is-related-to"泛化边
+###   ③ 历史歧义消解——概念带 periodTrace（如 1844→1857→1867），区分早期与成熟表述
+###   ④ 词义拆分——同一 lemma 在不同理论语境拆为不同义项（lemma + senseContext）
+###   ⑤ 非黑箱——每个概念经 kbont:conceptAnchor 锚回正式层可定位文本
+### ============================================================
+
+kbont:MarxistConcept a owl:Class ; rdfs:subClassOf skos:Concept , kbont:ContentUnit ;
+    rdfs:label "马克思主义概念（义项级）"@zh ;
+    rdfs:comment "概念图谱的节点。同一 lemma 的不同理论语境变体拆为独立节点（词义拆分），不强行合并。"@zh .
+
+### ---------- 受控辩证谓词词表（C7 白名单） ----------
+kbont:dialecticalRelation a owl:ObjectProperty ; rdfs:label "概念辩证关系（总谓词，受控词表根）"@zh ;
+    rdfs:comment "概念层任何概念—概念边必须是下列受控谓词之一的实例，禁止泛化关联。"@zh .
+
+kbont:determines a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "决定"@zh ; rdfs:comment "A 决定 B（经典因果—结构关系，如生产力决定分配形式）"@zh .
+kbont:conditions a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "制约"@zh ; rdfs:comment "A 是 B 的可行性条件而非决定项（信息约束语境）"@zh .
+kbont:mediates a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "通过中介"@zh ; rdfs:comment "B 经由中介 A 得以展开/实现（A mediates B）"@zh .
+kbont:reproduces a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "再生产"@zh ; rdfs:comment "A 在运行中使 B 得以持续再生产"@zh .
+kbont:transformsInto a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "转化为"@zh ; rdfs:comment "历史发展中 A 转化为 B（阶段演进，非并列）"@zh .
+kbont:commodifies a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "商品化"@zh ; rdfs:comment "A 把 B 纳入商品形式/纳入交换价值逻辑"@zh .
+kbont:alienates a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "异化"@zh ; rdfs:comment "A 使 B 反转为支配 B 的对立力量"@zh .
+kbont:exploits a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "剥削"@zh ; rdfs:comment "A 凭借占有结构攫取 B 的产出/剩余"@zh .
+kbont:contradictsConcept a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "互为矛盾"@zh ;
+    rdfs:comment "A 与 B 构成对立，张力须保留而非压缩为整洁摘要（与 kbont:contradicts「反例否证簇」严格区分：后者是文档级关系）"@zh .
+kbont:groundsOppositionTo a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "构成对立面"@zh ; rdfs:comment "A 为驳斥/消解 B 提供理论根据（A 是 B 的否定环节）"@zh .
+kbont:distinguishedFrom a owl:ObjectProperty ; rdfs:subPropertyOf kbont:dialecticalRelation ;
+    rdfs:label "辨析区分"@zh ;
+    rdfs:comment "A 与 B 须拆分义项、勿混用（L1-C 易混提示纪律的概念层编码，RedMarx 词义拆分）"@zh .
+
+### ---------- 概念层数据属性 ----------
+kbont:lemma a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "词条（义项分组键）"@zh .
+kbont:senseContext a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "义项所属理论语境"@zh .
+kbont:periodTrace a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "历史分期轨迹"@zh ;
+    rdfs:comment "如 \"1844→1857→1867\"；标注概念表述的演变阶段（RedMarx 历史歧义消解）"@zh .
+kbont:ahistorical a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "无历史演变"@zh ;
+    rdfs:comment "true 表示该概念为跨时代分析工具/定律，不适用分期标注（如 CAP 定理、古德哈特定律）"@zh .
+kbont:conceptAnchor a owl:ObjectProperty ; rdfs:label "概念→正式层锚点"@zh ;
+    rdfs:comment "每个概念须锚回正式层可定位单元（簇/命题/张力挑战/问/案例），保证图谱非黑箱、可溯源"@zh .
+
+### ---------- SHACL C7/C8：概念层纪律 ----------
+
+# C7：概念节点谓词封闭——禁用受控词表之外的边（RedMarx：不用 is-related-to 泛化边）
+kbont:C7_ConceptPredicateClosed a sh:NodeShape ;
+    sh:targetClass kbont:MarxistConcept ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type rdfs:label skos:definition skos:broader skos:narrower skos:prefLabel
+        kbont:code kbont:lemma kbont:senseContext kbont:periodTrace kbont:ahistorical kbont:conceptAnchor
+        kbont:isOriginalInference
+        kbont:determines kbont:conditions kbont:mediates kbont:reproduces kbont:transformsInto
+        kbont:commodifies kbont:alienates kbont:exploits kbont:contradictsConcept
+        kbont:groundsOppositionTo kbont:distinguishedFrom ) ;
+    sh:message "违反 C7：概念节点出现受控词表之外的谓词（辩证关系必须用 kbont:dialecticalRelation 子属性）"@zh .
+
+# C8：每个概念须有历史分期（或显式声明 ahistorical），且至少锚回一个正式层单元
+kbont:C8_ConceptGrounded a sh:NodeShape ;
+    sh:targetClass kbont:MarxistConcept ;
+    sh:or ( [ sh:property [ sh:path kbont:periodTrace ; sh:minCount 1 ] ]
+            [ sh:property [ sh:path kbont:ahistorical ; sh:hasValue true ] ] ) ;
+    sh:property [ sh:path kbont:conceptAnchor ; sh:minCount 1 ] ;
+    sh:property [ sh:path skos:definition ; sh:minCount 1 ] ;
+    sh:message "违反 C8：概念缺历史分期（或 ahistorical）、缺正式层锚点、或缺定义——构成黑箱概念"@zh .
+
+### ============================================================
+### 抽样 ABox（真实实例，编号与正式层一一对应）
+### ============================================================
+
+# —— 核心命题（入口 §二）——
+kb:M1 a kbont:CoreProposition ; kbont:code "M1" ;
+    rdfs:label "分配形式由生产力水平决定，不由道德愿望决定"@zh .
+kb:M3 a kbont:CoreProposition ; kbont:code "M3" ;
+    rdfs:label "一般智力成为直接生产力，却可能被私人占有"@zh .
+kb:M4 a kbont:CoreProposition ; kbont:code "M4" ;
+    rdfs:label "数据、模型与算法高可复制、低边际成本、倾向非竞争；算力、能源、芯片与优质数据仍受稀缺约束，社会化按瓶颈层推进"@zh .
+
+# —— 张力挑战（入口 §2.1，四组，命题 × 挑战 而非命题互张力）——
+kb:Ch-Optimism a kbont:TensionChallenge ; rdfs:label "自动化乐观论：若 AI 使生产力空前发达，是否\"门槛已达标\"（判定标准未定）"@zh ;
+    kbont:challenges kb:M1 .
+kb:Ch-Hayek a kbont:TensionChallenge ; rdfs:label "哈耶克问题：一般智力可被集中，但分散知识能否被集中（核心未决，L1-§2.2）"@zh ;
+    kbont:challenges kb:M3 .
+kb:Ch-Compute a kbont:TensionChallenge ; rdfs:label "算力稀缺：数据模型倾向非竞争，但算力、能源、芯片与优质数据仍有排他门槛（分层推进，非一步到位）"@zh ;
+    kbont:challenges kb:M4 .
+kb:Ch-Institution a kbont:TensionChallenge ; rdfs:label "制度权力论：权力是否已从\"占有\"转向\"制度与话语\"（部分采纳，保留物质基础优先性）"@zh ;
+    kbont:challenges kb:M5 .
+
+# —— 主题轴与论题簇（L2）——
+kb:T01 a kbont:TopicAxis ; kbont:code "T01" ; rdfs:label "理想社会的制度设计"@zh .
+kb:T01A a kbont:ThesisCluster ; kbont:code "T01-A" ;
+    rdfs:label "「按需分配」的三重技术前提"@zh ;
+    kbont:belongsToAxis kb:T01 ;
+    kbont:unfoldsProposition kb:M1 .
+kb:T02A a kbont:ThesisCluster ; kbont:code "T02-A" ;
+    rdfs:label "新型生产资料的分层属性"@zh ;
+    kbont:belongsToAxis kb:T02 ;
+    kbont:unfoldsProposition kb:M4 .
+
+# —— 论点 / 反对意见 / 回应（T01-A 内部结构）——
+kb:T01A_Arg1 a kbont:Argument ; rdfs:label "按需分配过去不可行是技术条件不具备"@zh ;
+    kbont:supportedBy kb:Claim-GDC .
+kb:Obj-T01A-1 a kbont:Objection ; rdfs:label "可测量的只是显性需求，隐性需求无法统计"@zh ;
+    kbont:answeredBy kb:Resp-T01A-1 .
+kb:Resp-T01A-1 a kbont:Response ; rdfs:label "不追求预测需求，只追求响应需求（后置反馈替代前置预测）"@zh .
+kb:Claim-GDC a kbont:TheoryClaim ;
+    rdfs:label "《哥达纲领批判》“权利决不能超出社会的经济结构”"@zh ;
+    kbont:firstHandVerified true ; kbont:isOriginalInference false .
+
+# —— 对手立场（对位纪律 C6 示例：米塞斯）——
+kb:Adv-Mises a kbont:AdversaryPosition ;
+    rdfs:label "米塞斯：无市场价格则经济核算不可能（外推版本）"@zh ;
+    kbont:extrapolatesFrom kb:Claim-Mises ;
+    kbont:counters kb:T01A_Arg1 .
+kb:Claim-Mises a kbont:TheoryClaim ;
+    rdfs:label "米塞斯《社会主义》原著中的核算论证（本人条件性表述）"@zh ;
+    kbont:sourceGrade "L-A" ; kbont:firstHandVerified true .
+
+# —— 案例（L3-A 案例 1-1）——
+kb:Case-1-1 a kbont:Case ; kbont:code "案例1-1" ;
+    rdfs:label "「数据二十条」与数据产权三权分置"@zh .
+kb:T02A kbont:instantiatedBy kb:Case-1-1 .
+kb:Case-1-1 kbont:raises kb:U1 .
+kb:U1 a kbont:OpenQuestion ; kbont:code "U1" ;
+    rdfs:label "三权分置是否会退化为权利碎片化、交易成本上升"@zh ;
+    kbont:questionStatus "open" .
+
+# —— 观察指标（表格行，J 段豁免，仍须来源）——
+kb:Ind-DataVolume a kbont:CaseIndicator ;
+    rdfs:label "年度数据生产总量 52.26 ZB（2025，+27.28%，占全球 27.44%）"@zh ;
+    kbont:metricKind "stock" ;
+    kbont:caliber "国家数据局《全国数据资源调查报告（2025年）》口径：年度数据生产总量" ;
+    kbont:evidencedBy kb:R-DataSurvey .
+
+# —— 带数字散文行（J 段管控对象，C2 示例：合规样例）——
+kb:Prose-CF40 a kbont:ProseDataPoint ;
+    rdfs:label "CF40 同口径复算：我国 10.5% vs OECD 21.2%"@zh ;
+    kbont:metricKind "rate" ;
+    kbont:caliber "Public social expenditure 同口径复算，可直接相减" ;
+    kbont:evidencedBy kb:R-CF40 .
+
+# —— 反例（L3-A §五）——
+kb:ExA a kbont:Counterexample ; kbont:code "反例A" ;
+    rdfs:label "数据交易所“有场无市”：场内枢纽路径未获验证"@zh ;
+    kbont:contradicts kb:T02A .
+kb:ExB a kbont:Counterexample ; kbont:code "反例B" ;
+    rdfs:label "智算中心利用率 36.8%：绕过私有化绕不过运营能力"@zh ;
+    kbont:contradicts kb:T02A .
+
+# —— 理论增量 ——
+kb:Insight-5 a kbont:Insight ; kbont:code "增量5" ;
+    rdfs:label "制度设计落地 ≠ 制度生效——实现路径依赖运营能力与条件结构"@zh ;
+    kbont:hasAnchor kb:Anchor-ExBC .
+
+# —— 台账来源（LEDGER 抽样）——
+kb:R-DataSurvey a kbont:EvidenceSource ; kbont:code "R-数据局2025" ;
+    kbont:sourceGrade "L-A" ; kbont:verifyStatus "已核验" ; kbont:firstHandVerified true ; kbont:inLedger true ;
+    kbont:author "国家数据局" ; kbont:title "全国数据资源调查报告（2025年）" ; kbont:year "2026" ; kbont:venue "第九届数字中国建设峰会" .
+kb:R-CF40 a kbont:EvidenceSource ; kbont:code "R-CF40" ;
+    kbont:sourceGrade "L-B" ; kbont:verifyStatus "已核验" ; kbont:inLedger true ;
+    kbont:author "CF40" ; kbont:title "社会支出同口径复算" ; kbont:year "2026" ; kbont:venue "CF40 研究报告" .
+kb:R-069 a kbont:EvidenceSource ; kbont:code "R-069" ;
+    kbont:sourceGrade "L-C" ; kbont:verifyStatus "待核验" ; kbont:firstHandVerified false ; kbont:inLedger true ;
+    rdfs:comment "结项保留：不可得项如实保持状态，不为凑 100% 改状态（方法论第 7 条）"@zh .
+
+# —— 锚点 ——
+kb:Anchor-ExBC a kbont:Anchor ; kbont:anchorNature "factual" ;
+    rdfs:label "智算中心利用率 36.8%（数据锚点）"@zh .

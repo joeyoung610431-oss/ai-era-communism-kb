@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="从工时、灵活就业到 AI、区块链与公共账本：用可核验事实、明确推论和反证条件，回答技术能力为什么没有自动带来公共权力与人的自由。设计样张，非全库公开。">
+<meta name="robots" content="noindex, nofollow">
+<meta id="themeColor" name="theme-color" content="#f2eee4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23fbf8f0'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1' fill='%23171a18'/%3E%3Crect x='7' y='14' width='14' height='3' rx='1' fill='%23b8412a'/%3E%3Crect x='7' y='20' width='10' height='3' rx='1' fill='%231c5a4d'/%3E%3C/svg%3E">
+<title>AI 与区块链时代，人为什么没有更自由？ · 研究台</title>
+<script>
+(function(){
+  try {
+    var q = new URLSearchParams(location.search).get('theme');
+    var t = (q === 'light' || q === 'dark') ? q : localStorage.getItem('kb-theme');
+    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch(e) {}
+})();
+</script>
+<style>
+:root{
+  --paper:#f2eee4;
+  --paper-blur:rgba(242,238,228,.88);
+  --card:#fbf8f0;
+  --wash:#e9e3d5;
+  --ink:#171a18;
+  --muted:#5d635c;
+  --line:#d8d1c0;
+  --line-strong:#b9b09a;
+  --vermilion:#b8412a;
+  --pine:#1c5a4d;
+  --gold:#8f6720;
+  --shadow:0 10px 30px rgba(30,25,15,.07);
+  --nav-h:64px;
+  --side-w:288px;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong",Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+}
+[data-theme="dark"]{
+  --paper:#0f1211;
+  --paper-blur:rgba(15,18,17,.88);
+  --card:#171c1a;
+  --wash:#1f2623;
+  --ink:#ece7da;
+  --muted:#9aa39b;
+  --line:#2a322e;
+  --line-strong:#3d4842;
+  --vermilion:#ff7d5a;
+  --pine:#63d3b4;
+  --gold:#dfb56a;
+  --shadow:0 10px 30px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.72;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+::selection{background:rgba(184,65,42,.18)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select{font:inherit;color:inherit}
+h1,h2,h3,h4{margin:0;font-weight:600}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--pine);outline-offset:2px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:fixed;left:12px;top:-60px;z-index:99;background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:8px;transition:top .2s}
+.skip:focus{top:12px}
+
+/* ---------- header ---------- */
+.top{
+  position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;
+  display:flex;align-items:center;gap:16px;padding:0 20px;
+  background:var(--paper-blur);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.mark{width:30px;height:30px;display:grid;gap:3px;flex:0 0 auto;padding:5px;border:1px solid var(--line-strong);border-radius:7px;background:var(--card)}
+.mark i{display:block;height:3px;border-radius:1px;background:var(--ink);opacity:.9}
+.mark i:nth-child(2){width:76%;background:var(--vermilion)}
+.mark i:nth-child(3){width:58%;background:var(--pine)}
+.mark i:nth-child(4){width:40%;background:var(--gold)}
+.brand-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.brand-txt b{font-family:var(--serif);font-size:14.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.brand-txt span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:2px;margin-left:8px}
+.nav a{padding:7px 11px;border-radius:8px;font-size:13.5px;color:var(--muted);white-space:nowrap}
+.nav a:hover{background:var(--wash);color:var(--ink)}
+.nav a.on{color:var(--ink);font-weight:600}
+.top-search{position:relative;margin-left:auto;flex:0 1 300px}
+.top-search input{
+  width:100%;height:36px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);padding:0 30px 0 32px;font-size:13px;outline:none;
+}
+.top-search input:focus{border-color:var(--pine);box-shadow:0 0 0 3px rgba(28,90,77,.12)}
+.top-search .ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted);pointer-events:none}
+.top-search kbd{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:var(--paper);pointer-events:none}
+.search-pop{
+  display:none;position:absolute;top:calc(100% + 9px);right:0;width:min(470px,calc(100vw - 24px));
+  background:var(--card);border:1px solid var(--line-strong);border-radius:13px;box-shadow:0 20px 55px rgba(0,0,0,.18);
+  padding:7px;z-index:70;
+}
+.search-pop.open{display:block}
+.search-head{display:flex;justify-content:space-between;gap:12px;padding:6px 8px 8px;font-size:10.5px;color:var(--muted);font-family:var(--mono)}
+.search-item{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:9px;align-items:center;width:100%;text-align:left;border:0;background:transparent;border-radius:8px;padding:9px 8px}
+.search-item:hover,.search-item.sel{background:var(--wash)}
+.search-item .kind{font-family:var(--mono);font-size:9.5px;color:var(--vermilion);letter-spacing:.04em}
+.search-item .st{display:block;font-family:var(--serif);font-size:13.5px;line-height:1.45;color:var(--ink)}
+.search-item .ss{display:block;margin-top:2px;font-size:10.5px;line-height:1.45;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-item .go{font-size:11px;color:var(--muted)}
+.search-tip{padding:9px 8px 6px;font-size:11px;line-height:1.6;color:var(--muted)}
+.search-tip b{color:var(--ink);font-weight:500}
+.search-foot{border-top:1px solid var(--line);margin-top:5px;padding:7px 8px 3px;font-size:10px;color:var(--muted)}
+.icon-btn{
+  width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;
+  border:1px solid var(--line);border-radius:10px;background:var(--card);
+}
+.icon-btn:hover{border-color:var(--ink)}
+.icon-btn svg{width:16px;height:16px}
+#menuBtn{display:none}
+[data-theme="dark"] .sun{display:none}
+[data-theme="light"] .moon{display:none}
+
+/* ---------- sidebar ---------- */
+.side{
+  position:fixed;top:var(--nav-h);bottom:0;left:0;width:var(--side-w);z-index:50;
+  overflow-y:auto;overscroll-behavior:contain;padding:26px 18px 60px;
+  border-right:1px solid var(--line);background:var(--paper);
+}
+.side::-webkit-scrollbar{width:8px}
+.side::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+.side-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 9px 10px}
+.sec-list{display:flex;flex-direction:column;gap:1px;margin-bottom:26px}
+.sec-list a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:8px;font-size:13.5px;color:var(--muted)}
+.sec-list a:hover{background:var(--wash);color:var(--ink)}
+.sec-list a.on{background:var(--wash);color:var(--ink);font-weight:600}
+.sec-list em{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);padding:0 6px;border-radius:999px;line-height:1.7}
+.fgroup{padding-top:18px;margin-top:18px;border-top:1px solid var(--line)}
+.fgroup:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.fgroup h3{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:500;margin:0 0 8px 2px;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{
+  border:1px solid var(--line);background:transparent;color:var(--muted);
+  border-radius:999px;padding:3px 8px;font-size:11.5px;line-height:1.5;
+}
+.chip:hover{border-color:var(--line-strong);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip.g-A[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:#fff}
+.chip.g-C[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#fff}
+.chip.g-D[aria-pressed="true"]{background:var(--vermilion);border-color:var(--vermilion);color:#fff}
+.chip.g-K[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip.g-X[aria-pressed="true"]{background:var(--muted);border-color:var(--muted);color:var(--paper)}
+.chip small{font-family:var(--mono);font-size:9.5px;opacity:.7;margin-left:3px}
+.chip.zero{opacity:.55}
+.chip.zero:hover,.chip.zero[aria-pressed="true"]{opacity:1}
+.axis-note{margin:9px 1px 0;font-size:10.5px;line-height:1.6;color:var(--muted)}
+.filter-btn{display:none;align-items:center;gap:6px;height:32px;border:1px solid var(--line-strong);border-radius:8px;background:var(--card);padding:0 9px;font-size:11.5px;white-space:nowrap}
+.filter-btn svg{width:14px;height:14px}
+.filter-badge{display:none;min-width:17px;height:17px;padding:0 4px;place-items:center;border-radius:999px;background:var(--vermilion);color:#fff;font-family:var(--mono);font-size:9px}
+.filter-badge.show{display:grid}
+.filter-hint{font-size:10.5px;color:var(--muted)}
+.reset{
+  width:100%;margin-top:14px;padding:7px 10px;border:1px dashed var(--line-strong);
+  border-radius:9px;background:transparent;color:var(--muted);font-size:12px;
+}
+.reset:hover{color:var(--vermilion);border-color:var(--vermilion)}
+.legend{margin-top:18px;font-size:12px;color:var(--muted)}
+.legend summary{cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.legend dl{margin:10px 0 0;display:grid;grid-template-columns:42px 1fr;gap:6px 8px;font-size:11.5px;line-height:1.55}
+.legend dt{font-family:var(--mono);font-size:10.5px;color:var(--ink)}
+.legend dd{margin:0}
+.side-note{margin-top:18px;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:11.5px;line-height:1.6;color:var(--muted)}
+.side-note b{color:var(--ink);font-weight:600}
+.overlay{position:fixed;inset:var(--nav-h) 0 0 0;background:rgba(10,12,10,.42);z-index:45;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.show{opacity:1;pointer-events:auto}
+
+/* ---------- layout ---------- */
+.main{margin-left:var(--side-w);min-height:100vh}
+.wrap{max-width:1180px;margin:0 auto;padding:calc(var(--nav-h) + 40px) 36px 96px}
+section{scroll-margin-top:calc(var(--nav-h) + 24px)}
+.sec-head{margin-bottom:22px}
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--vermilion);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.kicker::before{content:"";width:18px;height:1px;background:var(--vermilion)}
+.sec-head h2{font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);line-height:1.3;letter-spacing:.01em}
+.sec-head p{margin-top:8px;max-width:66ch;color:var(--muted);font-size:13.8px}
+.section-gap{margin-top:78px}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr);gap:40px;align-items:center;padding:4px 0 36px;border-bottom:1px solid var(--line)}
+.hero .kicker{margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,3.8vw,48px);line-height:1.22;letter-spacing:-.015em;font-weight:600}
+.hbr{display:none}
+@media (min-width:1081px){.hbr{display:block}}
+.hero h1 .nb{white-space:nowrap}
+.hero h1 .hl{color:var(--vermilion);position:relative;white-space:nowrap}
+.hero h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.02em;height:.06em;background:var(--vermilion);opacity:.35}
+.hero-sub{margin-top:18px;max-width:60ch;color:var(--muted);font-size:15px;line-height:1.8}
+.hero-sub b{color:var(--ink);font-weight:600}
+.hero-note{margin-top:12px;max-width:58ch;font-size:11.8px;line-height:1.65;color:var(--muted)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 17px;border-radius:10px;font-size:13px;border:1px solid transparent;transition:transform .15s ease, background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary:hover{background:var(--vermilion);border-color:var(--vermilion)}
+.btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--ink)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:14px 26px;margin-top:28px}
+.hstat{display:flex;align-items:baseline;gap:6px}
+.hstat b{font-family:var(--serif);font-size:21px;font-weight:600;font-variant-numeric:tabular-nums}
+.hstat span{font-size:11.5px;color:var(--muted)}
+.scope-line{margin-top:9px;font-size:10.5px;line-height:1.65;color:var(--muted)}
+.scope-line b{color:var(--ink);font-weight:500}
+.specimen{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:15px;
+  padding:19px 19px 15px;box-shadow:var(--shadow);
+}
+.specimen::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;border-radius:15px 15px 0 0;background:linear-gradient(90deg,var(--vermilion),var(--gold) 55%,var(--pine))}
+.spec-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.spec-top .label{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.pill{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;line-height:1.6;padding:1px 7px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap}
+.pill.A{background:rgba(28,90,77,.1);border-color:rgba(28,90,77,.35);color:var(--pine)}
+.pill.B{background:rgba(28,90,77,.08);border-color:rgba(28,90,77,.28);color:var(--pine)}
+.pill.C{background:rgba(143,103,32,.1);border-color:rgba(143,103,32,.35);color:var(--gold)}
+.pill.D{background:rgba(184,65,42,.1);border-color:rgba(184,65,42,.35);color:var(--vermilion)}
+.pill.K{background:transparent;border-style:dashed}
+.pill.X{background:transparent;border-style:dotted;color:var(--muted)}
+.specimen h3{font-family:var(--serif);font-size:16.5px;line-height:1.45;margin-bottom:10px}
+.spec-rows{margin-top:12px;display:grid;gap:0;font-size:11.8px;color:var(--muted)}
+.spec-rows div{display:grid;grid-template-columns:46px minmax(0,1fr);gap:8px;padding:8px 0;border-top:1px dashed var(--line)}
+.spec-rows b{font-weight:600;color:var(--ink)}
+.spec-g{display:inline-block;margin-left:4px;font-family:var(--mono);font-size:9px;color:var(--muted)}
+.spec-foot{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px;color:var(--muted)}
+
+/* ---------- ticker ---------- */
+.ticker{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;padding:11px 0;border-bottom:1px solid var(--line);font-size:11.6px;color:var(--muted)}
+.ticker .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--vermilion);margin-right:12px;text-transform:uppercase}
+.ticker span.item{display:inline-flex;align-items:center;white-space:nowrap}
+.ticker span.item + span.item::before{content:"·";margin:0 9px;color:var(--line-strong)}
+.ticker b{font-weight:600;color:var(--ink);margin:0 4px}
+.ticker .warn b{color:var(--vermilion)}
+
+/* ---------- evidence primer ---------- */
+.primer{margin-top:24px}
+.primer-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.primer-head h2{font-family:var(--serif);font-size:17px;line-height:1.45}
+.primer-head p{font-size:11px;color:var(--muted)}
+.primer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.primer-card{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;border:1px solid var(--line);border-radius:11px;background:var(--card);padding:12px 13px}
+.primer-card .pmark{font-family:var(--mono);font-size:10px;color:var(--pine);border:1px solid rgba(28,90,77,.35);border-radius:5px;padding:2px 5px;white-space:nowrap}
+.primer-card:nth-child(2) .pmark{color:var(--vermilion);border-color:rgba(184,65,42,.4)}
+.primer-card:nth-child(3) .pmark{color:var(--gold);border-color:rgba(143,103,32,.4)}
+.primer-card b{display:block;font-size:12px;font-weight:600;margin-bottom:2px}
+.primer-card p{font-size:10.8px;line-height:1.6;color:var(--muted)}
+.techsplit{margin-top:24px;padding:17px 18px 16px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(135deg,var(--card),transparent)}
+.tech-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.tech-head h2{font-family:var(--serif);font-size:17px;line-height:1.45}
+.tech-head p{font-size:10.8px;color:var(--muted)}
+.tech-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tech-card{padding:12px 13px;border-left:2px solid var(--line-strong);background:var(--paper)}
+.tech-card:nth-child(1){border-left-color:var(--pine)}
+.tech-card:nth-child(2){border-left-color:var(--gold)}
+.tech-card:nth-child(3){border-left-color:var(--vermilion)}
+.tech-card b{display:block;font-family:var(--serif);font-size:14px;margin-bottom:5px}
+.tech-card p{font-size:11.5px;line-height:1.7;color:var(--muted)}
+.tech-rule{margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:11.5px;line-height:1.65;color:var(--ink)}
+.tech-rule span{font-family:var(--mono);font-size:9.5px;color:var(--vermilion);margin-right:7px}
+.fact-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:27px 0 10px}
+.fact-head h2{font-family:var(--serif);font-size:17px;line-height:1.45}
+.fact-head p{font-size:10.8px;color:var(--muted)}
+
+/* ---------- numbers ---------- */
+.numbers{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-top:0}
+.num{
+  text-align:left;background:var(--card);border:1px solid var(--line);border-radius:11px;
+  padding:13px 13px 11px;display:flex;flex-direction:column;gap:2px;min-height:116px;
+  transition:transform .15s,border-color .15s,box-shadow .15s;
+}
+.num:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+.num .n{font-family:var(--serif);font-size:26px;line-height:1.15;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.num .n small{font-size:13px;margin-left:3px;color:var(--muted)}
+.num .l{font-size:11.8px;color:var(--ink);line-height:1.5}
+.num .period{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.num .g{margin-top:auto;padding-top:8px;display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.num .g .dot{width:5px;height:5px;border-radius:50%;background:var(--pine)}
+.num .g .dot.c{background:var(--gold)}
+.num .g .dot.d{background:var(--vermilion)}
+.num .go{margin-left:auto;font-family:var(--sans);font-size:10px;color:var(--muted)}
+.num:hover .go{color:var(--vermilion)}
+
+/* ---------- M matrix ---------- */
+.mmap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.mcard{
+  text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:15px;display:flex;flex-direction:column;gap:7px;min-height:122px;position:relative;
+  transition:transform .15s,border-color .15s,box-shadow .15s;
+}
+.mcard:hover{transform:translateY(-2px);border-color:var(--vermilion);box-shadow:var(--shadow)}
+.mcard .mid{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--vermilion)}
+.mcard .mt{font-family:var(--serif);font-size:15px;line-height:1.45;font-weight:600}
+.mcard .mx{font-size:11px;color:var(--muted);margin-top:auto}
+.mcard .tension{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--gold);font-family:var(--mono)}
+.mcard .tension::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.mcard .open{position:absolute;right:13px;top:13px;color:var(--muted);font-size:12px;opacity:.65}
+.mcard:hover .open{color:var(--vermilion);opacity:1}
+.mmap-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:11px;flex-wrap:wrap}
+.mmap-foot p{font-size:11.5px;color:var(--muted)}
+.linkish{background:none;border:0;padding:0;font-size:11.5px;color:var(--vermilion);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* ---------- judgments ---------- */
+.jbar{
+  position:sticky;top:var(--nav-h);z-index:30;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:10px 0;margin-bottom:12px;background:var(--paper-blur);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.jcount{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.jcount b{color:var(--ink);font-size:13px}
+.jactive{display:flex;flex-wrap:nowrap;gap:5px;flex:1 1 250px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.jactive::-webkit-scrollbar{display:none}
+.jactive .a{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:2px 8px;font-size:10.5px;color:var(--muted);white-space:nowrap}
+.jactive .a button{border:0;background:none;padding:0;color:var(--muted);line-height:1;font-size:12px}
+.jactive .a button:hover{color:var(--vermilion)}
+.jactive .clear-all{flex:0 0 auto;border:0;background:none;padding:2px 4px;font-size:10.5px;color:var(--vermilion);white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
+.jtools{margin-left:auto;display:flex;align-items:center;gap:7px}
+.jtools label{font-size:10.5px;color:var(--muted);font-family:var(--mono)}
+.jtools select{height:32px;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:0 7px;font-size:11.5px}
+.jgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.jcard{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;
+  display:flex;flex-direction:column;scroll-margin-top:calc(var(--nav-h) + 76px);
+  transition:border-color .15s,box-shadow .15s;
+}
+.jcard:hover{border-color:var(--line-strong);box-shadow:var(--shadow)}
+.jcard.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,55%{box-shadow:0 0 0 3px rgba(184,65,42,.35)}100%{box-shadow:0 0 0 0 transparent}}
+.jtop{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.axes{display:inline-flex;gap:4px;font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.ax{border:1px solid var(--line);border-radius:4px;padding:0 4px;line-height:1.7}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:var(--paper)}
+.cid{font-family:var(--mono);font-size:9px;color:var(--muted);opacity:.75}
+.jtopics{display:flex;flex-wrap:wrap;gap:3px 10px;margin-top:7px;font-size:10.5px;line-height:1.5;color:var(--muted)}
+.jtopics b{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--ink);margin-right:3px}
+.jloc{margin-top:8px;font-size:10.5px;line-height:1.6;color:var(--muted)}
+.jloc b{font-weight:500;color:var(--ink);margin-right:4px}
+.jcard h3{font-family:var(--serif);font-size:18px;line-height:1.42;margin-top:8px;letter-spacing:.005em}
+.jcard .one{margin-top:9px;border-left:2px solid var(--vermilion);padding:2px 0 2px 11px;font-size:13.2px;line-height:1.7;background:linear-gradient(90deg,rgba(184,65,42,.055),transparent 70%)}
+.jrows{margin-top:9px}
+.jrow{display:grid;grid-template-columns:66px minmax(0,1fr);gap:9px;padding:8px 0;border-top:1px dashed var(--line)}
+.jrow .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:var(--muted);padding-top:2px}
+.jrow .v{font-size:12.8px;line-height:1.68;color:var(--ink)}
+.jrow .v b{font-weight:600}
+.jfoot{margin-top:auto;padding-top:11px;border-top:1px solid var(--line);display:flex;align-items:flex-start;gap:8px}
+.src{flex:1;min-width:0}
+.src summary{font-size:11px;color:var(--muted);cursor:pointer;list-style:none;display:flex;align-items:center;gap:5px;min-height:26px}
+.src summary::-webkit-details-marker{display:none}
+.src summary::before{content:"+";font-family:var(--mono);font-size:11px;width:11px}
+.src[open] summary::before{content:"−"}
+.src ul{margin:7px 0 0;display:grid;gap:5px}
+.src li{font-size:11px;color:var(--muted);line-height:1.55}
+.src li .g{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:0 3px;margin-right:4px}
+.src a{text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--line-strong)}
+.src a:hover{color:var(--vermilion);text-decoration-color:var(--vermilion)}
+.copy{flex:0 0 auto;border:1px solid var(--line);background:transparent;border-radius:7px;padding:4px 8px;font-size:10.5px;color:var(--muted)}
+.copy:hover{border-color:var(--pine);color:var(--pine)}
+.empty{grid-column:1/-1;text-align:center;padding:52px 20px;border:1px dashed var(--line-strong);border-radius:14px;color:var(--muted);font-size:13px}
+.empty b{display:block;font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:5px}
+mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1px}
+[data-theme="dark"] mark{background:rgba(223,181,106,.28)}
+/* ---------- forks ---------- */
+.fork-summary{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:9px 18px;align-items:center;margin-bottom:10px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:var(--card);font-size:11.5px;color:var(--muted)}
+.fork-summary span{display:flex;align-items:baseline;gap:6px;white-space:nowrap}
+.fork-summary b{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:600}
+.fork-summary span:first-child b{color:var(--gold)}
+.fork-summary span:nth-child(2) b{color:var(--vermilion)}
+.fork-summary p{justify-self:end;max-width:54ch;font-size:10.8px;line-height:1.6}
+.forks{border-top:1px solid var(--line)}
+.fork{display:grid;grid-template-columns:210px 108px minmax(0,1fr);gap:16px;align-items:start;padding:18px 2px;border-bottom:1px solid var(--line)}
+.fork .fname{font-family:var(--serif);font-size:15px;line-height:1.45;font-weight:600}
+.fork .fname small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);font-weight:400;margin-top:3px}
+.status{display:inline-flex;justify-self:start;align-items:center;gap:5px;font-size:10.5px;border:1px solid var(--line-strong);border-radius:999px;padding:2px 8px;white-space:nowrap;font-family:var(--mono)}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.status.partial{color:var(--gold);border-color:rgba(143,103,32,.4);background:rgba(143,103,32,.07)}
+.status.partial::before{background:var(--gold)}
+.status.unknown{color:var(--vermilion);border-color:rgba(184,65,42,.4);background:rgba(184,65,42,.06);border-style:dashed}
+.status.unknown::before{background:var(--vermilion)}
+.status.none{color:var(--muted);border-style:dotted}
+.fork .fdesc{font-size:12.5px;line-height:1.72;color:var(--muted)}
+.fork .fdesc b{color:var(--ink);font-weight:600}
+.fork-label{display:inline-block;min-width:34px;font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.fork .fdesc .verdict{display:block;margin-top:6px;color:var(--ink);font-size:11.8px}
+.fork .fdesc .verdict::before{content:"判定｜";font-family:var(--mono);font-size:9.5px;color:var(--vermilion);letter-spacing:.06em}
+.fork-link{display:inline-block;margin-top:7px;font-size:10.5px;color:var(--vermilion);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- routes ---------- */
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.route{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
+.route:hover{border-color:var(--line-strong);box-shadow:var(--shadow)}
+.route .rt{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.route .rt b{font-family:var(--serif);font-size:16px;line-height:1.45}
+.route .rt span{font-family:var(--mono);font-size:9.5px;color:var(--vermilion);white-space:nowrap}
+.route .audience{margin-top:7px;font-size:10.5px;color:var(--muted)}
+.route .chain{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin:13px 0 11px}
+.route .chain button{font-style:normal;font-size:10.5px;border:1px solid var(--line);border-radius:5px;padding:4px 6px;background:var(--paper);color:var(--ink);line-height:1.35}
+.route .chain button:hover{border-color:var(--vermilion);color:var(--vermilion)}
+.route .chain u{text-decoration:none;color:var(--line-strong);font-size:10px}
+.route .q{font-size:12.5px;color:var(--muted);line-height:1.68;margin-top:auto}
+.route .q b{color:var(--ink);font-weight:600}
+.route-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding-top:11px;border-top:1px dashed var(--line)}
+.route-foot span{font-size:10px;color:var(--muted)}
+.route-foot .linkish{font-size:11px}
+
+/* ---------- method ---------- */
+.method{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:30px;align-items:start}
+.table-wrap{overflow-x:auto}
+.gtable{width:100%;border-collapse:collapse;font-size:12px;min-width:440px}
+.gtable th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--muted);font-weight:500;padding:0 8px 7px 0;border-bottom:1px solid var(--line)}
+.gtable td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted);line-height:1.65}
+.gtable td:first-child{width:64px;font-family:var(--mono);font-size:10.5px;color:var(--ink);white-space:nowrap}
+.gtable td:nth-child(2){width:86px;color:var(--ink)}
+.bound{display:grid;gap:10px}
+.bound div{border:1px solid var(--line);border-radius:10px;padding:13px 14px;background:var(--card)}
+.bound b{display:block;font-family:var(--serif);font-size:14px;margin-bottom:3px}
+.bound p{font-size:12px;color:var(--muted);line-height:1.7}
+.bound p + p{margin-top:4px}
+.bound .no{color:var(--vermilion)}
+.bound .yes{color:var(--pine)}
+
+/* ---------- footer ---------- */
+.foot{margin-top:78px;border-top:1px solid var(--line);padding-top:22px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;font-size:11.5px;color:var(--muted);line-height:1.7}
+.foot b{color:var(--ink);font-weight:600}
+.foot .mono{font-family:var(--mono);font-size:10px;letter-spacing:.05em}
+.foot-r{text-align:right}
+.foot-r .badge-draft{display:inline-block;border:1px dashed var(--vermilion);color:var(--vermilion);border-radius:6px;padding:3px 8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;margin-bottom:8px}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:20px}
+.modal.open{display:grid}
+.modal-bg{position:absolute;inset:0;background:rgba(8,10,9,.55);backdrop-filter:blur(3px)}
+.sheet{
+  position:relative;width:min(640px,100%);max-height:82vh;overflow:auto;
+  background:var(--card);border:1px solid var(--line-strong);border-radius:16px;padding:26px 26px 22px;box-shadow:0 30px 80px rgba(0,0,0,.3);
+}
+.sheet .close{position:absolute;right:14px;top:12px;width:30px;height:30px;border:1px solid var(--line);background:transparent;border-radius:8px;font-size:16px;line-height:1;color:var(--muted)}
+.sheet .close:hover{color:var(--vermilion);border-color:var(--vermilion)}
+.sheet .sk{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--vermilion);text-transform:uppercase}
+.sheet h3{font-family:var(--serif);font-size:23px;line-height:1.4;margin:7px 0 12px;padding-right:24px}
+.sheet .body{font-size:13.2px;line-height:1.8}
+.sheet .body p{margin:0 0 10px}
+.sheet .body .quote{border-left:2px solid var(--vermilion);padding:4px 0 4px 12px;margin:12px 0;font-family:var(--serif);font-size:15px;line-height:1.7}
+.sheet .body .meta{display:grid;grid-template-columns:72px 1fr;gap:6px 10px;font-size:12px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.sheet .body .meta b{font-family:var(--mono);font-size:9.5px;color:var(--muted);font-weight:500;padding-top:2px}
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,12px);z-index:90;
+  background:var(--ink);color:var(--paper);padding:8px 15px;border-radius:999px;font-size:12px;
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:var(--shadow);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.noscript{margin:20px;padding:14px;border:1px solid var(--vermilion);border-radius:10px;color:var(--vermilion);font-size:13px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .numbers{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mmap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav a{padding:7px 8px;font-size:12.8px}
+  .top-search{flex-basis:230px}
+}
+@media (max-width:1080px){
+  .side{transform:translateX(-100%);transition:transform .22s ease;box-shadow:20px 0 50px rgba(0,0,0,.12)}
+  .side.open{transform:none}
+  .main{margin-left:0}
+  #menuBtn{display:grid}
+  .filter-btn{display:inline-flex}
+  .filter-hint{display:none}
+  .wrap{padding:calc(var(--nav-h) + 30px) 24px 80px}
+  .hero{grid-template-columns:1fr;gap:26px;align-items:start}
+  .specimen{max-width:560px}
+}
+@media (max-width:900px){
+  .nav{display:none}
+  .brand-txt b{font-size:13.5px}
+  .fork{grid-template-columns:1fr 108px;gap:6px 12px}
+  .fork .fdesc{grid-column:1/-1}
+  .method{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+  .foot-r{text-align:left}
+}
+@media (max-width:760px){
+  .jgrid{grid-template-columns:1fr}
+  .routes{grid-template-columns:1fr}
+  .numbers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .primer-grid,.tech-grid{grid-template-columns:1fr}
+  .hero h1{font-size:clamp(30px,7.4vw,42px)}
+  .sec-head h2{font-size:23px}
+  .sec-head p{font-size:13.5px}
+  .jbar{top:var(--nav-h)}
+  .jactive{order:3;flex-basis:100%}
+  .top-search{flex:1;min-width:0}
+  .top-search kbd{display:none}
+  .search-pop{position:fixed;top:calc(var(--nav-h) + 8px);left:12px;right:12px;width:auto;max-height:calc(100vh - var(--nav-h) - 24px);overflow:auto}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px 14px}
+  .sheet{padding:22px 18px 18px}
+  .hero h1 .hl{white-space:normal}
+  .hero h1 .hl::after{display:none}
+  .chip{padding:6px 10px;font-size:12px}
+  .fork-summary{grid-template-columns:auto auto;gap:8px 16px}
+  .fork-summary p{grid-column:1/-1;justify-self:start;max-width:none}
+  .route .chain button{min-height:30px}
+  .jrow .v{font-size:13px}
+}
+@media (max-width:520px){
+  .wrap{padding:calc(var(--nav-h) + 22px) 16px 70px}
+  .top{padding:0 12px;gap:9px}
+  .brand-txt{display:none}
+  .icon-btn{width:38px;height:38px}
+  .numbers{grid-template-columns:1fr 1fr}
+  .num{min-height:108px;padding:12px 11px 10px}
+  .num .n{font-size:24px}
+  .num .l{font-size:11.5px}
+  .fork{grid-template-columns:1fr}
+  .fork .fdesc{grid-column:auto}
+  .hero-actions .btn{width:100%;justify-content:center}
+  .jrow{grid-template-columns:58px minmax(0,1fr)}
+  .ticker .tag{width:100%;margin-bottom:4px}
+  .search-item{grid-template-columns:38px minmax(0,1fr);padding:10px 8px}
+  .search-item .go{display:none}
+  .jtools label{display:none}
+}
+@media (max-width:380px){
+  .hero h1{font-size:29px}
+  .hero-stats{gap:7px 9px}
+  .hstat b{font-size:19px}
+  .hstat span{font-size:10.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+@media print{
+  .top,.side,.jbar,.overlay,.ticker,.hero-actions,.copy,.modal,.toast,.mmap-foot .linkish,.search-pop,.filter-btn,.filter-hint,.fork-link,.route-foot .linkish{display:none !important}
+  .main{margin:0}
+  .wrap{max-width:none;padding:0}
+  .hbr{display:none}
+  body{background:#fff;color:#000;font-size:10.5pt}
+  .jgrid,.mmap,.numbers,.routes{grid-template-columns:1fr 1fr}
+  .primer-grid,.tech-grid{grid-template-columns:repeat(3,1fr)}
+  .jcard,.mcard,.route,.num,.specimen{break-inside:avoid;box-shadow:none}
+  .jcard{border-color:#bbb}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#desk">跳到正文</a>
+<header class="top">
+  <a class="brand" href="#desk" aria-label="AI 时代共产主义知识库 · 研究台">
+    <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="brand-txt"><b>AI 时代共产主义知识库</b><span>Research Desk · v4.17</span></span>
+  </a>
+  <nav class="nav" aria-label="主导航">
+    <a href="#desk">研究台</a>
+    <a href="#map">命题矩阵</a>
+    <a href="#judgments">判断库</a>
+    <a href="#forks">五开关</a>
+    <a href="#routes">阅读路线</a>
+    <a href="#method">方法与边界</a>
+  </nav>
+  <div class="top-search" role="search">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>
+    <input id="globalSearch" type="search" placeholder="搜问题、主题或证据…" aria-label="搜索核心命题与判断卡" aria-controls="searchResults" aria-expanded="false" autocomplete="off" spellcheck="false">
+    <kbd>/</kbd>
+    <div class="search-pop" id="searchResults" aria-live="polite"></div>
+  </div>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></svg>
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"></path></svg>
+  </button>
+  <button class="icon-btn" id="menuBtn" type="button" aria-label="打开筛选与目录" aria-expanded="false" aria-controls="side">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+  </button>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="side" id="side" aria-label="目录与筛选">
+  <p class="side-label">目录</p>
+  <nav class="sec-list" id="secList" aria-label="页内目录">
+    <a href="#desk">研究台 <em>01</em></a>
+    <a href="#map">命题矩阵 <em>08</em></a>
+    <a href="#judgments">判断库 <em>29</em></a>
+    <a href="#forks">五开关 <em>05</em></a>
+    <a href="#routes">阅读路线 <em>04</em></a>
+    <a href="#method">方法与边界</a>
+  </nav>
+
+  <div class="fgroup">
+    <h3>证据等级</h3>
+    <div class="chips" id="gradeChips" role="group" aria-label="按证据等级筛选">
+      <button class="chip g-A" data-grade="L-A" aria-pressed="false" title="官方一手公开材料">L-A</button>
+      <button class="chip" data-grade="L-B" aria-pressed="false" title="同行评议研究">L-B</button>
+      <button class="chip g-C" data-grade="L-C" aria-pressed="false" title="权威报告 / 官方转载">L-C</button>
+      <button class="chip g-D" data-grade="L-D" aria-pressed="false" title="可靠媒体转引，待一手回补">L-D</button>
+      <button class="chip g-K" data-grade="L-K" aria-pressed="false" title="本库推导，须标【本文推论】">L-K</button>
+      <button class="chip g-X" data-grade="定义" aria-pressed="false" title="术语与方法：固定用法，不做证据分级">定义</button>
+    </div>
+  </div>
+
+  <div class="fgroup">
+    <h3>卡片类型</h3>
+    <div class="chips" id="typeChips" role="group" aria-label="按卡片类型筛选">
+      <button class="chip" data-type="事实锚点" aria-pressed="false">事实锚点</button>
+      <button class="chip" data-type="机制论题" aria-pressed="false">机制论题</button>
+      <button class="chip" data-type="制度推演" aria-pressed="false">制度推演</button>
+      <button class="chip" data-type="分叉诊断" aria-pressed="false">分叉诊断</button>
+      <button class="chip" data-type="案例" aria-pressed="false">案例</button>
+      <button class="chip" data-type="术语" aria-pressed="false">术语</button>
+      <button class="chip" data-type="方法" aria-pressed="false">方法</button>
+    </div>
+  </div>
+
+  <div class="fgroup">
+    <h3>主题轴 T01–T10</h3>
+    <div class="chips" id="axisChips" role="group" aria-label="按主题轴筛选">
+      <button class="chip" data-axis="T01" aria-pressed="false" title="T01 理想社会的制度设计">T01</button>
+      <button class="chip" data-axis="T02" aria-pressed="false" title="T02 所有制、货币与分配制度">T02</button>
+      <button class="chip" data-axis="T03" aria-pressed="false" title="T03 劳动形态与就业变迁">T03</button>
+      <button class="chip" data-axis="T04" aria-pressed="false" title="T04 人与劳动：心理学基础">T04</button>
+      <button class="chip" data-axis="T05" aria-pressed="false" title="T05 家庭、生育与共同体">T05</button>
+      <button class="chip" data-axis="T06" aria-pressed="false" title="T06 教育、文化与审美">T06</button>
+      <button class="chip" data-axis="T07" aria-pressed="false" title="T07 权力、国家与治理">T07</button>
+      <button class="chip" data-axis="T08" aria-pressed="false" title="T08 社会分层与人口">T08</button>
+      <button class="chip" data-axis="T09" aria-pressed="false" title="T09 世界格局与历史进程">T09</button>
+      <button class="chip" data-axis="T10" aria-pressed="false" title="T10 一人公司与个体解放">T10</button>
+    </div>
+    <p class="axis-note">标签后的数字是本页卡片数；0 只表示样张未展示，不代表完整知识库没有该主题。</p>
+    <button class="reset" id="resetBtn" type="button">清除全部筛选</button>
+  </div>
+
+  <details class="legend">
+    <summary>图例与方法</summary>
+    <dl>
+      <dt>L-A</dt><dd>官方一手材料，可直接作事实锚点</dd>
+      <dt>L-B</dt><dd>同行评议，用于机制而非规模</dd>
+      <dt>L-C</dt><dd>权威报告或官方转载，趋势用</dd>
+      <dt>L-D</dt><dd>媒体转引，正式引用前须回补</dd>
+      <dt>L-K</dt><dd>本库推演，标【本文推论】</dd>
+      <dt>定义</dt><dd>术语、方法：固定用法，不计级</dd>
+    </dl>
+  </details>
+
+  <div class="side-note">
+    <b>数字登记处</b><br>
+    当期数值以 L4 §2 与 L4-B §4/§6/§8/§9 为唯一登记处；本页不另立口径。<br><br>
+    <b>设计样张</b> · 非全库公开，未部署。
+  </div>
+</aside>
+
+<main class="main" id="desk">
+  <div class="wrap">
+
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <p class="kicker">先看结论 / 2025—2026 证据基线</p>
+        <h1 id="heroTitle">AI 能算，账本能记，<br class="hbr"><span class="nb">为什么人没有</span><span class="hl">更自由</span><span>？</span></h1>
+        <p class="hero-sub">AI 可以识别、预测与调度，区块链可以留痕、验证与协调；<b>但工时、保障、议价权与收益分配没有自动改善。</b>技术能力不等于公共权力，这里继续追问：谁定规则、谁能更正、能否退出。</p>
+        <p class="hero-note">每张卡只回答三件事：依据是什么、结论走到哪一步、什么观察会让它失效。你可以赞同，也可以拿着反证条件来反驳。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#map">3 分钟看懂核心判断 <span aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="#judgments">直接查证据卡</a>
+        </div>
+        <div class="hero-stats" aria-label="本页内容规模">
+          <span class="hstat"><b>8</b><span>个核心命题</span></span>
+          <span class="hstat"><b>29</b><span>张判断卡</span></span>
+          <span class="hstat"><b>4</b><span>条阅读路线</span></span>
+        </div>
+        <p class="scope-line"><b>完整知识库</b>：4 层结构 · 42 论题簇 · 51 文献 · 69 术语 · 6 案例。本页只展示入门切片。</p>
+      </div>
+
+      <aside class="specimen" aria-label="证据卡阅读示例">
+        <div class="spec-top">
+          <span class="label">一张卡怎么读 / Example</span>
+          <span class="pill K">L-K 推演</span>
+        </div>
+        <h3>P-L4-3 · 灵活就业不是问题，权利不能跟人走才是</h3>
+        <div class="spec-rows">
+          <div><b>事实</b><span>灵活就业超 2 亿，但养老、医疗保障仍以标准雇佣为主要锚点。<i class="spec-g">L-A</i></span></div>
+          <div><b>推论</b><span>权利能否跨平台迁移，比就业规模本身更能解释组织转型风险。<i class="spec-g">L-K</i></span></div>
+          <div><b>反证</b><span>若保障迁移完善后，平台依附率仍居高不下，这个判断就要重估。</span></div>
+        </div>
+        <div class="spec-foot">
+          <span>定位：L4 §5.1 / §5.3</span>
+          <a href="#card-c07" class="linkish" data-goto="c07">看完整证据卡 →</a>
+        </div>
+      </aside>
+    </section>
+
+    <div class="ticker" aria-label="研究状态">
+      <span class="tag">研究状态</span>
+      <span class="item">L4 <b>v1.5</b> AI + 区块链制度接口已接入</span>
+      <span class="item warn">能源闸门 <b>未判定</b></span>
+      <span class="item warn">军控机制 <b>未取证</b></span>
+      <span class="item">青年失业一手页 <b>待回补</b></span>
+      <span class="item">本页 <b>设计样张 · 未发布</b></span>
+    </div>
+
+    <section class="primer" aria-labelledby="primerTitle">
+      <div class="primer-head">
+        <h2 id="primerTitle">读这页前，先认识 3 类标签</h2>
+        <a class="linkish" href="#method">完整方法说明 →</a>
+      </div>
+      <div class="primer-grid">
+        <div class="primer-card"><span class="pmark">L-A—L-D</span><div><b>有来源的事实材料</b><p>等级说明材料来源与可用范围，不是质量总分。L-D 只能作旁证，正式引用前要回补一手页。</p></div></div>
+        <div class="primer-card"><span class="pmark">L-K</span><div><b>可以推翻的本文推论</b><p>由本库从事实推导，必须同时写出反证条件。没有反证条件的判断，不升级为结论。</p></div></div>
+        <div class="primer-card"><span class="pmark">定义</span><div><b>固定用法与评估方法</b><p>用来避免同一个词在不同段落里换意思；定义本身不证明现实。</p></div></div>
+      </div>
+    </section>
+
+    <section class="techsplit" aria-labelledby="techTitle">
+      <div class="tech-head">
+        <h2 id="techTitle">两种技术，三种不同的问题</h2>
+        <p>不要用“去中心化”一个词跳过权力分析</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card"><b>AI：判断与调度</b><p>识别需求、生成方案、排序任务、预测风险。它放大决策能力，也可能把偏差、目标函数和支配自动化。</p></div>
+        <div class="tech-card"><b>区块链：共同记录</b><p>用签名、共识与区块关联维护共享状态、验证记录、减少跨组织改账。它不证明链外输入为真，也不自动保护隐私。</p></div>
+        <div class="tech-card"><b>制度：定权与救济</b><p>决定谁可加入、谁可升级、谁负责签发、错误如何更正、败诉如何执行。这才是公共性与自由的来源。</p></div>
+      </div>
+      <p class="tech-rule"><span>判断线</span>先问“是否需要共同账本”，再选区块链、许可型账本、签名日志或可审计数据库；先保障更正与退出，再讨论不可篡改。</p>
+    </section>
+
+    <section aria-labelledby="factsTitle">
+      <div class="fact-head">
+        <h2 id="factsTitle">先看 6 个有日期的读数</h2>
+        <p>它们是讨论的起点，不是结论；点击可直达对应证据卡。</p>
+      </div>
+      <div class="numbers">
+        <button class="num" type="button" data-goto="c01">
+          <span class="n">48.3<small>小时</small></span>
+          <span class="l">企业就业人员周平均工时</span>
+          <span class="period">2026 年 10 月</span>
+          <span class="g"><i class="dot"></i>L-A · 统计局<span class="go">证据 →</span></span>
+        </button>
+        <button class="num" type="button" data-goto="c02">
+          <span class="n">&gt;2<small>亿</small></span>
+          <span class="l">灵活就业人员</span>
+          <span class="period">国务院报告 · 2025 年 12 月</span>
+          <span class="g"><i class="dot"></i>L-A · 中国政府网<span class="go">证据 →</span></span>
+        </button>
+        <button class="num" type="button" data-goto="c03">
+          <span class="n">&gt;7<small>亿</small></span>
+          <span class="l">生成式 AI 用户</span>
+          <span class="period">2026 年上半年</span>
+          <span class="g"><i class="dot"></i>L-A · CNNIC<span class="go">证据 →</span></span>
+        </button>
+        <button class="num" type="button" data-goto="c17">
+          <span class="n">2,185<small>EFLOPS</small></span>
+          <span class="l">智能算力规模</span>
+          <span class="period">2026 年 6 月</span>
+          <span class="g"><i class="dot"></i>L-A · CNNIC<span class="go">证据 →</span></span>
+        </button>
+        <button class="num" type="button" data-goto="c18">
+          <span class="n">46.7<small>%</small></span>
+          <span class="l">托位使用率；供给≠使用</span>
+          <span class="period">2023 年</span>
+          <span class="g"><i class="dot c"></i>L-C · 案例综合<span class="go">证据 →</span></span>
+        </button>
+        <button class="num" type="button" data-goto="c04">
+          <span class="n">17.2<small>%</small></span>
+          <span class="l">16–24 岁失业率（不含在校生）</span>
+          <span class="period">2026 年 11 月发布 · 尚未回补一手页</span>
+          <span class="g"><i class="dot d"></i>L-D · 待核验<span class="go">证据 →</span></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section-gap" id="map" aria-labelledby="mapTitle">
+      <div class="sec-head">
+        <p class="kicker">核心命题 / 先读这一页</p>
+        <h2 id="mapTitle">先给结论：八个核心命题</h2>
+        <p>不必先懂整套理论。点开任一命题，可以看到完整表述、理论锚点和它尚未解决的对手；其中 4 条明确标出了未决张力。</p>
+      </div>
+      <div class="mmap" id="mmap"></div>
+      <div class="mmap-foot">
+        <p>M1–M8 是全库的压缩坐标；展开后的反证条件仍是研究议程，不是既成结论。</p>
+        <button class="linkish" type="button" id="legendBtn">证据等级怎么读？</button>
+      </div>
+    </section>
+
+    <section class="section-gap" id="judgments" aria-labelledby="jTitle">
+      <div class="sec-head">
+        <p class="kicker">证据卡片 / 从判断到依据</p>
+        <h2 id="jTitle">判断库：先看结论，再核对它能走多远</h2>
+        <p>每张卡先给一句话判断，再列出依据、边界与反证条件。证据等级回答“材料能不能这样用”，卡片类型回答“这是事实、机制还是推演”。本页展示 29 张入门卡，其中 7 张专门解释区块链与公共账本，1 张说明怎样验证试点；它们不是全部 42 个论题簇。</p>
+      </div>
+      <div class="jbar">
+        <button class="filter-btn" id="filterBtn" type="button" aria-controls="side" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"></path></svg>
+          筛选 <span class="filter-badge" id="filterBadge">0</span>
+        </button>
+        <span class="jcount"><b id="jCount">29</b> / 29 张卡片</span>
+        <span class="filter-hint">可在左侧按等级、类型与主题细分</span>
+        <div class="jactive" id="jActive" aria-label="当前筛选条件"></div>
+        <div class="jtools">
+          <label for="sortSel">排序</label>
+          <select id="sortSel">
+            <option value="default">推荐顺序</option>
+            <option value="grade">证据优先</option>
+            <option value="axis">按主题</option>
+          </select>
+        </div>
+      </div>
+      <div class="jgrid" id="jgrid" aria-live="polite"></div>
+    </section>
+
+    <section class="section-gap" id="forks" aria-labelledby="fTitle">
+      <div class="sec-head">
+        <p class="kicker">分叉诊断 / 哪些还不能下结论</p>
+        <h2 id="fTitle">五个制度开关：3 个有线索，2 个仍空白</h2>
+        <p>来自 L1-B 的分叉监测。状态只按已登记证据判定；“未判定”不是坏消息，而是拒绝用不相干的指标冒充结论。</p>
+      </div>
+      <div class="fork-summary">
+        <span><b>3</b> 已有部分证据</span>
+        <span><b>2</b> 尚不能判断</span>
+        <p>“部分证据”表示已有现象记录，但还缺制度有效性或分配指标；“未判定 / 未取证”不等于否定。</p>
+      </div>
+      <div class="forks">
+        <div class="fork">
+          <div class="fname">占有关系社会化<small>OWNERSHIP</small></div>
+          <span class="status partial">部分证据</span>
+          <div class="fdesc"><span class="fork-label">已有</span>灵活就业超 2 亿；职工养老 7,057 万、职工医保 6,615.9 万、职业伤害试点 2,325 万（L-A）。<br><span class="fork-label">还缺</span>平台抽成率、劳动收入份额、剩余如何分配。
+            <span class="verdict">覆盖扩大 ≠ 占有关系改变；不能据此判定社会化。</span>
+            <a class="fork-link" href="#card-c02" data-goto="c02">查看保障与就业判断 →</a>
+          </div>
+        </div>
+        <div class="fork">
+          <div class="fname">算法治理三防线<small>ALGORITHMIC GOVERNANCE</small></div>
+          <span class="status partial">部分证据</span>
+          <div class="fdesc"><span class="fork-label">已有</span>生成式 AI 用户超 7 亿、渗透率超 50%（L-A）。<br><span class="fork-label">还缺</span>规则透明度、人工复核率、改判率、集体谈判覆盖。
+            <span class="verdict">制度存在 ≠ 制度有效；有效性尚未系统测量。</span>
+            <a class="fork-link" href="#card-c08" data-goto="c08">查看平台规则判断 →</a>
+          </div>
+        </div>
+        <div class="fork">
+          <div class="fname">信息环境中立化<small>INFORMATION NEUTRALITY</small></div>
+          <span class="status partial">部分证据</span>
+          <div class="fdesc"><span class="fork-label">已有</span>生成式 AI 渗透率超 50%（L-A）。<br><span class="fork-label">还缺</span>模型输出集中度、推荐目标函数披露、非竞价分发比例。
+            <span class="verdict">未测，不作乐观假设。</span>
+            <a class="fork-link" href="#card-c09" data-goto="c09">查看分层社会化判断 →</a>
+          </div>
+        </div>
+        <div class="fork">
+          <div class="fname">能源闸门突破<small>ENERGY GATE</small></div>
+          <span class="status unknown">未判定</span>
+          <div class="fdesc"><span class="fork-label">还缺</span>中国清洁能源装机 / 发电量与 AI 用电增量的<b>同口径</b>数据。
+            <span class="verdict">不得由算力 +177% 推出“能源风险已缓解”。</span>
+            <a class="fork-link" href="#card-c09" data-goto="c09">查看算力与能源边界 →</a>
+          </div>
+        </div>
+        <div class="fork">
+          <div class="fname">军控机制有效<small>ARMS CONTROL</small></div>
+          <span class="status none">未取证</span>
+          <div class="fdesc"><span class="fork-label">还缺</span>可核验条约、核查机制、主要行为体履约记录。
+            <span class="verdict">不把“存在对话”当作“已有约束”。</span>
+            <a class="fork-link" href="#method">查看本页证据边界 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-gap" id="routes" aria-labelledby="rTitle">
+      <div class="sec-head">
+        <p class="kicker">阅读路线 / 按问题，不按文件顺序</p>
+        <h2 id="rTitle">不知道从哪开始？选一个问题</h2>
+        <p>每条路线用 3—4 张卡片走完一个推理链。步骤可以直接点击，读完最后一张，你会知道下一步该核对什么。</p>
+      </div>
+      <div class="routes">
+        <div class="route">
+          <div class="rt"><b>AI 越强，为什么人反而更忙？</b><span>3 张卡</span></div>
+          <div class="audience">适合关心工时、工作意义与自动化的人</div>
+          <div class="chain"><button type="button" data-goto="c01">48.3 小时</button><u>→</u><button type="button" data-goto="c06">收益如何分配</button><u>→</u><button type="button" data-goto="c12">时间贫困</button></div>
+          <p class="q">关键不在模型能力，而在<b>节约的劳动由谁决定去向</b>：裁员、缩时、转岗，还是公共任务扩张。</p>
+          <div class="route-foot"><span>对应 L4 §5.7 / §8.1</span><a class="linkish" href="#card-c01" data-goto="c01">从第 1 张开始 →</a></div>
+        </div>
+        <div class="route">
+          <div class="rt"><b>灵活就业需要什么制度接口？</b><span>3 张卡</span></div>
+          <div class="audience">适合自由职业者、平台劳动者与组织研究者</div>
+          <div class="chain"><button type="button" data-goto="c02">2 亿基本盘</button><u>→</u><button type="button" data-goto="c07">权利跟人走</button><u>→</u><button type="button" data-goto="c11">企业 OPC 化</button></div>
+          <p class="q">把社保、技能凭证、声誉与数据授权做成<b>个人可携带账户</b>；只有展示功能、不能转移，属于伪可携带。</p>
+          <div class="route-foot"><span>对应 L4 §5.1 / §5.3 / §5.6</span><a class="linkish" href="#card-c02" data-goto="c02">从第 1 张开始 →</a></div>
+        </div>
+        <div class="route">
+          <div class="rt"><b>什么观察会推翻这套框架？</b><span>4 张卡</span></div>
+          <div class="audience">适合愿意检查反例、寻找研究缺口的人</div>
+          <div class="chain"><button type="button" data-goto="c05">主要矛盾</button><u>→</u><button type="button" data-goto="c16">两种分叉</button><u>→</u><button type="button" data-goto="c21">成熟度判据</button><u>→</u><button type="button" data-goto="c29">试点监测</button></div>
+          <p class="q">若权利迁移与收益共享显著改善后依附结构仍不变，<b>主因判断就要重写</b>；没有真实基线和对照，试点成功也只是演示。</p>
+          <div class="route-foot"><span>对应 L4 §6.3 / §8 · L4-B §2</span><a class="linkish" href="#card-c05" data-goto="c05">从第 1 张开始 →</a></div>
+        </div>
+        <div class="route">
+          <div class="rt"><b>上链之后，为什么仍可能不自由？</b><span>3 张卡</span></div>
+          <div class="audience">适合关心数据权利、平台规则与数字治理的人</div>
+          <div class="chain"><button type="button" data-goto="c22">链能证明什么</button><u>→</u><button type="button" data-goto="c24">公共性从哪来</button><u>→</u><button type="button" data-goto="c27">六项硬门槛</button></div>
+          <p class="q">区块链可以留下难以偷偷改动的记录，<b>但准入、签发、升级与密钥仍可被少数人控制</b>。不可篡改不是正义，迁移与救济才是。</p>
+          <div class="route-foot"><span>对应 L1-F / L4 §5.11 / L4-B §10.6</span><a class="linkish" href="#card-c22" data-goto="c22">从第 1 张开始 →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-gap" id="method" aria-labelledby="mTitle">
+      <div class="sec-head">
+        <p class="kicker">方法与边界 / 先确认它能说明什么</p>
+        <h2 id="mTitle">如何判断一张卡能不能引用？</h2>
+        <p>先看材料等级，再看卡片类型。等级不是质量总分，类型也不是证据强度：一条 L-K 推论可以很有解释力，但它仍然不是已经证实的事实。</p>
+      </div>
+      <div class="method">
+        <div class="table-wrap">
+          <table class="gtable">
+            <thead><tr><th>等级</th><th>材料类型</th><th>能说明什么 / 不能说明什么</th></tr></thead>
+            <tbody>
+              <tr><td>L-A</td><td>官方一手</td><td>可说明已发布的规模、政策与统计事实；须保留发布期和口径，不能直接推出因果。</td></tr>
+              <tr><td>L-B</td><td>同行评议</td><td>可识别机制与因果；不能替代中国当期官方规模数。</td></tr>
+              <tr><td>L-C</td><td>权威转载</td><td>可作趋势与案例综合；正式引用时尽量回补一手页。</td></tr>
+              <tr><td>L-D</td><td>媒体转引</td><td>只作待核旁证；未经一手页核验，不得写成“官方确认”。</td></tr>
+              <tr><td>L-E</td><td>无法复核</td><td>只用于提出疑问；不得进入事实锚点，本页未使用。</td></tr>
+              <tr><td>L-K</td><td>本库推演</td><td>可提出有边界的解释；必须标【本文推论】，同时写出反证条件。</td></tr>
+              <tr><td>定义</td><td>术语 / 方法</td><td>统一用法与评估尺度；定义本身不证明现实。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bound">
+          <div><b>数字只有一个登记处</b><p>当期数值以 L4 §2 与 L4-B §4/§6/§8/§9 为准；其他层与本页只引行号与等级，不另立口径。刷新按来源发布期追加，旧口径保留可追溯。</p></div>
+          <div><b>口径不可相加</b><p>灵活就业人员、新就业形态劳动者、平台从业者、自由职业者与“一人公司”不是同一总体。“超过 2 亿”是当前官方口径；2036 年“4 亿”只是预测。</p></div>
+          <div><b>赛博朋克只做风险接口</b><p class="yes">正式机制名是“平台依附固化”。</p><p class="no">不能由反乌托邦意象推出封建制复归、后资本主义或技术不可公共化；也不等于“赛博共产主义”。</p></div>
+          <div><b>区块链不是所有制</b><p class="yes">公共账本的公共性来自治理。</p><p class="no">发币、DAO、上链、节点数、币价或交易量都不单独构成共产主义因素；审计留痕也不能替代审计权。</p></div>
+          <div><b>公开边界</b><p>本页是设计样张：不对应正式发布，不包含脚本、草稿、凭证或全库原文。正式上线需单独建立公开白名单与构建门禁。</p></div>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <div>
+          <b>AI 时代共产主义知识库</b> · 研究台样张<br>
+          <span class="mono">L1 理论 + 区块链专题 / L2 42 论题 / L3-A 6 案例 / L4 制度方案 / L4-B 可行性判据</span><br>
+          当前数值登记：L4 §2、L4-B §4/§6/§8/§9。2026 年 11 月青年失业 17.2% 为 L-D，正式引用前须回补国家统计局一手页。
+        </div>
+        <div class="foot-r">
+          <span class="badge-draft">DESIGN PROOF · NOT PUBLISHED</span><br>
+          页面 v0.4 · 对应知识库 v4.17 · 2026-11-27<br>
+          单文件、零外部依赖、可离线审阅
+        </div>
+      </footer>
+    </section>
+
+  </div>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-bg" data-close="1"></div>
+  <div class="sheet">
+    <button class="close" type="button" id="modalClose" aria-label="关闭">×</button>
+    <p class="sk" id="modalKicker">PROPOSITION</p>
+    <h3 id="modalTitle"></h3>
+    <div class="body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript><div class="noscript">此页的筛选、搜索与命题展开依赖 JavaScript。正文数据仍保存在知识库 Markdown 中；请启用脚本或直接阅读源文件。</div></noscript>
+<script>
+const KB_M = [
+  {
+    id:'M1', short:'分配由生产力决定',
+    full:'分配形式由生产力水平决定，不由道德愿望决定。',
+    anchor:'历史唯物主义 · 生产力—生产关系',
+    tension:'自动化乐观主义：物质门槛是否已经达到？未决。',
+    expands:'基本服务与能力账户必须从当前物质能力出发、分阶段扩展；不能以“技术已经足够”跳过制度条件。L4 的五阶段过渡正是为此设置停止与回滚条件。'
+  },
+  {
+    id:'M2', short:'技术后果取决于占有与规则',
+    full:'同一技术在不同所有制与治理规则下后果相反。',
+    anchor:'生产关系对生产力的反作用',
+    tension:'账本与算法可能同时成为公共基础设施和新的控制入口。',
+    expands:'AI 可用于缩短劳动、提升公共服务，也可用于压缩成本、扩大零工池；账本可降低跨组织改账风险，也可绑定身份、结算与可见性。决定结果的是占有、规则、审计与收益归属，不是技术本身。'
+  },
+  {
+    id:'M3', short:'一般智力可被私人占有',
+    full:'一般智力成为直接生产力，却可能被私人占有。',
+    anchor:'《大纲》“机器论片断” · 一般智力',
+    tension:'哈耶克式反驳：分散知识能否被集中处理，仍是核心未解问题。',
+    expands:'公众使用、行业数据与公共网络共同训练出智能能力，收益却可能集中在模型持有者与流量入口。社会化生产与私人占有的张力由此进入经验层面。'
+  },
+  {
+    id:'M4', short:'分层社会化，不是一步国有化',
+    full:'数据、模型与算法具有高可复制、低边际成本和非竞争倾向；算力、能源、芯片和高质量数据供给仍受物理及制度稀缺约束。社会化应优先处理公共投入形成、自然垄断或具有网络外部性的瓶颈层，不等于全部数字资源天然公共，也不等于一步国有化。',
+    anchor:'新型生产资料分层 · L4-B §1',
+    tension:'算力与能源稀缺：不能以“天然公共”替代治理与分层。',
+    expands:'八个对象层分别治理：公共数据副本、个人数据、行业交互数据、模型权重、算法与排序、算力、能源与硬件、任务与身份接口。接口层可以先社会化，应用层保留竞争。'
+  },
+  {
+    id:'M5', short:'权力有物质基础',
+    full:'权力源于对生产资料和生产力的占有；占有不均则权力必不均。',
+    anchor:'国家与阶级理论',
+    tension:'制度权力理论：部分吸收“权力可独立于占有”的洞见，但保留物质基础优先。',
+    expands:'平台对派单、抽成、排序、封禁与申诉的控制，是事实上的规则权力。它需要公共问责，但问责设计不能假设权力只来自话语。'
+  },
+  {
+    id:'M6', short:'国家消亡＝职能转移',
+    full:'国家消亡是职能转移而非机器砸碎：镇压职能消解，公共管理职能下沉保留。',
+    anchor:'国家学说 · 职能转移',
+    tension:'',
+    expands:'社保、认证、凭证与争议处理从单位转向个人—公共接口，是职能转移的现实形态；公共账本只有接受审计、更正与退出约束，才不会把转移退化为集中。'
+  },
+  {
+    id:'M7', short:'家庭具有财产制度维度',
+    full:'婚姻是财产制度的产物，家庭与爱独立于此而存在。',
+    anchor:'家庭、私有制与国家的起源',
+    tension:'',
+    expands:'照料成本社会化不是消灭亲密关系，而是把可分工的清洁、照护、康复与临时看护从私人义务转为可组织服务；时间贡献也应进入账户。'
+  },
+  {
+    id:'M8', short:'解放＝异化的扬弃',
+    full:'人的解放＝异化的扬弃＝改变技术的社会形式，而非消灭技术。',
+    anchor:'异化理论 · 四重规定',
+    tension:'',
+    expands:'AI 与公共账本只有转化为可支配时间、自主活动、可迁移权利与能力形成，才指向解放；只看效率、上链量或交易量，无法区分普遍富裕与少数节点占租。'
+  }
+];
+
+const KB_CARDS = [
+  {
+    id:'c01', type:'事实锚点', grade:'L-A', axes:['T03'],
+    title:'48.3 小时：效率提高，为什么没有换来更短工时？',
+    one:'生产率提高没有自动缩短工时；企业产能相对过剩与在职过载同时出现。',
+    rows:[
+      ['机制位置','劳动时间未随自动化生产率提高而重新分配（L4 §2.2）。'],
+      ['证据锚点','2026 年 10 月全国企业就业人员周平均工作时间 <b>48.3 小时</b>；国家统计局判断“国内供强需弱仍较突出”（L-A）。'],
+      ['反证条件','若工时下降与工资上升在多数行业同步稳定出现，“收益必然向节点集中”的强因果需弱化（L4 §8.1-2）。']
+    ],
+    sources:[
+      {t:'国家统计局 · 2026年10月新闻发布',g:'L-A',u:'https://www.stats.gov.cn/sj/zxfb/202611/t20261116_1965844.html'},
+      {t:'国家统计局 · 2026年10月数据解读',g:'L-A',u:'https://www.stats.gov.cn/sj/zxfbhjd/202611/t20261116_1965869.html'}
+    ]
+  },
+  {
+    id:'c02', type:'事实锚点', grade:'L-A', axes:['T03'],
+    title:'灵活就业超 2 亿，为什么保障仍跟岗位走？',
+    one:'规模不是问题本身；养老、医疗、职业伤害覆盖与可迁移性才是制度接口。',
+    rows:[
+      ['机制位置','社会保障仍以标准劳动关系为默认锚点（T03-A；L4 §5.3）。'],
+      ['证据锚点','灵活就业人员超过 <b>2 亿</b>；职工养老灵活就业参保 <b>7,057 万</b>、职工医保 <b>6,615.9 万</b>、职业伤害保障试点 <b>2,325 万</b>（L-A，国务院报告）。'],
+      ['反证条件','保障迁移完善后，平台依附率仍居高不下，则需重估瓶颈位置（P-L4-3）。']
+    ],
+    sources:[
+      {t:'中国政府网 · 灵活就业与权益保障报告',g:'L-A',u:'https://www.gov.cn/yaowen/liebiao/202512/content_7052451.htm'},
+      {t:'国家医保局 · 2025年统计公报',g:'L-A',u:'https://www.nhsa.gov.cn/art/2026/7/16/art_7_21451.html'}
+    ]
+  },
+  {
+    id:'c03', type:'事实锚点', grade:'L-A', axes:['T02'],
+    title:'AI 用户超 7 亿，收益为什么没有自动共享？',
+    one:'AI 已进入生产流程，不再只是内容工具；但收益归属没有随渗透率自动改变。',
+    rows:[
+      ['机制位置','一般智力成为直接生产力，收益可被少数节点占有（M3；L4 §2.3）。'],
+      ['证据锚点','截至 2026 年上半年，生成式 AI 用户超 <b>7 亿</b>、网民渗透率超 <b>50%</b>；2026 年 6 月智能算力 <b>2,185 EFLOPS</b>；规上制造业 AI 应用渗透率超 <b>30%</b>（L-A，CNNIC）。'],
+      ['反证条件','若渗透率提升同时劳动收入份额与依附结构稳定改善，技术乐观路径获得支持（L4 §8.1）。']
+    ],
+    sources:[
+      {t:'CNNIC · 第56次互联网发展统计报告',g:'L-A',u:'http://www.cnnic.cn/n4/2026/1008/c88-11704.html'},
+      {t:'天津市委网信办转载 · AI 产业规模',g:'L-C',u:'https://www.tjcac.gov.cn/xxh/202601/t20260122_7229801.html'}
+    ]
+  },
+  {
+    id:'c04', type:'事实锚点', grade:'L-D', axes:['T03'],
+    title:'青年失业 17.2%：数据能用到哪一步？',
+    one:'数据来自多家权威媒体一致转引，一手发布页尚未回补，因此不作“官方确认”使用。',
+    rows:[
+      ['机制位置','岗位入口少与在职过载并存（L4 §2.2）。'],
+      ['证据锚点','2026 年 11 月 18 日发布数据：16–24 岁（不含在校生）<b>17.2%</b>、25–29 岁 <b>7.3%</b>、30–59 岁 <b>3.9%</b>；整体与 30–59 岁已由统计局解读页确认（L-D，青年分项待一手页）。'],
+      ['边界','正式引用前必须回补国家统计局发布页；不得写成“国家统计局数据显示”。']
+    ],
+    sources:[
+      {t:'澎湃新闻 · 转引（待一手回补）',g:'L-D',u:'https://m.thepaper.cn/newsDetail_forward_34503131'},
+      {t:'国家统计局 · 2026年10月数据解读',g:'L-A',u:'https://www.stats.gov.cn/sj/zxfbhjd/202611/t20261116_1965869.html'}
+    ]
+  },
+  {
+    id:'c05', type:'制度推演', grade:'L-K', axes:['T02','T03'],
+    title:'P-L4-1 · 主要矛盾：智能生产社会化，占有仍私人化',
+    one:'决定结果的是谁控制数据、算力、模型与任务规则，而不是 AI 水平本身。',
+    rows:[
+      ['机制位置','L4 §3.1；八组具体矛盾的总入口。'],
+      ['证据锚点','2 亿灵活就业、7 亿生成式 AI 用户、2,185 EFLOPS 与 48.3 小时共同构成“生产力社会化、权利接口碎片化”（L-A 锚点 + L-K 推演）。'],
+      ['反证条件','若权利迁移与收益共享显著改善后依附结构仍不变，主因判断被削弱（P-L4-1）。']
+    ],
+    sources:[
+      {t:'L4 §3 主要矛盾诊断（内部文档）',g:'L-K'},
+      {t:'L4-B §1 对象分层与 M4 校准（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c06', type:'制度推演', grade:'L-K', axes:['T03'],
+    title:'P-L4-2 · 自动化是否缩短劳动，取决于分配',
+    one:'同一自动化能力可以选择裁员、缩时、转岗或公共任务扩张。',
+    rows:[
+      ['机制位置','L4 §5.7；T03-C 时间贫困。'],
+      ['证据锚点','48.3 小时（L-A）说明节约的劳动没有自动转为自由时间；收益分配规则未变。'],
+      ['反证条件','在收入与工时稳定同步改善且分配规则不变的行业中被否证。']
+    ],
+    sources:[
+      {t:'L4 §5.7 工时、休假与自由时间（内部文档）',g:'L-K'},
+      {t:'L4 §8.1 可推翻本框架的观察（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c07', type:'制度推演', grade:'L-K', axes:['T03','T10'],
+    title:'P-L4-3 · 灵活就业不是问题，权利不能跟人走才是',
+    one:'可携带须完整包含导出、验证、接收、撤销、恢复与退出；只有展示功能属于伪可携带。',
+    rows:[
+      ['机制位置','L4 §5.1 / §5.3；T10-D 产权与可迁移性。'],
+      ['证据锚点','2 亿规模与 7,057 万 / 6,615.9 万参保结构（L-A），显示保障仍以标准雇佣为锚。'],
+      ['反证条件','保障迁移完善后，平台依附率仍居高不下。']
+    ],
+    sources:[
+      {t:'L4 §5.1 基本公共服务包（内部文档）',g:'L-K'},
+      {t:'L4 §5.3 任务包公共基础设施（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c08', type:'制度推演', grade:'L-K', axes:['T07'],
+    title:'P-L4-4 · 平台规则也是权力：谁能决定派单与申诉？',
+    one:'派单、抽成、排序、封禁与申诉决定劳动机会，必须接受透明度、申诉与集体谈判约束。',
+    rows:[
+      ['机制位置','L4 §5.4 算法治理；T07-D。'],
+      ['证据锚点','规则透明度与申诉质量尚无系统测量（L4 §12 缺口）；生成式 AI 渗透率超 50% 说明影响面已足够大（L-A）。'],
+      ['反证条件','若透明 / 申诉对收入、工时和依附率均无影响，治理机制设计被否证。']
+    ],
+    sources:[
+      {t:'L4 §5.4 算法治理（内部文档）',g:'L-K'},
+      {t:'L1-B · 五开关监测（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c09', type:'机制论题', grade:'L-K', axes:['T02'],
+    title:'M4 · 分层社会化：先治理瓶颈，不是全部国有化',
+    one:'数据与模型副本可复制；算力、能源、芯片与高质量数据仍稀缺。先处理瓶颈层。',
+    rows:[
+      ['机制位置','L4-B §1；L1-C“新型生产资料”分层定义。'],
+      ['证据锚点','算力一年增长约 177%（L-A）证明能力扩张；同口径清洁能源与 AI 用电增量仍缺，能源闸门未判定。'],
+      ['反证条件','若开放权重与数据接口并未改善集中度、依附与收入份额，且算力 / 数据质量仍是压倒性门槛，则“接口层先社会化”需降级（L4-B §1.4）。']
+    ],
+    sources:[
+      {t:'L4-B §1 对象分层与校准（内部文档）',g:'L-K'},
+      {t:'L1-C · 新型生产资料（内部文档）',g:'定义'}
+    ]
+  },
+  {
+    id:'c10', type:'机制论题', grade:'L-K', axes:['T03'],
+    title:'T03-A · “灵活就业”不是一个口径，数字不能相加',
+    one:'“灵活就业 / 新就业形态 / 平台从业者 / 一人公司”不是同一总体，不能相加。',
+    rows:[
+      ['机制位置','L2 T03-A；口径规范见 L1-C。'],
+      ['证据锚点','官方“超过 2 亿”是当前口径；2036 年“4 亿”只是预测，不得混写（L4 §2.1 口径警示）。'],
+      ['反证条件','若口径统一后规模显著缩小，依赖“2 亿基本盘”的推论需重算。']
+    ],
+    sources:[
+      {t:'L2 T03-A（内部文档）',g:'L-K'},
+      {t:'L4 §2.1 口径警示（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c11', type:'机制论题', grade:'L-K', axes:['T03','T10'],
+    title:'T03-B · 从职业到任务：企业 OPC 化意味着什么？',
+    one:'企业把非核心工作变成任务包；核心合伙人必须与决策权、剩余收益、风险与退出权绑定。',
+    rows:[
+      ['机制位置','L2 T03-B / T10；L4 §5.3-6。'],
+      ['证据锚点','平台接单、算法派单与评价集中（L4 §2.2，L-A 现象 + L-K 机制）。'],
+      ['反证条件','若“合伙人”普遍无决策权与剩余收益，只是外包名目，则 OPC 化退化为依附。']
+    ],
+    sources:[
+      {t:'L2 T03-B 就业范畴的终结（内部文档）',g:'L-K'},
+      {t:'L4 §5.3 任务包公共基础设施（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c12', type:'机制论题', grade:'L-K', axes:['T03'],
+    title:'T03-C · 生产率上升，为什么可能更“时间贫困”？',
+    one:'如果生产率提升只意味着同样时间要交付更多，自由时间不会出现，压力只会从正式员工转移到更隐蔽的零工。',
+    rows:[
+      ['机制位置','L2 T03-C；L4 §5.7。'],
+      ['证据锚点','48.3 小时（L-A）；无薪照料时长缺一手统计（缺口，不写成确定数值）。'],
+      ['反证条件','若工时下降但收入同步崩塌，说明缩时未与分配改革配套。']
+    ],
+    sources:[
+      {t:'L2 T03-C（内部文档）',g:'L-K'},
+      {t:'L4 §5.7 工时与自由时间（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c13', type:'机制论题', grade:'L-K', axes:['T10'],
+    title:'T10-D · 名义归你不等于能带走：迁移权决定依附',
+    one:'“名义归我”不等于“能带走”；迁移成本决定退出选择与议价能力。',
+    rows:[
+      ['机制位置','L2 T10-D；L1-C“资产可迁移性”。'],
+      ['证据锚点','账户、评价与作品仍锁在封闭系统（L4 §5.3 / §5.4，机制推演）。'],
+      ['反证条件','若迁移权落地后单平台依赖不降，需重估网络效应与需求侧约束。']
+    ],
+    sources:[
+      {t:'L2 T10-D（内部文档）',g:'L-K'},
+      {t:'L1-C · 资产可迁移性（内部文档）',g:'定义'}
+    ]
+  },
+  {
+    id:'c14', type:'机制论题', grade:'L-K', axes:['T02'],
+    title:'T02-B · 数据与一般智力被私人占有，问题出在哪？',
+    one:'公众使用、行业数据与公共网络共同训练出智能能力，收益却集中在模型持有者与流量入口。',
+    rows:[
+      ['机制位置','L2 T02-B；L4 §3.2-1。'],
+      ['证据锚点','公共算力 2,185 EFLOPS（L-A）；模型收益归属与抽成率缺公开统一口径（缺口）。'],
+      ['反证条件','若公共数据收益回流后模型集中度与劳动收入份额无变化，机制判断需修正。']
+    ],
+    sources:[
+      {t:'L2 T02-B（内部文档）',g:'L-K'},
+      {t:'L4 §3.2 八组具体矛盾（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c15', type:'机制论题', grade:'L-K', axes:['T07'],
+    title:'T07-D · 算法治理：同一工具，为什么可能解放也可能支配？',
+    one:'算法既可新增支配，也可新增解放可能；分界在审计、申诉与退出权。',
+    rows:[
+      ['机制位置','L2 T07-D；L4 §5.4。'],
+      ['证据锚点','生成式 AI 渗透率超 50%（L-A）说明规则影响面已足够大；算法审计尚非常态。'],
+      ['反证条件','若审计与申诉常态化后收入波动与误判不降，需重估治理工具。']
+    ],
+    sources:[
+      {t:'L2 T07-D（内部文档）',g:'L-K'},
+      {t:'L4 §5.4 算法治理（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c16', type:'分叉诊断', grade:'L-K', axes:['T03','T07','T10'],
+    title:'分叉 A / B · 自主任务网络，或平台依附固化',
+    one:'同一任务包，在不同规则下走向自由或依附；正式机制名是“平台依附固化”，赛博朋克只是表征。',
+    rows:[
+      ['机制位置','L4 §8.2；L1-B 分叉 A。'],
+      ['证据锚点','A 需公共账户 + 多平台迁移 + 集体谈判；B 由私人垄断 + 评价封闭 + 社保绑岗触发。'],
+      ['观测阈值','多平台比例虚高、迁移失败率上升＝B；依附率下降、申诉有效＝A。']
+    ],
+    sources:[
+      {t:'L4 §8.2 主要分叉（内部文档）',g:'L-K'},
+      {t:'L1-B 分叉路径（内部文档）',g:'L-K'},
+      {t:'L1-C §3.1 赛博朋克谱系（内部文档）',g:'定义'}
+    ]
+  },
+  {
+    id:'c17', type:'案例', grade:'L-C', axes:['T02'],
+    title:'案例 2-1 · 全国一体化算力网：调度集中后，收益归谁？',
+    one:'8 枢纽 + 10 集群，算力像水电一样调度；但“算力地主”与收益分配仍未解。',
+    rows:[
+      ['机制位置','L3-A 案例 2-1；L4 §5.2。'],
+      ['证据锚点','2026 年 6 月智能算力 <b>2,185 EFLOPS</b>（+177%）；机架利用率 <b>71.4%</b>；8 枢纽贡献超 <b>80%</b> 智能算力（L-C，案例综合；分项等级见 L3-A）。'],
+      ['未解问题','U4 收益分配、U5 新“算力地主”依附、U6 高端算力受限。']
+    ],
+    sources:[
+      {t:'L3-A 案例 2-1（内部文档）',g:'L-C'},
+      {t:'CNNIC · 智能算力规模',g:'L-A',u:'http://www.cnnic.cn/n4/2026/1008/c88-11704.html'}
+    ]
+  },
+  {
+    id:'c18', type:'案例', grade:'L-C', axes:['T05'],
+    title:'案例 4-1 · 托位增加了，为什么仍有很多家庭用不上？',
+    one:'床位增加不等于使用；价格、位置与质量信任决定实际入托。',
+    rows:[
+      ['机制位置','L3-A 案例 4-1；L4 §5.5。'],
+      ['证据锚点','2025 年末托育机构 <b>12.6 万家</b>、托位 <b>665.7 万个</b>、每千人 <b>4.73 个</b>（L-C）；2023 年托位使用率 <b>46.7%</b>、2024 年 9 月登记率 <b>42%</b>、实际入托 <b>7.86%</b>。'],
+      ['边界','不同年份不可相减；江苏 / 上海 / 苏州地方数据不得当全国结论。']
+    ],
+    sources:[
+      {t:'L3-A 案例 4-1（内部文档）',g:'L-C'},
+      {t:'L3-A 案例 U11 价格与区位（内部文档）',g:'L-C'}
+    ]
+  },
+  {
+    id:'c19', type:'术语', grade:'定义', axes:['T03','T10'],
+    title:'平台依附固化',
+    one:'生产者“形式独立、实质依附”于平台的关系；本库正式机制名。',
+    rows:[
+      ['机制位置','L1-C；用以替代“技术封建主义”框架。'],
+      ['用法','看迁移成本、抽成、退出权与保障连续性；赛博朋克以“云农奴 / 企业城邦”表征，但不作因果证据。'],
+      ['边界','不等于所有灵活就业者都是依附者；不等于封建制复归。']
+    ],
+    sources:[
+      {t:'L1-C 术语表（内部文档）',g:'定义'},
+      {t:'L1-B 分叉路径（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c20', type:'术语', grade:'定义', axes:['T07'],
+    title:'赛博朋克式技术统治',
+    one:'把企业城邦、算法监狱、高科技低生活等意象连接到可检验机制的文化—分析接口。',
+    rows:[
+      ['机制位置','L1-C §3.1；L4 §8.3。'],
+      ['用法','先识别意象 → 再定位经济机制 → 最后用指标检验；没有机制与指标，只能作文化评论。'],
+      ['边界','不是新的社会形态定性；不等于赛博共产主义；不能由意象推出封建制复归或技术不可公共化。']
+    ],
+    sources:[
+      {t:'L1-C §3.1 赛博朋克谱系（内部文档）',g:'定义'},
+      {t:'L4 §8.3 风险诊断接口（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c21', type:'方法', grade:'定义', axes:['T02'],
+    title:'七维制度成熟度：为什么不能用一个总分补偿？',
+    one:'占有、分配、劳动、再生产、参与、国家职能、生态七维分别设阈值；一维高分不能抵消另一维失败。',
+    rows:[
+      ['机制位置','L4-B §2 共产主义判据。'],
+      ['用法','判断“共产主义因素”是否实际削弱资本与强制分工支配，而非看覆盖率或国有化比例。'],
+      ['边界','单项福利或公共化比例不能宣告成熟共产主义；覆盖、可及、可携带、可申诉、可退出、反俘获、生态须同时看。']
+    ],
+    sources:[
+      {t:'L4-B §2 七维成熟度（内部文档）',g:'定义'},
+      {t:'L1-C · 制度成熟度（内部文档）',g:'定义'}
+    ]
+  },
+  {
+    id:'c22', type:'术语', grade:'定义', axes:['T02','T07'],
+    title:'区块链能保证什么，不能保证什么？',
+    one:'它让共享记录更难被单方偷偷改动，并可用密码学签名验证来源；它不保证上链内容真实。',
+    rows:[
+      ['技术机制','分布式账本、签名、共识验证、区块关联与多方复制，提供防篡改留痕和共同状态（NIST IR 8202）。'],
+      ['不能推出','节点多、币价高、交易量大或记录上链，都不自动意味着公共所有、公平分配或正当治理。'],
+      ['链外依赖','预言机、签发者、身份系统与数据采集仍可能出错或被俘获；可验证只说明验证通过。']
+    ],
+    sources:[
+      {t:'NIST IR 8202 · Blockchain Technology Overview',g:'定义',u:'https://csrc.nist.gov/pubs/ir/8202/final'},
+      {t:'L1-F §1 技术机制（内部文档）',g:'定义'}
+    ]
+  },
+  {
+    id:'c23', type:'术语', grade:'定义', axes:['T02','T10'],
+    title:'可验证凭证，为什么不必“上链”？',
+    one:'VC 是签发者—持有者—验证者模型，核心是签名与可验证状态，不是必须写入区块链。',
+    rows:[
+      ['技术机制','持有者出示由签发者签名的凭证，验证者检查签名、有效期与撤销状态；可采用链下状态列表或许可型基础设施。'],
+      ['撤销边界','W3C Bitstring Status List 可表达撤销或暂停状态；状态发布、身份绑定与机构承认仍需制度安排。'],
+      ['不能推出','可验证不证明声明真实、签发正当，也不保证另一家机构愿意接收。']
+    ],
+    sources:[
+      {t:'W3C · Verifiable Credentials Data Model v2.0',g:'定义',u:'https://www.w3.org/TR/vc-data-model-2.0/'},
+      {t:'W3C · Bitstring Status List v1.1（Working Draft）',g:'定义',u:'https://www.w3.org/TR/vc-bitstring-status-list-1.1/'}
+    ]
+  },
+  {
+    id:'c24', type:'机制论题', grade:'L-K', axes:['T02','T07'],
+    title:'公共账本，为什么不等于公共所有？',
+    one:'账本的公共性来自准入、升级、签发、审计与收益规则，不来自“去中心化”标签。',
+    rows:[
+      ['机制位置','L1-F §2 / §3；L4 §5.11。账本可以降低跨组织改账风险，但控制入口仍可形成平台依附固化。'],
+      ['制度边界','先明确谁能读、谁能写、谁能升级、谁承担错误责任，再决定采用区块链、许可型账本、签名日志或可审计数据库。'],
+      ['反证条件','若账本公开可查、规则可共同修订且申诉有效后，迁移与参与仍无改善，则“公共账本促进公共性”的机制需重估。']
+    ],
+    sources:[
+      {t:'L1-F §2 政治经济学接线（内部文档）',g:'L-K'},
+      {t:'L4 §5.11 公共账本方案（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c25', type:'制度推演', grade:'L-K', axes:['T01','T03','T10'],
+    title:'AI + 区块链，怎样进入任务包而不是只做演示？',
+    one:'AI 负责识别、预测、排序与调度；账本负责承诺、授权、结算与审计状态，高影响决定仍保留人工权。',
+    rows:[
+      ['参考架构','链下可信数据层 → 密码学承诺与状态层 → 凭证与撤销层 → 规则执行层 → 治理与救济层。'],
+      ['默认边界','个人与敏感数据默认不上链；智能合约只执行已获授权的规则，不等于法律合同，也不能取消人工申诉。'],
+      ['反证条件','若同等非链方案成本更低，或链上协同未改善结算、争议与迁移，则不应扩大区块链使用范围。']
+    ],
+    sources:[
+      {t:'L1-F §6 候选架构（内部文档）',g:'L-K'},
+      {t:'L4 §5.11 七项制度安排（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c26', type:'机制论题', grade:'L-K', axes:['T02','T10'],
+    title:'“可迁移”不是一个导出按钮：完整口径有六项',
+    one:'可导出、可验证、可接收、可撤销、可恢复、可退出，六项缺一项都可能只是伪可携带。',
+    rows:[
+      ['完整链条','导出解决拿得到；验证解决读得懂；接收解决别人肯收；撤销解决能停止；恢复解决丢钥匙能回来；退出解决能真正离开。'],
+      ['凭证边界','签名与撤销列表可以降低验证成本，却不能强迫其他机构接收，也不能替代司法救济。'],
+      ['反证条件','若导出率很高但接收率、撤销成功率与退出率很低，就不能把“接口开放”算作迁移权已经实现。']
+    ],
+    sources:[
+      {t:'L2 T10 技术接口（内部文档）',g:'L-K'},
+      {t:'L1-F §2.4 / §6.3（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c27', type:'方法', grade:'定义', axes:['T02','T07','T10'],
+    title:'公共账本的六项硬门槛：先过闸门，再谈规模',
+    one:'真实迁移、撤销与更正、密钥恢复、人工申诉、真实退出、反俘获；六项都过，才进入对照试验。',
+    rows:[
+      ['前置审查','先问是否确实需要共同账本，再问准入、升级、签发、数据真实性与责任是否正当。'],
+      ['对照纪律','用同任务、同基线比较非链方案；分别看成本、隐私、迁移、救济和权力集中，不用链上活动替代制度效果。'],
+      ['判定边界','任一硬门槛失败即暂停扩围；“代码已部署”不等于“制度已生效”。']
+    ],
+    sources:[
+      {t:'L4-B §10.6 可行性闸门（内部文档）',g:'定义'},
+      {t:'L1-F §5 适用性筛查（内部文档）',g:'定义'}
+    ]
+  },
+  {
+    id:'c28', type:'分叉诊断', grade:'L-K', axes:['T03','T07','T10'],
+    title:'两条新分叉：链上平台依附固化，或代码官僚制',
+    one:'账本可能让依附更难退出，也可能让规则绕过民主修订与司法救济；两种都不是技术自动解放。',
+    rows:[
+      ['分叉 G','身份、可见性、结算与保障被同一账本控制，迁移失败率与拒收率上升，平台依附固化加深。'],
+      ['分叉 H','规则一旦上链便难以修订，错误不能更正、争议只能等待“代码执行”，治理退化为代码官僚制。'],
+      ['阻断指标','真实退出率、撤销与更正成功率、人工申诉改判率、独立审计覆盖与升级参与度；不以交易量上升判为好转。']
+    ],
+    sources:[
+      {t:'L4 §8.2 分叉 G/H（内部文档）',g:'L-K'},
+      {t:'L1-F §7 反证与分叉（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c29', type:'方法', grade:'L-K', axes:['T02','T03','T07','T08'],
+    title:'试点怎样证明不是演示：先锁基线，再锁停止条件',
+    one:'同一任务、同一口径比较参与组与原流程；没有可复核基线和对照，只能称运行观察，不能称政策有效。',
+    rows:[
+      ['启动前','登记 B0/C0、指标字典、分子分母、数据来源、隐私方案、预算与生态上限；缺一项不得启动。'],
+      ['复核节奏','启动后第 30/60/90 天复核，过程指标每月看、结果指标每季度看；隐私、欠薪和服务中断即时停止。'],
+      ['反表演指标','覆盖须与有效使用配对，迁移须与真实接收配对，申诉量须与改判补偿配对；上链量和交易量不算成效。'],
+      ['扩围条件','连续两个周期结果改善、重点群体未恶化、全成本与生态预算通过、独立复核可复现、负结果公开；硬停止先止损再归因。']
+    ],
+    sources:[
+      {t:'L4 §6.3 八项试点监测规格（内部文档）',g:'L-K'},
+      {t:'L4-B §12.3 试点监测总闸（内部文档）',g:'L-K'}
+    ]
+  }
+];
+
+window.KB = { M: KB_M, CARDS: KB_CARDS };
+</script>
+<script>
+(function(){
+  'use strict';
+  var DATA = window.KB;
+  var CARDS = DATA.CARDS;
+  var M = DATA.M;
+  var TOTAL = CARDS.length;
+
+  var GRADE_CLASS = {'L-A':'A','L-B':'B','L-C':'C','L-D':'D','L-K':'K','定义':'X'};
+  var GRADE_RANK = {'L-A':1,'L-B':2,'L-C':3,'L-D':4,'L-K':5,'定义':6};
+  var GRADE_LABEL = {
+    'L-A':'官方一手材料','L-B':'同行评议研究','L-C':'权威报告或官方转载',
+    'L-D':'可靠媒体转引，待一手回补','L-K':'本库推演，须标【本文推论】','定义':'术语或方法：固定用法，不做证据分级'
+  };
+  var AXIS_LABEL = {
+    'T01':'理想社会的制度设计','T02':'所有制、货币与分配','T03':'劳动形态与就业变迁',
+    'T04':'人与劳动：心理学基础','T05':'家庭、生育与共同体','T06':'教育、文化与审美',
+    'T07':'权力、国家与治理','T08':'社会分层与人口','T09':'世界格局与历史进程','T10':'一人公司与个体解放'
+  };
+  var ROUTES = [
+    {id:'r1',title:'AI 越强，为什么人反而更忙？',sub:'阅读路线 · 工时 / 分配 / 时间贫困'},
+    {id:'r2',title:'灵活就业需要什么制度接口？',sub:'阅读路线 · 保障 / 迁移 / 组织'},
+    {id:'r3',title:'什么观察会推翻这套框架？',sub:'阅读路线 · 矛盾 / 分叉 / 成熟度'},
+    {id:'r4',title:'上链之后，为什么仍可能不自由？',sub:'阅读路线 · 区块链 / 公共账本 / 六项门槛'}
+  ];
+  ROUTES.forEach(function(r){ r._search = (r.title+' '+r.sub).toLowerCase(); });
+
+  var state = {
+    q:'',
+    grades:new Set(),
+    types:new Set(),
+    axes:new Set(),
+    sort:'default'
+  };
+
+  var $ = function(s,root){ return (root||document).querySelector(s); };
+  var $$ = function(s,root){ return Array.prototype.slice.call((root||document).querySelectorAll(s)); };
+
+  /* ---------- render M ---------- */
+  var mmap = $('#mmap');
+  mmap.innerHTML = M.map(function(m){
+    return '<button class="mcard" type="button" data-m="'+m.id+'" aria-haspopup="dialog" aria-label="查看命题 '+m.id+'：'+esc(m.short)+'">'
+      + '<span class="mid">'+m.id+'</span><span class="open" aria-hidden="true">↗</span>'
+      + '<span class="mt">'+m.short+'</span>'
+      + (m.tension ? '<span class="tension">未决张力</span>' : '<span class="mx">核心坐标</span>')
+      + '</button>';
+  }).join('');
+
+  /* ---------- card html ---------- */
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function sourceHTML(s){
+    var g = '<span class="g">'+esc(s.g)+'</span>';
+    if (s.u) return '<li>'+g+'<a href="'+esc(s.u)+'" target="_blank" rel="noopener noreferrer">'+esc(s.t)+'</a></li>';
+    return '<li>'+g+esc(s.t)+'</li>';
+  }
+  function cardHTML(c){
+    var pill = GRADE_CLASS[c.grade] || '';
+    var axes = c.axes.map(function(a){ return '<span class="ax" title="'+esc(AXIS_LABEL[a]||a)+'">'+a+'</span>'; }).join('');
+    var topics = c.axes.map(function(a){ return '<span><b>'+a+'</b>'+esc(AXIS_LABEL[a]||a)+'</span>'; }).join('');
+    var loc = c.rows[0] ? '<p class="jloc"><b>'+esc(c.rows[0][0])+'</b>'+c.rows[0][1]+'</p>' : '';
+    var rows = c.rows.slice(1).map(function(r){
+      return '<div class="jrow"><span class="k">'+esc(r[0])+'</span><span class="v">'+r[1]+'</span></div>';
+    }).join('');
+    var srcs = c.sources.map(sourceHTML).join('');
+    var first = c.sources[0];
+    var srcName = first ? (first.u ? first.t.split('·')[0].trim() : '内部文档') : '';
+    var gradeText = c.grade === 'L-K' ? 'L-K · 推演' : c.grade;
+    return '<article class="jcard" id="card-'+c.id+'" data-id="'+c.id+'" aria-labelledby="title-'+c.id+'">'
+      + '<div class="jtop"><span class="tag">'+esc(c.type)+'</span>'
+      + '<span class="pill '+pill+'" title="'+esc(GRADE_LABEL[c.grade]||'')+'">'+esc(gradeText)+'</span>'
+      + '<span class="cid">'+c.id+'</span><span class="axes" style="margin-left:auto">'+axes+'</span></div>'
+      + '<div class="jtopics">'+topics+'</div>'
+      + '<h3 id="title-'+c.id+'">'+c.title+'</h3>'
+      + '<p class="one">'+c.one+'</p>'
+      + loc + '<div class="jrows">'+rows+'</div>'
+      + '<div class="jfoot"><details class="src"><summary>来源 '+c.sources.length+' · '+esc(srcName)+'</summary><ul>'+srcs+'</ul></details>'
+      + '<button class="copy" type="button" data-copy="'+c.id+'" aria-label="复制 '+esc(c.title)+' 的引用">引用</button></div>'
+      + '</article>';
+  }
+
+  /* ---------- search / filter ---------- */
+  function corpus(c){
+    return [
+      c.title, c.one, c.type, c.grade, c.axes.join(' '),
+      c.rows.map(function(r){ return r[0]+' '+r[1]; }).join(' '),
+      c.sources.map(function(s){ return s.t+' '+s.g; }).join(' ')
+    ].join(' ').replace(/<[^>]+>/g,' ').toLowerCase();
+  }
+  CARDS.forEach(function(c){ c._search = corpus(c); });
+  M.forEach(function(m){
+    m._search = [m.id,m.short,m.full,m.anchor,m.tension,m.expands].join(' ').toLowerCase();
+  });
+
+  function annotateCounts(){
+    function fill(selector, predicate){
+      $$(selector).forEach(function(b){
+        if (b.querySelector('small')) return;
+        var n = CARDS.filter(function(c){ return predicate(c,b); }).length;
+        b.insertAdjacentHTML('beforeend','<small>'+n+'</small>');
+        b.classList.toggle('zero', n === 0);
+        var base = b.getAttribute('title') || b.textContent.trim();
+        b.setAttribute('aria-label', base+'，本页 '+n+' 张卡片');
+      });
+    }
+    fill('#gradeChips .chip',function(c,b){ return c.grade === b.dataset.grade; });
+    fill('#typeChips .chip',function(c,b){ return c.type === b.dataset.type; });
+    fill('#axisChips .chip',function(c,b){ return c.axes.indexOf(b.dataset.axis) !== -1; });
+  }
+
+  function matches(c){
+    if (state.grades.size && !state.grades.has(c.grade)) return false;
+    if (state.types.size && !state.types.has(c.type)) return false;
+    if (state.axes.size && !c.axes.some(function(a){ return state.axes.has(a); })) return false;
+    if (state.q){
+      var q = state.q.toLowerCase();
+      if (c._search.indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+
+  function sortCards(list){
+    var arr = list.slice();
+    if (state.sort === 'grade'){
+      arr.sort(function(a,b){ return (GRADE_RANK[a.grade]||9)-(GRADE_RANK[b.grade]||9); });
+    } else if (state.sort === 'axis'){
+      arr.sort(function(a,b){
+        var x = a.axes[0]||'T99', y = b.axes[0]||'T99';
+        if (x !== y) return x < y ? -1 : 1;
+        return (GRADE_RANK[a.grade]||9)-(GRADE_RANK[b.grade]||9);
+      });
+    }
+    return arr;
+  }
+
+  var jgrid = $('#jgrid');
+  function activeFilterCount(){
+    return state.grades.size + state.types.size + state.axes.size + (state.q ? 1 : 0);
+  }
+  function emptyMessage(){
+    var zeroAxis = Array.from(state.axes).find(function(a){
+      return !CARDS.some(function(c){ return c.axes.indexOf(a) !== -1; });
+    });
+    if (zeroAxis){
+      return '本页样张尚未展示 '+zeroAxis+'「'+(AXIS_LABEL[zeroAxis]||'')+'」；完整知识库另有内容，你仍可搜索其他卡片。';
+    }
+    if (state.grades.has('L-B')){
+      return 'L-B 在本页尚无登记卡片：不是遗漏，而是尚未回补同行评议证据。';
+    }
+    return '试试减少筛选条件，或换一个关键词。';
+  }
+  function render(){
+    var list = sortCards(CARDS.filter(matches));
+    if (!list.length){
+      jgrid.innerHTML = '<div class="empty"><b>没有匹配的卡片</b>当前组合下 0 条。'+emptyMessage()
+        + '<br><button class="linkish" type="button" data-reset-empty>清除筛选</button></div>';
+    } else {
+      jgrid.innerHTML = list.map(cardHTML).join('');
+    }
+    $('#jCount').textContent = list.length;
+    var n = activeFilterCount();
+    $('#filterBadge').textContent = n;
+    $('#filterBadge').classList.toggle('show', n > 0);
+    $('#filterBtn').setAttribute('aria-label','筛选卡片'+(n ? '，当前 '+n+' 个条件' : ''));
+    renderActive();
+    highlight(jgrid, state.q);
+    syncChips();
+  }
+
+  function renderActive(){
+    var box = $('#jActive');
+    var bits = [];
+    if (state.q) bits.push('<span class="a">搜索：'+esc(state.q)+' <button type="button" data-clear="q" aria-label="清除搜索">×</button></span>');
+    state.grades.forEach(function(v){ bits.push('<span class="a">'+esc(v)+' <button type="button" data-clear="grade:'+esc(v)+'" aria-label="移除">×</button></span>'); });
+    state.types.forEach(function(v){ bits.push('<span class="a">'+esc(v)+' <button type="button" data-clear="type:'+esc(v)+'" aria-label="移除">×</button></span>'); });
+    state.axes.forEach(function(v){ bits.push('<span class="a">'+esc(v)+' <button type="button" data-clear="axis:'+esc(v)+'" aria-label="移除">×</button></span>'); });
+    if (bits.length) bits.push('<button class="clear-all" type="button" data-clear-all>清除全部</button>');
+    box.innerHTML = bits.join('');
+  }
+
+  function syncChips(){
+    $$('#gradeChips .chip').forEach(function(b){
+      b.setAttribute('aria-pressed', state.grades.has(b.dataset.grade) ? 'true' : 'false');
+    });
+    $$('#typeChips .chip').forEach(function(b){
+      b.setAttribute('aria-pressed', state.types.has(b.dataset.type) ? 'true' : 'false');
+    });
+    $$('#axisChips .chip').forEach(function(b){
+      b.setAttribute('aria-pressed', state.axes.has(b.dataset.axis) ? 'true' : 'false');
+    });
+  }
+
+  function resetAll(){
+    state.q = '';
+    state.grades.clear(); state.types.clear(); state.axes.clear();
+    $('#globalSearch').value = '';
+    closeSearch();
+    render();
+  }
+
+  /* ---------- unified search ---------- */
+  var searchResults = $('#searchResults');
+  var searchMatches = [];
+  var searchIndex = -1;
+  function openSearch(){
+    searchResults.classList.add('open');
+    $('#globalSearch').setAttribute('aria-expanded','true');
+  }
+  function closeSearch(){
+    searchResults.classList.remove('open');
+    $('#globalSearch').setAttribute('aria-expanded','false');
+    searchIndex = -1;
+  }
+  function renderSearchResults(){
+    var q = state.q.toLowerCase();
+    if (!q){
+      searchMatches = [];
+      searchIndex = -1;
+      searchResults.innerHTML = '<div class="search-tip">试试搜索：<button class="linkish" type="button" data-example="工时">工时</button>、<button class="linkish" type="button" data-example="平台">平台</button>、<button class="linkish" type="button" data-example="反证">反证</button>、<button class="linkish" type="button" data-example="灵活就业">灵活就业</button>、<button class="linkish" type="button" data-example="区块链">区块链</button>、<button class="linkish" type="button" data-example="基线">基线</button></div>'
+        + '<div class="search-foot">范围：8 个核心命题、29 张判断卡、4 条阅读路线。按 ↑ ↓ 选择，Enter 打开。</div>';
+      openSearch();
+      return;
+    }
+    var entries = [];
+    M.forEach(function(m){
+      if (m._search.indexOf(q) !== -1) entries.push({kind:'m',id:m.id,title:m.id+' · '+m.short,sub:m.anchor});
+    });
+    CARDS.forEach(function(c){
+      if (c._search.indexOf(q) !== -1) entries.push({kind:'c',id:c.id,title:c.title,sub:c.type+' · '+c.grade+' · '+c.axes.map(function(a){ return AXIS_LABEL[a]||a; }).join(' / '),rank:c.title.toLowerCase().indexOf(q) !== -1 ? 0 : 1});
+    });
+    ROUTES.forEach(function(r){
+      if (r._search.indexOf(q) !== -1) entries.push({kind:'r',id:r.id,title:r.title,sub:r.sub,rank:r.title.indexOf(q) !== -1 ? 0 : 1});
+    });
+    entries.forEach(function(e){
+      if (e.rank === undefined) e.rank = e.title.toLowerCase().indexOf(q) !== -1 ? 0 : 1;
+    });
+    entries.sort(function(a,b){
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      var order = {m:0,c:1,r:2};
+      return order[a.kind] - order[b.kind];
+    });
+    var mc = M.filter(function(m){ return m._search.indexOf(q) !== -1; }).length;
+    var cc = CARDS.filter(function(c){ return c._search.indexOf(q) !== -1; }).length;
+    var rc = ROUTES.filter(function(r){ return r._search.indexOf(q) !== -1; }).length;
+    searchMatches = entries.slice(0,7);
+    if (searchIndex >= searchMatches.length) searchIndex = -1;
+    var kindName = {m:'命题',c:'卡片',r:'路线'};
+    var goName = {m:'打开',c:'查看',r:'进入'};
+    searchResults.innerHTML = '<div class="search-head"><span>命题 '+mc+' · 卡片 '+cc+' · 路线 '+rc+'</span><span>Esc 关闭</span></div>'
+      + (searchMatches.length ? searchMatches.map(function(e,i){
+          return '<button class="search-item'+(i === searchIndex ? ' sel' : '')+'" type="button" data-search-kind="'+e.kind+'" data-search-id="'+e.id+'"'+(i === searchIndex ? ' aria-current="true"' : '')+'>'
+            + '<span class="kind">'+kindName[e.kind]+'</span><span><span class="st">'+esc(e.title)+'</span><span class="ss">'+esc(e.sub)+'</span></span><span class="go">'+goName[e.kind]+' →</span></button>';
+        }).join('') : '<div class="search-tip"><b>没有找到匹配内容。</b><br>试试更短的关键词，例如“工时”“平台”或“分配”。</div>')
+      + '<div class="search-foot">卡片结果同时用于筛选下方判断库。</div>';
+    openSearch();
+  }
+  function chooseSearchResult(e){
+    if (!e) return;
+    closeSearch();
+    if (e.kind === 'm'){
+      var m = M.find(function(x){ return x.id === e.id; });
+      if (m) showProposition(m);
+    } else if (e.kind === 'c'){
+      gotoCARD(e.id);
+    } else {
+      document.getElementById('routes').scrollIntoView({behavior:scrollBehavior(),block:'start'});
+    }
+  }
+  function scrollBehavior(){
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  }
+
+  /* ---------- highlight ---------- */
+  function escapeRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+  function highlight(root,q){
+    $$('mark', root).forEach(function(m){
+      var p = m.parentNode;
+      p.replaceChild(document.createTextNode(m.textContent), m);
+      p.normalize();
+    });
+    if (!q || !q.trim()) return;
+    var re = new RegExp(escapeRe(q.trim()),'gi');
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode:function(n){
+        if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (n.parentNode && n.parentNode.closest && n.parentNode.closest('script,style,mark')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function(n){
+      var text = n.nodeValue;
+      re.lastIndex = 0;
+      if (!re.test(text)) return;
+      re.lastIndex = 0;
+      var frag = document.createDocumentFragment();
+      var last = 0, m;
+      while ((m = re.exec(text))){
+        if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        var mk = document.createElement('mark');
+        mk.textContent = m[0];
+        frag.appendChild(mk);
+        last = m.index + m[0].length;
+        if (m[0].length === 0) re.lastIndex++;
+      }
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+    });
+  }
+
+  /* ---------- interactions ---------- */
+  var search = $('#globalSearch');
+  var timer = null;
+  search.addEventListener('focus', renderSearchResults);
+  search.addEventListener('input', function(){
+    state.q = search.value.trim();
+    renderSearchResults();
+    clearTimeout(timer);
+    timer = setTimeout(render, 90);
+  });
+  search.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowDown' && searchMatches.length){
+      e.preventDefault();
+      searchIndex = searchIndex >= searchMatches.length - 1 ? 0 : searchIndex + 1;
+      renderSearchResults();
+    } else if (e.key === 'ArrowUp' && searchMatches.length){
+      e.preventDefault();
+      searchIndex = searchIndex <= 0 ? searchMatches.length - 1 : searchIndex - 1;
+      renderSearchResults();
+    } else if (e.key === 'Enter' && searchResults.classList.contains('open')){
+      e.preventDefault();
+      chooseSearchResult(searchMatches[searchIndex >= 0 ? searchIndex : 0]);
+    } else if (e.key === 'Escape'){
+      e.preventDefault(); e.stopPropagation(); closeSearch(); search.blur();
+    }
+  });
+  searchResults.addEventListener('click', function(e){
+    var item = e.target.closest('[data-search-kind]');
+    if (item){
+      chooseSearchResult(searchMatches.find(function(x){ return x.kind === item.dataset.searchKind && x.id === item.dataset.searchId; }));
+      return;
+    }
+    var ex = e.target.closest('[data-example]');
+    if (ex){
+      search.value = ex.dataset.example;
+      state.q = search.value;
+      renderSearchResults(); render(); search.focus();
+    }
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.top-search')) closeSearch();
+  });
+
+  $('#gradeChips').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if (!b) return;
+    var v = b.dataset.grade;
+    if (state.grades.has(v)) state.grades.delete(v); else state.grades.add(v);
+    render();
+  });
+  $('#typeChips').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if (!b) return;
+    var v = b.dataset.type;
+    if (state.types.has(v)) state.types.delete(v); else state.types.add(v);
+    render();
+  });
+  $('#axisChips').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if (!b) return;
+    var v = b.dataset.axis;
+    if (state.axes.has(v)) state.axes.delete(v); else state.axes.add(v);
+    render();
+  });
+  $('#resetBtn').addEventListener('click', resetAll);
+
+  $('#jActive').addEventListener('click', function(e){
+    if (e.target.closest('[data-clear-all]')){ resetAll(); return; }
+    var b = e.target.closest('[data-clear]'); if (!b) return;
+    var v = b.dataset.clear;
+    if (v === 'q'){ state.q = ''; search.value = ''; }
+    else if (v.indexOf('grade:') === 0) state.grades.delete(v.slice(6));
+    else if (v.indexOf('type:') === 0) state.types.delete(v.slice(5));
+    else if (v.indexOf('axis:') === 0) state.axes.delete(v.slice(5));
+    render();
+  });
+
+  jgrid.addEventListener('click', function(e){
+    if (e.target.closest('[data-reset-empty]')){ resetAll(); return; }
+    var btn = e.target.closest('[data-copy]');
+    if (!btn) return;
+    var c = CARDS.find(function(x){ return x.id === btn.dataset.copy; });
+    if (!c) return;
+    var locator = c.rows[0] ? c.rows[0][1] : c.id;
+    var text = c.title + '｜AI时代共产主义知识库 v4.17｜卡片 '+c.id+'｜'+c.grade+'｜定位：'+locator;
+    if (/^https?:$/.test(location.protocol)) text += '｜'+location.href.split('#')[0]+'#card-'+c.id;
+    copyText(text, '引用已复制（含等级与定位）');
+  });
+
+  $('#sortSel').addEventListener('change', function(){
+    state.sort = this.value;
+    render();
+  });
+
+  function copyText(text, okMsg){
+    var done = function(){ toast(okMsg); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch(err){ toast('复制失败，请手动选择'); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  var toastTimer = null;
+  function toast(msg){
+    var t = $('#toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2000);
+  }
+
+  /* ---------- goto card ---------- */
+  function gotoCARD(id){
+    closeSearch();
+    var card = $('#card-' + id);
+    if (!card){
+      resetAll();
+      card = $('#card-' + id);
+    }
+    if (!card) return;
+    card.scrollIntoView({behavior:scrollBehavior(), block:'center'});
+    card.classList.remove('flash');
+    void card.offsetWidth;
+    card.classList.add('flash');
+    setTimeout(function(){ card.classList.remove('flash'); }, 1800);
+  }
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-goto]');
+    if (g){ e.preventDefault(); gotoCARD(g.dataset.goto); closeMenu(); }
+  });
+
+  /* ---------- theme ---------- */
+  var themeBtn = $('#themeBtn');
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    var tc = $('#themeColor');
+    if (tc) tc.setAttribute('content', t === 'dark' ? '#0f1211' : '#f2eee4');
+    try { localStorage.setItem('kb-theme', t); } catch(e) {}
+    themeBtn.setAttribute('aria-label', t === 'dark' ? '切换到亮色主题' : '切换到暗色主题');
+    themeBtn.title = t === 'dark' ? '切换到亮色主题' : '切换到暗色主题';
+  }
+  setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+  themeBtn.addEventListener('click', function(){
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+  });
+
+  /* ---------- menu ---------- */
+  var side = $('#side'), overlay = $('#overlay'), menuBtn = $('#menuBtn'), filterBtn = $('#filterBtn');
+  var menuReturnFocus = null;
+  var mobileQuery = window.matchMedia('(max-width: 1080px)');
+  function syncBodyLock(){
+    var locked = side.classList.contains('open') || (modal && modal.classList.contains('open'));
+    document.body.style.overflow = locked ? 'hidden' : '';
+  }
+  function syncSideState(){
+    if (mobileQuery.matches){
+      var hidden = !side.classList.contains('open');
+      side.inert = hidden;
+      if (hidden) side.setAttribute('aria-hidden','true'); else side.removeAttribute('aria-hidden');
+    } else {
+      side.inert = false;
+      side.removeAttribute('aria-hidden');
+    }
+  }
+  function openMenu(trigger){
+    if (!mobileQuery.matches) return;
+    menuReturnFocus = trigger || menuBtn;
+    side.classList.add('open'); overlay.classList.add('show');
+    menuBtn.setAttribute('aria-expanded','true');
+    filterBtn.setAttribute('aria-expanded','true');
+    syncSideState(); syncBodyLock();
+    var first = $('a,button,summary', side);
+    if (first) setTimeout(function(){ first.focus(); }, 30);
+  }
+  function closeMenu(restoreFocus){
+    side.classList.remove('open'); overlay.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded','false');
+    filterBtn.setAttribute('aria-expanded','false');
+    syncSideState(); syncBodyLock();
+    if (restoreFocus && menuReturnFocus && menuReturnFocus.offsetParent !== null) menuReturnFocus.focus();
+  }
+  menuBtn.addEventListener('click', function(){
+    if (side.classList.contains('open')) closeMenu(true); else openMenu(menuBtn);
+  });
+  filterBtn.addEventListener('click', function(){ openMenu(filterBtn); });
+  overlay.addEventListener('click', function(){ closeMenu(true); });
+  $('#secList').addEventListener('click', function(e){
+    if (e.target.closest('a')) closeMenu(false);
+  });
+  if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', function(){
+    if (!mobileQuery.matches) closeMenu(false); else syncSideState();
+  });
+  syncSideState();
+
+  /* ---------- modal ---------- */
+  var modal = $('#modal'), lastFocus = null;
+  function openModal(kicker, title, bodyHTML){
+    closeSearch();
+    lastFocus = document.activeElement;
+    $('#modalKicker').textContent = kicker;
+    $('#modalTitle').textContent = title;
+    $('#modalBody').innerHTML = bodyHTML;
+    modal.classList.add('open');
+    syncBodyLock();
+    $('#modalClose').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    syncBodyLock();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  modal.addEventListener('click', function(e){
+    if (e.target.closest('[data-close]') || e.target.closest('#modalClose')) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){
+      if (modal.classList.contains('open')) { closeModal(); return; }
+      if (side.classList.contains('open')) { closeMenu(true); return; }
+      if (document.activeElement === search) { search.blur(); return; }
+    }
+    if (e.key === 'Tab' && modal.classList.contains('open')){
+      var f = $$('a[href],button:not([disabled]),input,select,textarea', modal).filter(function(el){ return el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length-1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      return;
+    }
+    if (e.key === 'Tab' && side.classList.contains('open') && mobileQuery.matches){
+      var sf = $$('a[href],button:not([disabled]),summary', side).filter(function(el){ return el.offsetParent !== null; });
+      if (!sf.length) return;
+      var sFirst = sf[0], sLast = sf[sf.length-1];
+      if (e.shiftKey && document.activeElement === sFirst){ e.preventDefault(); sLast.focus(); }
+      else if (!e.shiftKey && document.activeElement === sLast){ e.preventDefault(); sFirst.focus(); }
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    var editing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) || document.activeElement.isContentEditable;
+    if (((e.key === '/' && !editing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) && !modal.classList.contains('open')){
+      e.preventDefault();
+      search.focus(); search.select();
+    }
+  });
+
+  function showProposition(m){
+    var meta = '<div class="meta"><b>展开</b><span>'+esc(m.expands)+'</span>'
+      + '<b>理论锚点</b><span>'+esc(m.anchor)+'</span>'
+      + (m.tension ? '<b>未决张力</b><span>'+esc(m.tension)+'</span>' : '')
+      + '</div>';
+    openModal('CORE PROPOSITION · ' + m.id, m.id + ' · ' + m.short,
+      '<p class="quote">'+esc(m.full)+'</p>'+meta);
+  }
+  mmap.addEventListener('click', function(e){
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    var m = M.find(function(x){ return x.id === b.dataset.m; });
+    if (m) showProposition(m);
+  });
+
+  $('#legendBtn').addEventListener('click', function(){
+    var body = '<p>等级只回答“这个数字或材料能不能这样用”，不是质量总分。写得像结论的推演不会因此升级。</p>'
+      + '<div class="meta">'
+      + '<b>L-A</b><span>国家统计局、国务院、人社部、医保局、CNNIC 等一手公开材料；可直接作事实锚点，保留发布期与统计口径。</span>'
+      + '<b>L-B</b><span>同行评议研究；用于机制与因果识别，不替代中国当期官方规模数。</span>'
+      + '<b>L-C</b><span>权威机构报告、官方新闻发布或政府网站转载；趋势可用，尽量回补一手页。</span>'
+      + '<b>L-D</b><span>可靠媒体转引；只作旁证，未经一手页核验不得升级为“官方确认”。</span>'
+      + '<b>L-E</b><span>口述、会议材料或无法复核的片段；只能启发问题，本页未使用。</span>'
+      + '<b>L-K</b><span>L1–L4 的内部推演；必须标【本文推论】，并写出被现实否证的条件。</span>'
+      + '<b>定义</b><span>术语与方法：固定用法，不做证据分级；不能反过来当事实引用。</span>'
+      + '</div>'
+      + '<p style="margin-top:12px;color:var(--muted);font-size:12px">本页不使用 HowToLiveBetter 的 A/B/C 总分：那套等级回答“数字是否可信”，与本库“材料类型 + 可用范围”的分级不是同一对象。</p>';
+    openModal('METHOD', '证据等级怎么读？', body);
+  });
+
+  /* ---------- scrollspy ---------- */
+  var sectionIds = ['desk','map','judgments','forks','routes','method'];
+  var ticking = false;
+  function spy(){
+    var y = window.scrollY + 64 + 110;
+    var current = 'desk';
+    sectionIds.forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.scrollY;
+      if (top <= y) current = id;
+    });
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    if (atBottom) current = sectionIds[sectionIds.length - 1];
+    $$('#secList a').forEach(function(a){
+      var on = a.getAttribute('href') === '#' + current;
+      a.classList.toggle('on', on);
+      if (on) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current');
+    });
+    $$('.nav a').forEach(function(a){
+      var on = a.getAttribute('href') === '#' + current;
+      a.classList.toggle('on', on);
+      if (on) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current');
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking){ requestAnimationFrame(spy); ticking = true; }
+  }, {passive:true});
+  window.addEventListener('resize', spy);
+  window.addEventListener('load', function(){ setTimeout(spy, 80); });
+  window.addEventListener('hashchange', function(){
+    var m = location.hash.match(/^#card-(c\d+)$/);
+    if (m) setTimeout(function(){ gotoCARD(m[1]); }, 30);
+    setTimeout(spy, 120);
+  });
+
+  /* ---------- init ---------- */
+  annotateCounts();
+  render();
+  spy();
+  var initialCard = location.hash.match(/^#card-(c\d+)$/);
+  if (initialCard) setTimeout(function(){ gotoCARD(initialCard[1]); }, 80);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# 历史校验报告（2026-11-04 批次）
+
+> 当前副本缺 instances.ttl、derived.ttl 与 tools/；2026-11-26 的 KB-ONT v1.10 仅校准 M4 相关文本标签，未重跑 TTL/SHACL/graph。以下“0 ERROR / 0 WARN”是旧批次结果，不适用于 v1.10，不得作为当前校验结论。
+
+# KB-ONT 校验报告
+
+- INFO TTL 解析 OK：kb-ontology.ttl（+556 triples）
+- INFO TTL 解析 OK：instances.ttl（+818 triples）
+- INFO TTL 解析 OK：concepts.ttl（+354 triples）
+- INFO TTL 解析 OK：derived.ttl（+1875 triples）
+- INFO C1 通过：无 L-E 未回溯来源被引用
+- INFO C2 通过：手工 ProseDataPoint 均有来源
+- INFO C2 接线：35 条〔来源〕散文行已接 R-XXX（含 5 条无 R 行官方直引另册）
+- INFO C3 通过：手工已核验来源四要素齐备
+- INFO C4/C5：暂无 CrossCheck 实例（比率对比纪律尚未结构化，属预期）
+- INFO C6 通过：26 条对手立场均有原文锚点
+- INFO C7 通过：概念节点谓词封闭，受控辩证边 29 条（词表 11 谓词）
+- INFO C8 分期：全部概念均有 periodTrace 或 ahistorical 标记（ahistorical 2 条）
+- INFO C8 通过：40 条概念全部落地（lemma 组 34，词义拆分边 5 条）
+- INFO 计数：命题 8 / 轴 10 / 簇 42 / P0 15 / 反例 3 / 案例 25 / 问 21 / 对手 26 / 成稿 6 / 概念 40
+- INFO P0 口径注：正式层记 14（附录条目口径，D-8 一条管两簇），去重簇口径 15，两者均来自附录 D 覆盖总表
+- INFO U 问编号唯一：21 问 21 号，无重号
+
+## 汇总：0 ERROR / 0 WARN

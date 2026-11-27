@@ -1,0 +1,20 @@
+# Obsidian 本地配置与工作区状态
+.obsidian/
+
+# 凭据与本地密钥
+.env
+.env.*
+*.pem
+*.key
+credentials*.json
+*credentials*.json
+
+# 临时文件与系统缓存
+*.tmp
+*.temp
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+.node_modules/
