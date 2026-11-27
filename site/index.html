@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="从工时、灵活就业到 AI、区块链与公共账本：用可核验事实、明确推论和反证条件，回答技术能力为什么没有自动带来公共权力与人的自由。设计样张，非全库公开。">
+<meta name="description" content="从工时、灵活就业到 AI、区块链、可控核聚变、合成淀粉、量子计算与太空技术：用可核验事实、明确推论和反证条件，回答技术能力为什么没有自动带来公共权力与人的自由。设计样张，非全库公开。">
 <meta name="robots" content="noindex, nofollow">
 <meta id="themeColor" name="theme-color" content="#f2eee4">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23fbf8f0'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1' fill='%23171a18'/%3E%3Crect x='7' y='14' width='14' height='3' rx='1' fill='%23b8412a'/%3E%3Crect x='7' y='20' width='10' height='3' rx='1' fill='%231c5a4d'/%3E%3C/svg%3E">
-<title>AI 与区块链时代，人为什么没有更自由？ · 研究台</title>
+<title>技术能力为什么没有自动带来自由？ · 研究台</title>
 <script>
 (function(){
   try {
@@ -269,6 +269,18 @@ section{scroll-margin-top:calc(var(--nav-h) + 24px)}
 .tech-card p{font-size:11.5px;line-height:1.7;color:var(--muted)}
 .tech-rule{margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:11.5px;line-height:1.65;color:var(--ink)}
 .tech-rule span{font-family:var(--mono);font-size:9.5px;color:var(--vermilion);margin-right:7px}
+.frontier{margin-top:12px}
+.frontier .tech-head{margin-bottom:10px}
+.frontier-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.frontier-card{text-align:left;border:1px solid var(--line);border-top:2px solid var(--pine);border-radius:9px;padding:12px;background:var(--card);color:var(--ink);transition:transform .15s,border-color .15s,box-shadow .15s}
+.frontier-card:nth-child(2){border-top-color:var(--gold)}
+.frontier-card:nth-child(3){border-top-color:var(--vermilion)}
+.frontier-card:nth-child(4){border-top-color:var(--line-strong)}
+.frontier-card:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+.frontier-card .fk{display:block;font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:6px}
+.frontier-card b{display:block;font-family:var(--serif);font-size:14px;line-height:1.45;margin-bottom:5px}
+.frontier-card p{font-size:10.8px;line-height:1.65;color:var(--muted)}
+.frontier-card .go{display:block;margin-top:9px;font-size:10px;color:var(--vermilion)}
 .fact-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:27px 0 10px}
 .fact-head h2{font-family:var(--serif);font-size:17px;line-height:1.45}
 .fact-head p{font-size:10.8px;color:var(--muted)}
@@ -493,6 +505,7 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
   .routes{grid-template-columns:1fr}
   .numbers{grid-template-columns:repeat(2,minmax(0,1fr))}
   .primer-grid,.tech-grid{grid-template-columns:1fr}
+  .frontier-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero h1{font-size:clamp(30px,7.4vw,42px)}
   .sec-head h2{font-size:23px}
   .sec-head p{font-size:13.5px}
@@ -547,6 +560,7 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
   body{background:#fff;color:#000;font-size:10.5pt}
   .jgrid,.mmap,.numbers,.routes{grid-template-columns:1fr 1fr}
   .primer-grid,.tech-grid{grid-template-columns:repeat(3,1fr)}
+  .frontier-grid{grid-template-columns:repeat(4,1fr)}
   .jcard,.mcard,.route,.num,.specimen{break-inside:avoid;box-shadow:none}
   .jcard{border-color:#bbb}
   a{text-decoration:none}
@@ -558,7 +572,7 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
 <header class="top">
   <a class="brand" href="#desk" aria-label="AI 时代共产主义知识库 · 研究台">
     <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-    <span class="brand-txt"><b>AI 时代共产主义知识库</b><span>Research Desk · v4.17</span></span>
+    <span class="brand-txt"><b>AI 时代共产主义知识库</b><span>Research Desk · v4.18</span></span>
   </a>
   <nav class="nav" aria-label="主导航">
     <a href="#desk">研究台</a>
@@ -590,9 +604,9 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
   <nav class="sec-list" id="secList" aria-label="页内目录">
     <a href="#desk">研究台 <em>01</em></a>
     <a href="#map">命题矩阵 <em>08</em></a>
-    <a href="#judgments">判断库 <em>29</em></a>
+    <a href="#judgments">判断库 <em>33</em></a>
     <a href="#forks">五开关 <em>05</em></a>
-    <a href="#routes">阅读路线 <em>04</em></a>
+    <a href="#routes">阅读路线 <em>05</em></a>
     <a href="#method">方法与边界</a>
   </nav>
 
@@ -665,7 +679,7 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
       <div>
         <p class="kicker">先看结论 / 2025—2026 证据基线</p>
         <h1 id="heroTitle">AI 能算，账本能记，<br class="hbr"><span class="nb">为什么人没有</span><span class="hl">更自由</span><span>？</span></h1>
-        <p class="hero-sub">AI 可以识别、预测与调度，区块链可以留痕、验证与协调；<b>但工时、保障、议价权与收益分配没有自动改善。</b>技术能力不等于公共权力，这里继续追问：谁定规则、谁能更正、能否退出。</p>
+        <p class="hero-sub">AI 可以识别、预测与调度，区块链可以留痕、验证与协调；聚变、合成淀粉、量子计算与太空技术则改变能源、食物、计算和空间约束。<b>但工时、保障、议价权与收益分配没有自动改善。</b>技术能力不等于公共权力，这里继续追问：谁定规则、谁能更正、能否退出。</p>
         <p class="hero-note">每张卡只回答三件事：依据是什么、结论走到哪一步、什么观察会让它失效。你可以赞同，也可以拿着反证条件来反驳。</p>
         <div class="hero-actions">
           <a class="btn primary" href="#map">3 分钟看懂核心判断 <span aria-hidden="true">→</span></a>
@@ -673,10 +687,10 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
         </div>
         <div class="hero-stats" aria-label="本页内容规模">
           <span class="hstat"><b>8</b><span>个核心命题</span></span>
-          <span class="hstat"><b>29</b><span>张判断卡</span></span>
-          <span class="hstat"><b>4</b><span>条阅读路线</span></span>
+          <span class="hstat"><b>33</b><span>张判断卡</span></span>
+          <span class="hstat"><b>5</b><span>条阅读路线</span></span>
         </div>
-        <p class="scope-line"><b>完整知识库</b>：4 层结构 · 42 论题簇 · 51 文献 · 69 术语 · 6 案例。本页只展示入门切片。</p>
+        <p class="scope-line"><b>完整知识库</b>：4 层结构 · 42 论题簇 · 51 文献 · 69 术语 · 6 案例 · 4 组前沿技术变量。本页只展示入门切片。</p>
       </div>
 
       <aside class="specimen" aria-label="证据卡阅读示例">
@@ -699,7 +713,7 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
 
     <div class="ticker" aria-label="研究状态">
       <span class="tag">研究状态</span>
-      <span class="item">L4 <b>v1.5</b> AI + 区块链制度接口已接入</span>
+      <span class="item">L4 <b>v1.7</b> AI + 区块链 + 前沿技术接口已接入</span>
       <span class="item warn">能源闸门 <b>未判定</b></span>
       <span class="item warn">军控机制 <b>未取证</b></span>
       <span class="item">青年失业一手页 <b>待回补</b></span>
@@ -729,6 +743,20 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
         <div class="tech-card"><b>制度：定权与救济</b><p>决定谁可加入、谁可升级、谁负责签发、错误如何更正、败诉如何执行。这才是公共性与自由的来源。</p></div>
       </div>
       <p class="tech-rule"><span>判断线</span>先问“是否需要共同账本”，再选区块链、许可型账本、签名日志或可审计数据库；先保障更正与退出，再讨论不可篡改。</p>
+    </section>
+
+    <section class="techsplit frontier" aria-labelledby="frontierTitle">
+      <div class="tech-head">
+        <h2 id="frontierTitle">四项前沿技术：先问成熟度，再问谁来占有</h2>
+        <p>实验室 → 工程系统 → 商业部署 → 公共服务，不可跳级</p>
+      </div>
+      <div class="frontier-grid">
+        <button class="frontier-card" type="button" data-goto="c30"><span class="fk">ENERGY / M0—M3</span><b>可控核聚变</b><p>研究净增益不是电网净输出，项目计划不是商业电站倒计时。</p><span class="go">查看能源边界 →</span></button>
+        <button class="frontier-card" type="button" data-goto="c31"><span class="fk">FOOD / M0—M3</span><b>合成淀粉</b><p>工程产量不是商业平价，淀粉也不是完整膳食与粮食安全。</p><span class="go">查看物质约束 →</span></button>
+        <button class="frontier-card" type="button" data-goto="c32"><span class="fk">COMPUTE / M0—M3</span><b>量子计算</b><p>物理比特不等于逻辑比特，特定任务优势不等于普遍加速。</p><span class="go">查看任务证据 →</span></button>
+        <button class="frontier-card" type="button" data-goto="c33"><span class="fk">SPACE / M0—M3</span><b>太空技术</b><p>发射和在轨能力不等于轨道公共化，数据可及仍须治理。</p><span class="go">查看治理边界 →</span></button>
+      </div>
+      <p class="tech-rule"><span>六道闸门</span>可复现能力、全系统成本、占有与可及、治理与救济、生态与安全、替代方案对照；缺一不得登记为公共成效。</p>
     </section>
 
     <section aria-labelledby="factsTitle">
@@ -793,14 +821,14 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
       <div class="sec-head">
         <p class="kicker">证据卡片 / 从判断到依据</p>
         <h2 id="jTitle">判断库：先看结论，再核对它能走多远</h2>
-        <p>每张卡先给一句话判断，再列出依据、边界与反证条件。证据等级回答“材料能不能这样用”，卡片类型回答“这是事实、机制还是推演”。本页展示 29 张入门卡，其中 7 张专门解释区块链与公共账本，1 张说明怎样验证试点；它们不是全部 42 个论题簇。</p>
+        <p>每张卡先给一句话判断，再列出依据、边界与反证条件。证据等级回答“材料能不能这样用”，卡片类型回答“这是事实、机制还是推演”。本页展示 33 张入门卡，其中 7 张专门解释区块链与公共账本，4 张解释前沿技术变量，1 张说明怎样验证试点；它们不是全部 42 个论题簇。</p>
       </div>
       <div class="jbar">
         <button class="filter-btn" id="filterBtn" type="button" aria-controls="side" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"></path></svg>
           筛选 <span class="filter-badge" id="filterBadge">0</span>
         </button>
-        <span class="jcount"><b id="jCount">29</b> / 29 张卡片</span>
+        <span class="jcount"><b id="jCount">33</b> / 33 张卡片</span>
         <span class="filter-hint">可在左侧按等级、类型与主题细分</span>
         <div class="jactive" id="jActive" aria-label="当前筛选条件"></div>
         <div class="jtools">
@@ -854,9 +882,9 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
         <div class="fork">
           <div class="fname">能源闸门突破<small>ENERGY GATE</small></div>
           <span class="status unknown">未判定</span>
-          <div class="fdesc"><span class="fork-label">还缺</span>中国清洁能源装机 / 发电量与 AI 用电增量的<b>同口径</b>数据。
-            <span class="verdict">不得由算力 +177% 推出“能源风险已缓解”。</span>
-            <a class="fork-link" href="#card-c09" data-goto="c09">查看算力与能源边界 →</a>
+          <div class="fdesc"><span class="fork-label">还缺</span>清洁能源装机 / 发电量与 AI 用电增量的<b>同口径</b>数据；聚变的全系统成本、可用率与公共可及也未闭合。
+            <span class="verdict">不得由算力 +177% 或 ITER 科研计划推出“能源闸门已突破”。</span>
+            <a class="fork-link" href="#card-c30" data-goto="c30">查看聚变计划与能源边界 →</a>
           </div>
         </div>
         <div class="fork">
@@ -905,6 +933,13 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
           <p class="q">区块链可以留下难以偷偷改动的记录，<b>但准入、签发、升级与密钥仍可被少数人控制</b>。不可篡改不是正义，迁移与救济才是。</p>
           <div class="route-foot"><span>对应 L1-F / L4 §5.11 / L4-B §10.6</span><a class="linkish" href="#card-c22" data-goto="c22">从第 1 张开始 →</a></div>
         </div>
+        <div class="route">
+          <div class="rt"><b>技术突破，为什么不是自由证明？</b><span>4 张卡</span></div>
+          <div class="audience">适合关注能源、粮食、算力与太空技术公共用途的人</div>
+          <div class="chain"><button type="button" data-goto="c30">聚变成熟度</button><u>→</u><button type="button" data-goto="c31">淀粉与物质约束</button><u>→</u><button type="button" data-goto="c32">量子任务证据</button><u>→</u><button type="button" data-goto="c33">太空公共治理</button></div>
+          <p class="q">单项能力改善不会自动改写占有与分配；<b>成熟度、全系统成本、公共可及和退出救济必须同时成立</b>，技术才可能成为公共基础设施。</p>
+          <div class="route-foot"><span>对应 L1-G / L4 §2.2 / §5.12 / L4-B §10.7</span><a class="linkish" href="#card-c30" data-goto="c30">从第 1 张开始 →</a></div>
+        </div>
       </div>
     </section>
 
@@ -934,6 +969,7 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
           <div><b>口径不可相加</b><p>灵活就业人员、新就业形态劳动者、平台从业者、自由职业者与“一人公司”不是同一总体。“超过 2 亿”是当前官方口径；2036 年“4 亿”只是预测。</p></div>
           <div><b>赛博朋克只做风险接口</b><p class="yes">正式机制名是“平台依附固化”。</p><p class="no">不能由反乌托邦意象推出封建制复归、后资本主义或技术不可公共化；也不等于“赛博共产主义”。</p></div>
           <div><b>区块链不是所有制</b><p class="yes">公共账本的公共性来自治理。</p><p class="no">发币、DAO、上链、节点数、币价或交易量都不单独构成共产主义因素；审计留痕也不能替代审计权。</p></div>
+          <div><b>前沿技术不是制度结论</b><p class="yes">聚变、淀粉、量子与太空技术先过能力、成本、占有、治理、生态和替代方案六关。</p><p class="no">实验室结果、企业路线图、物理比特数与发射次数均不能直接换算为公共服务或人的解放。</p></div>
           <div><b>公开边界</b><p>本页是设计样张：不对应正式发布，不包含脚本、草稿、凭证或全库原文。正式上线需单独建立公开白名单与构建门禁。</p></div>
         </div>
       </div>
@@ -941,12 +977,12 @@ mark{background:rgba(223,181,106,.4);color:inherit;border-radius:2px;padding:0 1
       <footer class="foot">
         <div>
           <b>AI 时代共产主义知识库</b> · 研究台样张<br>
-          <span class="mono">L1 理论 + 区块链专题 / L2 42 论题 / L3-A 6 案例 / L4 制度方案 / L4-B 可行性判据</span><br>
+          <span class="mono">L1 理论 + 区块链 / 前沿技术专题 / L2 42 论题 / L3-A 6 案例 / L4 制度方案 / L4-B 可行性判据</span><br>
           当前数值登记：L4 §2、L4-B §4/§6/§8/§9。2026 年 11 月青年失业 17.2% 为 L-D，正式引用前须回补国家统计局一手页。
         </div>
         <div class="foot-r">
           <span class="badge-draft">DESIGN PROOF · NOT PUBLISHED</span><br>
-          页面 v0.4 · 对应知识库 v4.17 · 2026-11-27<br>
+          页面 v0.5 · 对应知识库 v4.18 · 2026-11-27<br>
           单文件、零外部依赖、可离线审阅
         </div>
       </footer>
@@ -1034,7 +1070,7 @@ const KB_CARDS = [
     title:'48.3 小时：效率提高，为什么没有换来更短工时？',
     one:'生产率提高没有自动缩短工时；企业产能相对过剩与在职过载同时出现。',
     rows:[
-      ['机制位置','劳动时间未随自动化生产率提高而重新分配（L4 §2.2）。'],
+      ['机制位置','劳动时间未随自动化生产率提高而重新分配（L4 §2.3）。'],
       ['证据锚点','2026 年 10 月全国企业就业人员周平均工作时间 <b>48.3 小时</b>；国家统计局判断“国内供强需弱仍较突出”（L-A）。'],
       ['反证条件','若工时下降与工资上升在多数行业同步稳定出现，“收益必然向节点集中”的强因果需弱化（L4 §8.1-2）。']
     ],
@@ -1062,7 +1098,7 @@ const KB_CARDS = [
     title:'AI 用户超 7 亿，收益为什么没有自动共享？',
     one:'AI 已进入生产流程，不再只是内容工具；但收益归属没有随渗透率自动改变。',
     rows:[
-      ['机制位置','一般智力成为直接生产力，收益可被少数节点占有（M3；L4 §2.3）。'],
+      ['机制位置','一般智力成为直接生产力，收益可被少数节点占有（M3；L4 §2.4）。'],
       ['证据锚点','截至 2026 年上半年，生成式 AI 用户超 <b>7 亿</b>、网民渗透率超 <b>50%</b>；2026 年 6 月智能算力 <b>2,185 EFLOPS</b>；规上制造业 AI 应用渗透率超 <b>30%</b>（L-A，CNNIC）。'],
       ['反证条件','若渗透率提升同时劳动收入份额与依附结构稳定改善，技术乐观路径获得支持（L4 §8.1）。']
     ],
@@ -1076,7 +1112,7 @@ const KB_CARDS = [
     title:'青年失业 17.2%：数据能用到哪一步？',
     one:'数据来自多家权威媒体一致转引，一手发布页尚未回补，因此不作“官方确认”使用。',
     rows:[
-      ['机制位置','岗位入口少与在职过载并存（L4 §2.2）。'],
+      ['机制位置','岗位入口少与在职过载并存（L4 §2.3）。'],
       ['证据锚点','2026 年 11 月 18 日发布数据：16–24 岁（不含在校生）<b>17.2%</b>、25–29 岁 <b>7.3%</b>、30–59 岁 <b>3.9%</b>；整体与 30–59 岁已由统计局解读页确认（L-D，青年分项待一手页）。'],
       ['边界','正式引用前必须回补国家统计局发布页；不得写成“国家统计局数据显示”。']
     ],
@@ -1175,7 +1211,7 @@ const KB_CARDS = [
     one:'企业把非核心工作变成任务包；核心合伙人必须与决策权、剩余收益、风险与退出权绑定。',
     rows:[
       ['机制位置','L2 T03-B / T10；L4 §5.3-6。'],
-      ['证据锚点','平台接单、算法派单与评价集中（L4 §2.2，L-A 现象 + L-K 机制）。'],
+      ['证据锚点','平台接单、算法派单与评价集中（L4 §2.3，L-A 现象 + L-K 机制）。'],
       ['反证条件','若“合伙人”普遍无决策权与剩余收益，只是外包名目，则 OPC 化退化为依附。']
     ],
     sources:[
@@ -1436,6 +1472,66 @@ const KB_CARDS = [
       {t:'L4 §6.3 八项试点监测规格（内部文档）',g:'L-K'},
       {t:'L4-B §12.3 试点监测总闸（内部文档）',g:'L-K'}
     ]
+  },
+  {
+    id:'c30', type:'事实锚点', grade:'L-A', axes:['T09'],
+    title:'可控核聚变：ITER 计划为什么不是商业电站倒计时？',
+    one:'科研运行、全磁约束聚变能、氘氚运行与商业并网是不同阶段；研究净增益也不等于电网净输出。',
+    rows:[
+      ['机制位置','L1-G §2—§3；L4 §2.2 / §5.12。'],
+      ['当前登记','QST 的 2025 年 1 月更新计划列出研究运行 2034 年、全磁约束聚变能 2036 年、氘氚运行 2039 年目标（L-A，项目计划，非实现结果）。'],
+      ['能力边界','材料、氚循环、热流、维护、发电转换、全系统成本与并网规则尚未由科研目标闭合。'],
+      ['反证条件','若只能提供等离子体指标，却无可复现的全系统净输出、可用率与成本，则不得把能源闸门判为突破。']
+    ],
+    sources:[
+      {t:'QST · ITER 官方计划状况',g:'L-A',u:'https://www.fusion.qst.go.jp/ITER/iter/page1_1.html'},
+      {t:'L4 §2.2 前沿技术状态登记（内部文档）',g:'L-A'}
+    ]
+  },
+  {
+    id:'c31', type:'事实锚点', grade:'L-C', axes:['T03','T09'],
+    title:'合成淀粉增产，为什么还不等于粮食安全？',
+    one:'从二氧化碳到淀粉的实验路线正在工程化，但商业平价、完整营养、生命周期成本与小农转型仍须单独验证。',
+    rows:[
+      ['机制位置','L1-G §4；L4 §2.2 / §5.12。'],
+      ['当前登记','中国科学院官网转载《中国科学报》2026 年 1 月 23 日报道：新一轮测试产出为 2021 年的 10 倍以上，仍处工程测试与工业化攻关（L-C）。'],
+      ['能力边界','能耗、水、酶、分离纯化、连续生产与成本不能由产量倍数替代；淀粉也不是完整膳食。'],
+      ['反证条件','若全生命周期账、营养用途与可负担性未通过审查，则不得把工程增产登记为粮食安全问题已经解决。']
+    ],
+    sources:[
+      {t:'中国科学院 · 转载《中国科学报》人工合成淀粉报道',g:'L-C',u:'https://www.cas.cn/cm/202601/t20260123_5097042.shtml'},
+      {t:'L1-G §4 合成淀粉机制与反证（内部文档）',g:'L-K'}
+    ]
+  },
+  {
+    id:'c32', type:'机制论题', grade:'L-A', axes:['T07','T09'],
+    title:'量子计算：为什么要同时看逻辑比特与密码迁移？',
+    one:'物理量子比特不等于容错算力；特定任务优势、开放基准与后量子密码迁移必须分别审查。',
+    rows:[
+      ['机制位置','L1-G §5；L4 §2.2 / §5.12。'],
+      ['当前登记','IBM 2025 年 6 月 10 日路线图给出 2026 年底量子优势、2028 年 Starling 概念验证与 2029 年目标（L-A，企业路线图，非成效证据）。'],
+      ['标准边界','NIST 于 2024 年 8 月 13 日发布首批 3 项后量子密码最终标准（L-A）；标准发布不等于现行密码全部失效或迁移完成。'],
+      ['反证条件','若只报物理比特、演示电路或弱基线比较，且忽略数据准备、验证、纠错与系统成本，则不能宣称任务级容错优势。']
+    ],
+    sources:[
+      {t:'NIST · 首批后量子密码最终标准',g:'L-A',u:'https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards'},
+      {t:'IBM · 大规模容错量子计算路线图（企业目标）',g:'L-A',u:'https://www.ibm.com/quantum/blog/large-scale-ftqc'}
+    ]
+  },
+  {
+    id:'c33', type:'机制论题', grade:'L-A', axes:['T07','T09'],
+    title:'太空技术：发射更多，为什么轨道仍未必公共？',
+    one:'发射与在轨服务扩展能力，但轨道、频谱、卫星运营与数据可及仍受产权、集中和跨境治理约束。',
+    rows:[
+      ['机制位置','L1-G §6；L4 §2.2 / §5.12。'],
+      ['当前登记','UNOOSA 外层空间活动长期可持续性指南于 2019 年 6 月通过并鼓励自愿实施（L-A，官方治理材料）。'],
+      ['能力边界','发射次数、在轨卫星数量与投资不能替代碎片减缓、通信韧性、数据公共性和争端处理。'],
+      ['反证条件','若服务只覆盖少数机构、轨道风险治理缺乏履约记录或数据无法被基层公共用户取得，则不得登记为轨道公共化。']
+    ],
+    sources:[
+      {t:'UNOOSA · 外层空间活动长期可持续性',g:'L-A',u:'https://www.unoosa.org/oosa/en/ourwork/topics/long-term-sustainability-of-outer-space-activities.html'},
+      {t:'L4-B §10.7 前沿技术公共可行性闸门（内部文档）',g:'L-K'}
+    ]
   }
 ];
 
@@ -1464,7 +1560,8 @@ window.KB = { M: KB_M, CARDS: KB_CARDS };
     {id:'r1',title:'AI 越强，为什么人反而更忙？',sub:'阅读路线 · 工时 / 分配 / 时间贫困'},
     {id:'r2',title:'灵活就业需要什么制度接口？',sub:'阅读路线 · 保障 / 迁移 / 组织'},
     {id:'r3',title:'什么观察会推翻这套框架？',sub:'阅读路线 · 矛盾 / 分叉 / 成熟度'},
-    {id:'r4',title:'上链之后，为什么仍可能不自由？',sub:'阅读路线 · 区块链 / 公共账本 / 六项门槛'}
+    {id:'r4',title:'上链之后，为什么仍可能不自由？',sub:'阅读路线 · 区块链 / 公共账本 / 六项门槛'},
+    {id:'r5',title:'技术突破，为什么不是自由证明？',sub:'阅读路线 · 聚变 / 淀粉 / 量子 / 太空 / 成熟度'}
   ];
   ROUTES.forEach(function(r){ r._search = (r.title+' '+r.sub).toLowerCase(); });
 
@@ -1660,8 +1757,8 @@ window.KB = { M: KB_M, CARDS: KB_CARDS };
     if (!q){
       searchMatches = [];
       searchIndex = -1;
-      searchResults.innerHTML = '<div class="search-tip">试试搜索：<button class="linkish" type="button" data-example="工时">工时</button>、<button class="linkish" type="button" data-example="平台">平台</button>、<button class="linkish" type="button" data-example="反证">反证</button>、<button class="linkish" type="button" data-example="灵活就业">灵活就业</button>、<button class="linkish" type="button" data-example="区块链">区块链</button>、<button class="linkish" type="button" data-example="基线">基线</button></div>'
-        + '<div class="search-foot">范围：8 个核心命题、29 张判断卡、4 条阅读路线。按 ↑ ↓ 选择，Enter 打开。</div>';
+      searchResults.innerHTML = '<div class="search-tip">试试搜索：<button class="linkish" type="button" data-example="工时">工时</button>、<button class="linkish" type="button" data-example="平台">平台</button>、<button class="linkish" type="button" data-example="反证">反证</button>、<button class="linkish" type="button" data-example="灵活就业">灵活就业</button>、<button class="linkish" type="button" data-example="区块链">区块链</button>、<button class="linkish" type="button" data-example="核聚变">核聚变</button>、<button class="linkish" type="button" data-example="基线">基线</button></div>'
+        + '<div class="search-foot">范围：8 个核心命题、33 张判断卡、5 条阅读路线。按 ↑ ↓ 选择，Enter 打开。</div>';
       openSearch();
       return;
     }
@@ -1834,7 +1931,7 @@ window.KB = { M: KB_M, CARDS: KB_CARDS };
     var c = CARDS.find(function(x){ return x.id === btn.dataset.copy; });
     if (!c) return;
     var locator = c.rows[0] ? c.rows[0][1] : c.id;
-    var text = c.title + '｜AI时代共产主义知识库 v4.17｜卡片 '+c.id+'｜'+c.grade+'｜定位：'+locator;
+    var text = c.title + '｜AI时代共产主义知识库 v4.18｜卡片 '+c.id+'｜'+c.grade+'｜定位：'+locator;
     if (/^https?:$/.test(location.protocol)) text += '｜'+location.href.split('#')[0]+'#card-'+c.id;
     copyText(text, '引用已复制（含等级与定位）');
   });
